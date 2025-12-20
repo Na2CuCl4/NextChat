@@ -2128,6 +2128,45 @@ function _Chat() {
                             </div>
                           )}
 
+                          {message.attachFiles &&
+                            message.attachFiles.length > 0 && (
+                              <div className={styles["chat-message-files"]}>
+                                {message.attachFiles.map((file, fileIndex) => (
+                                  <div
+                                    key={fileIndex}
+                                    className={styles["attach-file-card"]}
+                                  >
+                                    <div className={styles["attach-file-left"]}>
+                                      <div
+                                        className={styles["attach-file-icon"]}
+                                      >
+                                        {fileTypeIcon(file.name)}
+                                      </div>
+                                      <div
+                                        className={styles["attach-file-meta"]}
+                                      >
+                                        <div
+                                          className={styles["attach-file-name"]}
+                                        >
+                                          {file.name}
+                                        </div>
+                                        <div
+                                          className={styles["attach-file-size"]}
+                                        >
+                                          {(file.size / 1024).toFixed(1)} KB
+                                          {file.textSize !== undefined
+                                            ? ` · parsed ${(
+                                                file.textSize / 1024
+                                              ).toFixed(1)} KB`
+                                            : ""}
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                ))}
+                              </div>
+                            )}
+
                           <div className={styles["chat-message-action-date"]}>
                             {isContext
                               ? Locale.Chat.IsContext

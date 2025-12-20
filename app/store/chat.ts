@@ -63,6 +63,7 @@ export type ChatMessage = RequestMessage & {
   tools?: ChatMessageTool[];
   audio_url?: string;
   isMcpResponse?: boolean;
+  attachFiles?: AttachedFileMeta[];
 };
 
 export function createMessage(override: Partial<ChatMessage>): ChatMessage {
@@ -110,6 +111,13 @@ export type AttachedFile = {
   text?: string; // recognized content
   textSize?: number; // bytes of recognized content
   error?: string;
+};
+
+export type AttachedFileMeta = {
+  name: string;
+  size: number;
+  type: string;
+  textSize?: number;
 };
 
 function createEmptySession(): ChatSession {
@@ -451,10 +459,21 @@ export const useChatStore = createPersistStore(
           }
         }
 
+        const attachedFileMetas: AttachedFileMeta[] =
+          attachFiles
+            ?.filter((file) => file.status === "success")
+            .map((file) => ({
+              name: file.name,
+              size: file.size,
+              type: file.type,
+              textSize: file.textSize,
+            })) ?? [];
+
         let userMessage: ChatMessage = createMessage({
           role: "user",
           content: mContent,
           isMcpResponse,
+          attachFiles: attachedFileMetas,
         });
 
         const botMessage: ChatMessage = createMessage({
