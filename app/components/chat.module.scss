@@ -1,10 +1,96 @@
 @import "../styles/animation.scss";
 
 .attach-images {
-  position: absolute;
-  left: 30px;
-  bottom: 32px;
   display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  width: 100%;
+  margin-top: 10px;
+  padding: 0 120px 0 10px; /* leave room for send button */
+}
+
+.attach-files {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  width: 100%;
+  margin-top: 10px;
+  padding: 4px 120px 0 10px; /* leave room for send button */
+  box-sizing: border-box;
+}
+
+.attach-file-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 10px 12px;
+  border-radius: 12px;
+  background: var(--white);
+  border: var(--border-in-light);
+  box-shadow: var(--card-shadow);
+  animation: slide-in ease 0.2s;
+  transition: transform ease 0.2s, box-shadow ease 0.2s;
+  flex: 0 1 280px; /* consistent card width without stretching */
+  max-width: 280px;
+
+  &:hover {
+    transform: translateY(-1px);
+    box-shadow: var(--shadow);
+  }
+}
+
+.attach-file-left {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 0;
+}
+
+.attach-file-icon {
+  width: 34px;
+  height: 34px;
+  border-radius: 10px;
+  background: var(--gray);
+  border: var(--border-in-light);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--black);
+}
+
+.attach-file-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 0;
+}
+
+.attach-file-name {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--black);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 100%;
+}
+
+.attach-file-size {
+  font-size: 12px;
+  color: #666;
+}
+
+.attach-file-error {
+  font-size: 12px;
+  color: #d9534f;
+}
+
+.attach-file-actions {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-shrink: 0;
 }
 
 .attach-image {
@@ -627,12 +713,14 @@
   cursor: text;
   display: flex;
   flex: 1;
+  flex-direction: column;
+  gap: 10px;
   border-radius: 10px;
   border: var(--border-in-light);
 }
 
 .chat-input-panel-inner-attach {
-  padding-bottom: 80px;
+  padding-bottom: 12px;
 }
 
 .chat-input-panel-inner:has(.chat-input:focus) {

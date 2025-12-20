@@ -101,6 +101,17 @@ export const BOT_HELLO: ChatMessage = createMessage({
   content: Locale.Store.BotHello,
 });
 
+export type AttachedFile = {
+  name: string;
+  content: File; // original file
+  size: number; // bytes
+  type: string; // mime
+  status: "idle" | "uploading" | "success" | "error";
+  text?: string; // recognized content
+  textSize?: number; // bytes of recognized content
+  error?: string;
+};
+
 function createEmptySession(): ChatSession {
   return {
     id: nanoid(),
@@ -407,6 +418,7 @@ export const useChatStore = createPersistStore(
       async onUserInput(
         content: string,
         attachImages?: string[],
+        attachFiles?: AttachedFile[],
         isMcpResponse?: boolean,
       ) {
         const session = get().currentSession();
@@ -417,14 +429,26 @@ export const useChatStore = createPersistStore(
           ? content
           : fillTemplateWith(content, modelConfig);
 
-        if (!isMcpResponse && attachImages && attachImages.length > 0) {
+        if (!isMcpResponse) {
           mContent = [
             ...(content ? [{ type: "text" as const, text: content }] : []),
-            ...attachImages.map((url) => ({
-              type: "image_url" as const,
-              image_url: { url },
-            })),
           ];
+          if (attachImages && attachImages.length > 0) {
+            mContent.push(
+              ...attachImages.map((url) => ({
+                type: "image_url" as const,
+                image_url: { url },
+              })),
+            );
+          }
+          if (attachFiles && attachFiles.length > 0) {
+            mContent.push(
+              ...attachFiles.map((file) => ({
+                type: "text" as const,
+                text: file.name + "\n\n---\n\n" + (file.text ?? ""),
+              })),
+            );
+          }
         }
 
         let userMessage: ChatMessage = createMessage({
@@ -843,6 +867,7 @@ export const useChatStore = createPersistStore(
                       : String(result);
                   get().onUserInput(
                     `\`\`\`json:mcp-response:${mcpRequest.clientId}\n${mcpResponse}\n\`\`\``,
+                    [],
                     [],
                     true,
                   );

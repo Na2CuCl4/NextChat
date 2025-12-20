@@ -56,6 +56,7 @@ import ShortcutkeyIcon from "../icons/shortcutkey.svg";
 import McpToolIcon from "../icons/tool.svg";
 import HeadphoneIcon from "../icons/headphone.svg";
 import {
+  AttachedFile,
   BOT_HELLO,
   ChatMessage,
   createMessage,
@@ -1049,16 +1050,6 @@ function _Chat() {
   const [uploading, setUploading] = useState(false);
 
   // files
-  type AttachedFile = {
-    name: string;
-    content: File; // original file
-    size: number; // bytes
-    type: string; // mime
-    status: "idle" | "uploading" | "success" | "error";
-    text?: string; // recognized content
-    textSize?: number; // bytes of recognized content
-    error?: string;
-  };
   const [attachFiles, setAttachFiles] = useState<AttachedFile[]>([]);
 
   // prompt hints
@@ -1143,16 +1134,9 @@ function _Chat() {
       matchCommand.invoke();
       return;
     }
-    // append recognized files as text blocks
-    const fileTextBlocks = attachFiles
-      .filter((f) => f.status === "success" && f.text)
-      .map((f) => `${f.name}\n\n---\n\n${f.text}`);
-    const combinedInput = [userInput, ...fileTextBlocks]
-      .filter((t) => t && t.length > 0)
-      .join("\n\n");
     setIsLoading(true);
     chatStore
-      .onUserInput(combinedInput, attachImages)
+      .onUserInput(userInput, attachImages, attachFiles)
       .then(() => setIsLoading(false));
     setAttachImages([]);
     setAttachFiles([]);
