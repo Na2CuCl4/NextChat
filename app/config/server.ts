@@ -25,6 +25,8 @@ declare global {
       DEFAULT_MODEL?: string; // to control default model in every new chat window
       VISION_MODELS?: string; // to control vision models
 
+      FILE_READING_SERVER?: string; // server to read file content
+
       // stability only
       STABILITY_URL?: string;
       STABILITY_API_KEY?: string;
@@ -151,6 +153,8 @@ export const getServerSideConfig = () => {
     }
   }
 
+  const fileReadingServer = process.env.FILE_READING_SERVER ?? "";
+
   const isStability = !!process.env.STABILITY_API_KEY;
 
   const isAzure = !!process.env.AZURE_URL;
@@ -274,5 +278,7 @@ export const getServerSideConfig = () => {
     visionModels,
     allowedWebDavEndpoints,
     enableMcp: process.env.ENABLE_MCP === "true",
+
+    fileReadingServer: fileReadingServer,
   };
 };

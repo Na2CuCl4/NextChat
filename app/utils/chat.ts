@@ -172,6 +172,35 @@ export function removeImage(imageUrl: string) {
   });
 }
 
+export async function uploadFile(file: File): Promise<string> {
+  const body = new FormData();
+  body.append("file", file);
+  const controller = new AbortController();
+  const timeoutId = setTimeout(
+    () => {
+      controller.abort();
+    },
+    10 * 60 * 1000,
+  );
+
+  try {
+    const res = await fetch("/api/read_file", {
+      method: "POST",
+      body,
+      signal: controller.signal,
+    });
+
+    const json = await res.json().catch(() => null);
+    if (!res.ok) {
+      const msg = json?.error || res.statusText;
+      throw new Error(`File Reading Server error ${res.status}: ${msg}`);
+    }
+    return json.data as string;
+  } finally {
+    clearTimeout(timeoutId);
+  }
+}
+
 export function stream(
   chatPath: string,
   requestPayload: any,

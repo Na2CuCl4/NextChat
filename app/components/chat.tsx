@@ -34,6 +34,13 @@ import ConfirmIcon from "../icons/confirm.svg";
 import CloseIcon from "../icons/close.svg";
 import CancelIcon from "../icons/cancel.svg";
 import ImageIcon from "../icons/image.svg";
+import UploadFileIcon from "../icons/upload-file.svg";
+import PptxIcon from "../icons/pptx.svg";
+import DocxIcon from "../icons/docx.svg";
+import XlsxIcon from "../icons/xlsx.svg";
+import XlsIcon from "../icons/xls.svg";
+import PdfIcon from "../icons/pdf.svg";
+import TxtIcon from "../icons/txt.svg";
 
 import LightIcon from "../icons/light.svg";
 import DarkIcon from "../icons/dark.svg";
@@ -78,6 +85,7 @@ import {
 } from "../utils";
 
 import { uploadImage as uploadImageRemote } from "@/app/utils/chat";
+import { uploadFile as uploadFileRemote } from "@/app/utils/chat";
 
 import dynamic from "next/dynamic";
 
@@ -493,6 +501,7 @@ function useScrollToBottom(
 
 export function ChatActions(props: {
   uploadImage: () => void;
+  uploadFile: () => void;
   setAttachImages: (images: string[]) => void;
   setUploading: (uploading: boolean) => void;
   showPromptModal: () => void;
@@ -628,6 +637,11 @@ export function ChatActions(props: {
             icon={props.uploading ? <LoadingButtonIcon /> : <ImageIcon />}
           />
         )}
+        <ChatAction
+          onClick={props.uploadFile}
+          text={"Upload File"}
+          icon={<UploadFileIcon />}
+        />
         <ChatAction
           onClick={nextTheme}
           text={Locale.Chat.InputActions.Theme[theme]}
@@ -1034,6 +1048,19 @@ function _Chat() {
   const [attachImages, setAttachImages] = useState<string[]>([]);
   const [uploading, setUploading] = useState(false);
 
+  // files
+  type AttachedFile = {
+    name: string;
+    content: File; // original file
+    size: number; // bytes
+    type: string; // mime
+    status: "idle" | "uploading" | "success" | "error";
+    text?: string; // recognized content
+    textSize?: number; // bytes of recognized content
+    error?: string;
+  };
+  const [attachFiles, setAttachFiles] = useState<AttachedFile[]>([]);
+
   // prompt hints
   const promptStore = usePromptStore();
   const [promptHints, setPromptHints] = useState<RenderPrompt[]>([]);
@@ -1103,7 +1130,12 @@ function _Chat() {
   };
 
   const doSubmit = (userInput: string) => {
-    if (userInput.trim() === "" && isEmpty(attachImages)) return;
+    if (
+      userInput.trim() === "" &&
+      isEmpty(attachImages) &&
+      attachFiles.filter((f) => f.status === "success" && f.text).length === 0
+    )
+      return;
     const matchCommand = chatCommands.match(userInput);
     if (matchCommand.matched) {
       setUserInput("");
@@ -1111,11 +1143,19 @@ function _Chat() {
       matchCommand.invoke();
       return;
     }
+    // append recognized files as text blocks
+    const fileTextBlocks = attachFiles
+      .filter((f) => f.status === "success" && f.text)
+      .map((f) => `${f.name}\n\n---\n\n${f.text}`);
+    const combinedInput = [userInput, ...fileTextBlocks]
+      .filter((t) => t && t.length > 0)
+      .join("\n\n");
     setIsLoading(true);
     chatStore
-      .onUserInput(userInput, attachImages)
+      .onUserInput(combinedInput, attachImages)
       .then(() => setIsLoading(false));
     setAttachImages([]);
+    setAttachFiles([]);
     chatStore.setLastInput(userInput);
     setUserInput("");
     setPromptHints([]);
@@ -1596,6 +1636,83 @@ function _Chat() {
     }
     setAttachImages(images);
   }
+  async function uploadFile() {
+    const accept = ".pptx,.docx,.xlsx,.xls,.pdf,.txt";
+    const newFiles: AttachedFile[] = [];
+    await new Promise<void>((res) => {
+      const fileInput = document.createElement("input");
+      fileInput.type = "file";
+      fileInput.multiple = true;
+      fileInput.accept = accept;
+      fileInput.onchange = async (event: any) => {
+        const files = event.target.files as FileList;
+        for (let i = 0; i < files.length; i++) {
+          const f = files[i];
+          const item: AttachedFile = {
+            name: f.name,
+            content: f,
+            size: f.size,
+            type: f.type || "application/octet-stream",
+            status: "uploading",
+          };
+          newFiles.push(item);
+          setAttachFiles((prev) => [...prev, item]);
+          try {
+            const text = await uploadFileRemote(f);
+            item.text = text;
+            item.textSize = new Blob([text]).size;
+            item.status = "success";
+          } catch (e: any) {
+            item.status = "error";
+            item.error = e?.message || String(e);
+          } finally {
+            setAttachFiles((prev) => prev.concat() as AttachedFile[]);
+          }
+        }
+        res();
+      };
+      fileInput.click();
+    });
+  }
+
+  // helper to pick a type icon
+  function fileTypeIcon(name: string) {
+    const ext = (name.split(".").pop() || "").toLowerCase();
+    if (ext === "pptx") return <PptxIcon />;
+    if (ext === "docx") return <DocxIcon />;
+    if (ext === "xlsx") return <XlsxIcon />;
+    if (ext === "xls") return <XlsIcon />;
+    if (ext === "pdf") return <PdfIcon />;
+    return <TxtIcon />;
+  }
+
+  async function retryReadFile(index: number) {
+    setAttachFiles((prev) => {
+      const newFiles = prev.slice();
+      newFiles[index].status = "uploading";
+      return newFiles;
+    });
+    const file = attachFiles[index];
+    try {
+      const text = await uploadFileRemote(file.content);
+      file.text = text;
+      file.textSize = new Blob([text]).size;
+      file.status = "success";
+    } catch (e: any) {
+      file.status = "error";
+      file.error = e?.message || String(e);
+    } finally {
+      setAttachFiles((prev) => prev.concat() as AttachedFile[]);
+    }
+  }
+
+  async function deleteFile(index: number) {
+    setAttachFiles((prev) => {
+      const newFiles = prev.slice();
+      newFiles.splice(index, 1);
+      return newFiles;
+    });
+  }
 
   // 快捷键 shortcut keys
   const [showShortcutKeyModal, setShowShortcutKeyModal] = useState(false);
@@ -2047,6 +2164,7 @@ function _Chat() {
 
               <ChatActions
                 uploadImage={uploadImage}
+                uploadFile={uploadFile}
                 setAttachImages={setAttachImages}
                 setUploading={setUploading}
                 showPromptModal={() => setShowPromptModal(true)}
@@ -2071,7 +2189,7 @@ function _Chat() {
               <label
                 className={clsx(styles["chat-input-panel-inner"], {
                   [styles["chat-input-panel-inner-attach"]]:
-                    attachImages.length !== 0,
+                    attachImages.length !== 0 || attachFiles.length !== 0,
                 })}
                 htmlFor="chat-input"
               >
@@ -2114,6 +2232,55 @@ function _Chat() {
                         </div>
                       );
                     })}
+                  </div>
+                )}
+                {attachFiles.length > 0 && (
+                  <div className={styles["attach-files"]}>
+                    {attachFiles.map((f, index) => (
+                      <div key={index} className={styles["attach-file-card"]}>
+                        <div className={styles["attach-file-left"]}>
+                          <div className={styles["attach-file-icon"]}>
+                            {fileTypeIcon(f.name)}
+                          </div>
+                          <div className={styles["attach-file-meta"]}>
+                            <div className={styles["attach-file-name"]}>
+                              {f.name}
+                            </div>
+                            <div className={styles["attach-file-size"]}>
+                              {(f.size / 1024).toFixed(1)} KB
+                              {f.status === "success" &&
+                              f.textSize !== undefined
+                                ? ` · parsed ${(f.textSize! / 1024).toFixed(
+                                    1,
+                                  )} KB`
+                                : ""}
+                            </div>
+                            {f.status === "error" && (
+                              <div className={styles["attach-file-error"]}>
+                                {f.error}
+                              </div>
+                            )}
+                          </div>
+                        </div>
+                        <div className={styles["attach-file-actions"]}>
+                          {f.status === "uploading" ? (
+                            <LoadingButtonIcon />
+                          ) : (
+                            <IconButton
+                              icon={<ResetIcon />}
+                              bordered
+                              title={Locale.Chat.Actions.Retry}
+                              onClick={() => retryReadFile(index)}
+                            />
+                          )}
+                          <IconButton
+                            icon={<DeleteIcon />}
+                            bordered
+                            onClick={() => deleteFile(index)}
+                          />
+                        </div>
+                      </div>
+                    ))}
                   </div>
                 )}
                 <IconButton
