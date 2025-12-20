@@ -2,11 +2,7 @@ import { useEffect, useState } from "react";
 import { showToast } from "./components/ui-lib";
 import Locale from "./locales";
 import { RequestMessage } from "./client/api";
-import {
-  REQUEST_TIMEOUT_MS,
-  REQUEST_TIMEOUT_MS_FOR_THINKING,
-  ServiceProvider,
-} from "./constant";
+import { REQUEST_TIMEOUT_MS, ServiceProvider } from "./constant";
 // import { fetch as tauriFetch, ResponseType } from "@tauri-apps/api/http";
 import { fetch as tauriStreamFetch } from "./utils/stream";
 import { VISION_MODEL_REGEXES, EXCLUDE_VISION_MODEL_REGEXES } from "./constant";
@@ -297,16 +293,6 @@ export function isDalle3(model: string) {
 }
 
 export function getTimeoutMSByModel(model: string) {
-  model = model.toLowerCase();
-  if (
-    model.startsWith("dall-e") ||
-    model.startsWith("dalle") ||
-    model.startsWith("o1") ||
-    model.startsWith("o3") ||
-    model.includes("deepseek-r") ||
-    model.includes("-thinking")
-  )
-    return REQUEST_TIMEOUT_MS_FOR_THINKING;
   return REQUEST_TIMEOUT_MS;
 }
 
