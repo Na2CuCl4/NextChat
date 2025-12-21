@@ -117,6 +117,7 @@ export type AttachedFileMeta = {
   name: string;
   size: number;
   type: string;
+  text?: string;
   textSize?: number;
 };
 
@@ -466,6 +467,7 @@ export const useChatStore = createPersistStore(
               name: file.name,
               size: file.size,
               type: file.type,
+              text: file.text,
               textSize: file.textSize,
             })) ?? [];
 

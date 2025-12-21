@@ -1290,7 +1290,30 @@ function _Chat() {
     setIsLoading(true);
     const textContent = getMessageTextContent(userMessage);
     const images = getMessageImages(userMessage);
-    chatStore.onUserInput(textContent, images).then(() => setIsLoading(false));
+    const files = (userMessage.attachFiles ?? []).map((meta) => ({
+      name: meta.name,
+      // create a dummy empty File to satisfy type; text content is used when available
+      content: new File([], meta.name, {
+        type: meta.type || "application/octet-stream",
+      }),
+      size: meta.size,
+      type: meta.type,
+      status: "success" as const,
+      text: meta.text,
+      textSize: meta.textSize,
+    }));
+
+    // show previews in input panel while resending
+    setAttachImages(images);
+    setAttachFiles(files);
+
+    // pass both images and files when resending
+    chatStore.onUserInput(textContent, images, files).then(() => {
+      setIsLoading(false);
+      // clear previews after resend completes (consistent with doSubmit)
+      setAttachImages([]);
+      setAttachFiles([]);
+    });
     inputRef.current?.focus();
   };
 
