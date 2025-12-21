@@ -64,7 +64,9 @@ const tw: PartialLocaleType = {
       Clear: "清除聊天",
       Settings: "對話設定",
       UploadImage: "上傳圖片",
+      UploadFile: "上傳檔案",
     },
+    Parsed: "已解析",
     Rename: "重新命名對話",
     Typing: "正在輸入…",
     Input: (submitKey: string) => {

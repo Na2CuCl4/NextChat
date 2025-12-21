@@ -63,7 +63,9 @@ const bn: PartialLocaleType = {
       Clear: "চ্যাট পরিষ্কার করুন",
       Settings: "চ্যাট সেটিংস",
       UploadImage: "চিত্র আপলোড করুন",
+      UploadFile: "ফাইল আপলোড করুন",
     },
+    Parsed: "বিশ্লেষিত",
     Rename: "চ্যাট নাম পরিবর্তন করুন",
     Typing: "লিখছে…",
     Input: (submitKey: string) => {

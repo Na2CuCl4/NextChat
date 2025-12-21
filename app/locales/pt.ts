@@ -62,7 +62,10 @@ const pt: PartialLocaleType = {
       Masks: "Máscaras",
       Clear: "Limpar Contexto",
       Settings: "Configurações",
+      UploadImage: "Carregar imagem",
+      UploadFile: "Carregar arquivo",
     },
+    Parsed: "Analisado",
     Rename: "Renomear Chat",
     Typing: "Digitando…",
     Input: (submitKey: string) => {

@@ -62,7 +62,10 @@ const sk: PartialLocaleType = {
       Masks: "Masky",
       Clear: "Vymazať kontext",
       Settings: "Nastavenia",
+      UploadImage: "Nahrať obrázok",
+      UploadFile: "Nahrať súbor",
     },
+    Parsed: "Spracované",
     Rename: "Premenovať Chat",
     Typing: "Písanie…",
     Input: (submitKey: string) => {

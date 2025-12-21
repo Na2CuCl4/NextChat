@@ -640,7 +640,7 @@ export function ChatActions(props: {
         )}
         <ChatAction
           onClick={props.uploadFile}
-          text={"Upload File"}
+          text={Locale.Chat.InputActions.UploadFile}
           icon={<UploadFileIcon />}
         />
         <ChatAction
@@ -2178,7 +2178,7 @@ function _Chat() {
                                         >
                                           {(file.size / 1024).toFixed(1)} KB
                                           {file.textSize !== undefined
-                                            ? ` · parsed ${(
+                                            ? ` · ${Locale.Chat.Parsed} ${(
                                                 file.textSize / 1024
                                               ).toFixed(1)} KB`
                                             : ""}
@@ -2296,9 +2296,9 @@ function _Chat() {
                               {(f.size / 1024).toFixed(1)} KB
                               {f.status === "success" &&
                               f.textSize !== undefined
-                                ? ` · parsed ${(f.textSize! / 1024).toFixed(
-                                    1,
-                                  )} KB`
+                                ? ` · ${Locale.Chat.Parsed} ${(
+                                    f.textSize! / 1024
+                                  ).toFixed(1)} KB`
                                 : ""}
                             </div>
                             {f.status === "error" && (

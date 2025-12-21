@@ -64,7 +64,9 @@ const es: PartialLocaleType = {
       Clear: "Limpiar chat",
       Settings: "Configuración de conversación",
       UploadImage: "Subir imagen",
+      UploadFile: "Subir archivo",
     },
+    Parsed: "Analizado",
     Rename: "Renombrar conversación",
     Typing: "Escribiendo…",
     Input: (submitKey: string) => {

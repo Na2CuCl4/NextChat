@@ -67,7 +67,9 @@ const da: PartialLocaleType = {
       Clear: "Ryd kontekst",
       Settings: "Indstillinger",
       UploadImage: "Upload billeder",
+      UploadFile: "Upload filer",
     },
+    Parsed: "Fortolket",
     Rename: "Omdøb chat",
     Typing: "Skriver…",
     Input: (submitKey: string) => {

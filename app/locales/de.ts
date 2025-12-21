@@ -63,7 +63,9 @@ const de: PartialLocaleType = {
       Clear: "Chat löschen",
       Settings: "Gesprächseinstellungen",
       UploadImage: "Bild hochladen",
+      UploadFile: "Datei hochladen",
     },
+    Parsed: "Analysiert",
     Rename: "Gespräch umbenennen",
     Typing: "Tippt…",
     Input: (submitKey: string) => {
