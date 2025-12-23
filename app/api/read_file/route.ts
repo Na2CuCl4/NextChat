@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { getServerSideConfig } from "@/app/config/server";
 
-export async function handle(req: NextRequest) {
+export async function POST(req: NextRequest) {
   const serverConfig = getServerSideConfig();
 
   try {
@@ -33,7 +33,5 @@ export async function handle(req: NextRequest) {
     );
   }
 }
-
-export const POST = handle;
 
 export const runtime = "edge";
