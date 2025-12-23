@@ -482,6 +482,7 @@
 }
 
 .chat-message-user > .chat-message-container {
+  width: var(--message-max-width);
   align-items: flex-end;
 }
 
