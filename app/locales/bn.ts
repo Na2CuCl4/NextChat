@@ -191,6 +191,7 @@ const bn: PartialLocaleType = {
     Sync: {
       CloudState: "ক্লাউড ডেটা",
       NotSyncYet: "এখনো সিঙ্ক করা হয়নি",
+      Syncing: "সিঙ্ক চলছে, পৃষ্ঠা বন্ধ করবেন না",
       Success: "সিঙ্ক সফল",
       Fail: "সিঙ্ক ব্যর্থ",
 
@@ -232,6 +233,17 @@ const bn: PartialLocaleType = {
         return `${overview.chat} বার চ্যাট, ${overview.message} বার্তা, ${overview.prompt} প্রম্পট, ${overview.mask} মাস্ক`;
       },
       ImportFailed: "আমদানি ব্যর্থ",
+
+      Interval: {
+        Title: "স্বয়ংক্রিয় সিঙ্ক ইন্টারভ্যাল",
+        Selection: {
+          Hourly: "প্রতি ঘণ্টায়",
+          Daily: "দৈনিক",
+          Weekly: "সাপ্তাহিক",
+          Monthly: "মাসিক",
+          Never: "কখনো না",
+        },
+      },
     },
     Mask: {
       Splash: {

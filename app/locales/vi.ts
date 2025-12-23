@@ -191,6 +191,7 @@ const vi: PartialLocaleType = {
     Sync: {
       CloudState: "Dữ liệu đám mây",
       NotSyncYet: "Chưa thực hiện đồng bộ",
+      Syncing: "Đang đồng bộ, vui lòng không đóng trang",
       Success: "Đồng bộ thành công",
       Fail: "Đồng bộ thất bại",
 
@@ -231,6 +232,17 @@ const vi: PartialLocaleType = {
         return `${overview.chat} cuộc trò chuyện, ${overview.message} tin nhắn, ${overview.prompt} lệnh, ${overview.mask} mặt nạ`;
       },
       ImportFailed: "Nhập không thành công",
+
+      Interval: {
+        Title: "Khoảng thời gian đồng bộ tự động",
+        Selection: {
+          Hourly: "Hàng giờ",
+          Daily: "Hàng ngày",
+          Weekly: "Hàng tuần",
+          Monthly: "Hàng tháng",
+          Never: "Không bao giờ",
+        },
+      },
     },
     Mask: {
       Splash: {

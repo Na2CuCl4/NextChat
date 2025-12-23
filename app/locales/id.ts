@@ -192,6 +192,7 @@ const id: PartialLocaleType = {
     Sync: {
       CloudState: "Data Cloud",
       NotSyncYet: "Belum disinkronkan",
+      Syncing: "Sedang disinkronkan, jangan tutup halaman",
       Success: "Sinkronisasi Berhasil",
       Fail: "Sinkronisasi Gagal",
 
@@ -232,6 +233,17 @@ const id: PartialLocaleType = {
         return `${overview.chat} percakapan, ${overview.message} pesan, ${overview.prompt} prompt, ${overview.mask} masker`;
       },
       ImportFailed: "Impor Gagal",
+
+      Interval: {
+        Title: "Interval Sinkronisasi Otomatis",
+        Selection: {
+          Hourly: "Per Jam",
+          Daily: "Harian",
+          Weekly: "Mingguan",
+          Monthly: "Bulanan",
+          Never: "Tidak Pernah",
+        },
+      },
     },
     Mask: {
       Splash: {

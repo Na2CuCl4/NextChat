@@ -199,6 +199,7 @@ const tw: PartialLocaleType = {
     Sync: {
       CloudState: "雲端資料",
       NotSyncYet: "還沒有進行過同步",
+      Syncing: "同步中，請勿關閉網頁",
       Success: "同步成功",
       Fail: "同步失敗",
 
@@ -238,6 +239,17 @@ const tw: PartialLocaleType = {
         return `${overview.chat} 次對話，${overview.message} 則訊息，${overview.prompt} 條提示詞，${overview.mask} 個角色範本`;
       },
       ImportFailed: "匯入失敗",
+
+      Interval: {
+        Title: "自動同步間隔",
+        Selection: {
+          Hourly: "每小時",
+          Daily: "每天",
+          Weekly: "每週",
+          Monthly: "每月",
+          Never: "從不",
+        },
+      },
     },
     Mask: {
       Splash: {

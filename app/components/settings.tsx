@@ -346,7 +346,7 @@ function SyncConfigModal(props: { onClose?: () => void }) {
             title={Locale.Settings.Sync.Config.SyncType.Title}
             subTitle={Locale.Settings.Sync.Config.SyncType.SubTitle}
           >
-            <select
+            <Select
               value={syncStore.provider}
               onChange={(e) => {
                 syncStore.update(
@@ -360,7 +360,7 @@ function SyncConfigModal(props: { onClose?: () => void }) {
                   {k}
                 </option>
               ))}
-            </select>
+            </Select>
           </ListItem>
 
           <ListItem
@@ -568,6 +568,24 @@ function SyncItems() {
               }}
             />
           </div>
+        </ListItem>
+
+        <ListItem title={Locale.Settings.Sync.Interval.Title}>
+          <Select
+            aria-label={Locale.Settings.Sync.Interval.Title}
+            value={syncStore.getSyncInterval()}
+            onChange={(e) => {
+              syncStore.setSyncInterval(e.target.value);
+            }}
+          >
+            {Object.entries(Locale.Settings.Sync.Interval.Selection).map(
+              ([k, v]) => (
+                <option value={v} key={k}>
+                  {v}
+                </option>
+              ),
+            )}
+          </Select>
         </ListItem>
       </List>
 

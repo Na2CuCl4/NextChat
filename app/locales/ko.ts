@@ -211,6 +211,7 @@ const ko: PartialLocaleType = {
     Sync: {
       CloudState: "클라우드 데이터",
       NotSyncYet: "아직 동기화되지 않았습니다.",
+      Syncing: "동기화 중입니다. 페이지를 닫지 마세요.",
       Success: "동기화 성공",
       Fail: "동기화 실패",
 
@@ -251,6 +252,17 @@ const ko: PartialLocaleType = {
         return `${overview.chat} 회의 대화, ${overview.message} 개의 메시지, ${overview.prompt} 개의 프롬프트, ${overview.mask} 개의 마스크`;
       },
       ImportFailed: "가져오기 실패",
+
+      Interval: {
+        Title: "자동 동기화 간격",
+        Selection: {
+          Hourly: "매시간",
+          Daily: "매일",
+          Weekly: "매주",
+          Monthly: "매달",
+          Never: "안 함",
+        },
+      },
     },
     Mask: {
       Splash: {

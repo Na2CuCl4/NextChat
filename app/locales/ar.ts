@@ -190,6 +190,7 @@ const ar: PartialLocaleType = {
     Sync: {
       CloudState: "بيانات السحابة",
       NotSyncYet: "لم يتم التزامن بعد",
+      Syncing: "جاري التزامن، يرجى عدم إغلاق الصفحة",
       Success: "تم التزامن بنجاح",
       Fail: "فشل التزامن",
 
@@ -229,6 +230,17 @@ const ar: PartialLocaleType = {
         return `${overview.chat} دردشة، ${overview.message} رسالة، ${overview.prompt} إشعار، ${overview.mask} قناع`;
       },
       ImportFailed: "فشل الاستيراد",
+
+      Interval: {
+        Title: "فترة التزامن التلقائي",
+        Selection: {
+          Hourly: "كل ساعة",
+          Daily: "يومياً",
+          Weekly: "أسبوعياً",
+          Monthly: "شهرياً",
+          Never: "أبداً",
+        },
+      },
     },
     Mask: {
       Splash: {

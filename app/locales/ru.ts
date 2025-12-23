@@ -193,6 +193,7 @@ const ru: PartialLocaleType = {
     Sync: {
       CloudState: "Облачные данные",
       NotSyncYet: "Синхронизация еще не проводилась",
+      Syncing: "Синхронизация в процессе, не закрывайте страницу",
       Success: "Синхронизация успешна",
       Fail: "Не удалось синхронизировать",
 
@@ -233,6 +234,17 @@ const ru: PartialLocaleType = {
         return `${overview.chat} бесед, ${overview.message} сообщений, ${overview.prompt} подсказок, ${overview.mask} масок`;
       },
       ImportFailed: "Не удалось импортировать",
+
+      Interval: {
+        Title: "Интервал автоматической синхронизации",
+        Selection: {
+          Hourly: "Каждый час",
+          Daily: "Ежедневно",
+          Weekly: "Еженедельно",
+          Monthly: "Ежемесячно",
+          Never: "Никогда",
+        },
+      },
     },
     Mask: {
       Splash: {

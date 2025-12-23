@@ -197,6 +197,7 @@ const fr: PartialLocaleType = {
     Sync: {
       CloudState: "Données cloud",
       NotSyncYet: "Pas encore synchronisé",
+      Syncing: "Synchronisation en cours, veuillez ne pas fermer la page",
       Success: "Synchronisation réussie",
       Fail: "Échec de la synchronisation",
 
@@ -238,6 +239,17 @@ const fr: PartialLocaleType = {
         return `${overview.chat} discussions, ${overview.message} messages, ${overview.prompt} invites, ${overview.mask} masques`;
       },
       ImportFailed: "Échec de l'importation",
+
+      Interval: {
+        Title: "Intervalle de synchronisation automatique",
+        Selection: {
+          Hourly: "Horaire",
+          Daily: "Quotidien",
+          Weekly: "Hebdomadaire",
+          Monthly: "Mensuel",
+          Never: "Jamais",
+        },
+      },
     },
     Mask: {
       Splash: {

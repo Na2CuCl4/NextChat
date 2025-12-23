@@ -191,6 +191,7 @@ const sk: PartialLocaleType = {
     Sync: {
       CloudState: "Posledná aktualizácia",
       NotSyncYet: "Zatiaľ nesynchronizované",
+      Syncing: "Prebieha synchronizácia, prosím neuzatvárajte stránku",
       Success: "Synchronizácia úspešná",
       Fail: "Synchronizácia zlyhala",
 
@@ -230,6 +231,17 @@ const sk: PartialLocaleType = {
         return `${overview.chat} chaty, ${overview.message} správy, ${overview.prompt} výzvy, ${overview.mask} masky`;
       },
       ImportFailed: "Import z súboru zlyhal",
+
+      Interval: {
+        Title: "Interval automatickej synchronizácie",
+        Selection: {
+          Hourly: "Každú hodinu",
+          Daily: "Denne",
+          Weekly: "Týždenne",
+          Monthly: "Mesačne",
+          Never: "Nikdy",
+        },
+      },
     },
     Mask: {
       Splash: {

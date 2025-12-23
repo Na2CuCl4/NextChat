@@ -196,6 +196,7 @@ const no: PartialLocaleType = {
     Sync: {
       CloudState: "Skydatasynkronisering",
       NotSyncYet: "Har ikke blitt synkronisert ennå",
+      Syncing: "Synkroniserer, vennligst ikke lukk siden",
       Success: "Synkronisering vellykket",
       Fail: "Synkronisering mislyktes",
 
@@ -236,6 +237,17 @@ const no: PartialLocaleType = {
         return `${overview.chat} samtaler, ${overview.message} meldinger, ${overview.prompt} oppfordringer, ${overview.mask} masker`;
       },
       ImportFailed: "Import mislyktes",
+
+      Interval: {
+        Title: "Intervall for automatisk synkronisering",
+        Selection: {
+          Hourly: "Hver time",
+          Daily: "Daglig",
+          Weekly: "Ukentlig",
+          Monthly: "Månedlig",
+          Never: "Aldri",
+        },
+      },
     },
     Mask: {
       Splash: {

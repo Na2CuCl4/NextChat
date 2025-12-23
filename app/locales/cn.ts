@@ -210,6 +210,7 @@ const cn = {
     Sync: {
       CloudState: "云端数据",
       NotSyncYet: "还没有进行过同步",
+      Syncing: "正在同步，请勿关闭网页",
       Success: "同步成功",
       Fail: "同步失败",
 
@@ -249,6 +250,17 @@ const cn = {
         return `${overview.chat} 次对话，${overview.message} 条消息，${overview.prompt} 条提示词，${overview.mask} 个面具`;
       },
       ImportFailed: "导入失败",
+
+      Interval: {
+        Title: "自动同步间隔",
+        Selection: {
+          Hourly: "每小时",
+          Daily: "每天",
+          Weekly: "每周",
+          Monthly: "每月",
+          Never: "从不",
+        },
+      },
     },
     Mask: {
       Splash: {

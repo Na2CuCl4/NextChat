@@ -212,6 +212,7 @@ const en: PartialLocaleType = {
     Sync: {
       CloudState: "Last Update",
       NotSyncYet: "Not sync yet",
+      Syncing: "Syncing, please don't close the page",
       Success: "Sync Success",
       Fail: "Sync Fail",
 
@@ -252,6 +253,17 @@ const en: PartialLocaleType = {
         return `${overview.chat} chats，${overview.message} messages，${overview.prompt} prompts，${overview.mask} masks`;
       },
       ImportFailed: "Failed to import from file",
+
+      Interval: {
+        Title: "Auto Sync Interval",
+        Selection: {
+          Hourly: "Hourly",
+          Daily: "Daily",
+          Weekly: "Weekly",
+          Monthly: "Monthly",
+          Never: "Never",
+        },
+      },
     },
     Mask: {
       Splash: {

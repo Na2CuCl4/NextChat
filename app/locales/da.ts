@@ -212,6 +212,7 @@ const da: PartialLocaleType = {
     Sync: {
       CloudState: "Seneste opdatering",
       NotSyncYet: "Endnu ikke synkroniseret",
+      Syncing: "Synkroniserer, luk ikke siden",
       Success: "Synkronisering lykkedes",
       Fail: "Synkronisering mislykkedes",
       Config: {
@@ -246,6 +247,17 @@ const da: PartialLocaleType = {
       Overview: (overview: any) =>
         `${overview.chat} chats, ${overview.message} beskeder, ${overview.prompt} prompts, ${overview.mask} personaer`,
       ImportFailed: "Import mislykkedes",
+
+      Interval: {
+        Title: "Interval for automatisk synkronisering",
+        Selection: {
+          Hourly: "Hver time",
+          Daily: "Dagligt",
+          Weekly: "Ugentlig",
+          Monthly: "Månedlig",
+          Never: "Aldrig",
+        },
+      },
     },
     Mask: {
       Splash: {

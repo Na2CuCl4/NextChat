@@ -191,6 +191,7 @@ const jp: PartialLocaleType = {
     Sync: {
       CloudState: "クラウドデータ",
       NotSyncYet: "まだ同期されていません",
+      Syncing: "同期中です。ページを閉じないでください",
       Success: "同期に成功しました",
       Fail: "同期に失敗しました",
 
@@ -231,6 +232,17 @@ const jp: PartialLocaleType = {
         return `${overview.chat} 回の対話、${overview.message} 件のメッセージ、${overview.prompt} 件のプロンプト、${overview.mask} 件のマスク`;
       },
       ImportFailed: "インポートに失敗しました",
+
+      Interval: {
+        Title: "自動同期間隔",
+        Selection: {
+          Hourly: "毎時",
+          Daily: "毎日",
+          Weekly: "毎週",
+          Monthly: "毎月",
+          Never: "なし",
+        },
+      },
     },
     Mask: {
       Splash: {

@@ -191,6 +191,7 @@ const tr: PartialLocaleType = {
     Sync: {
       CloudState: "Bulut Verisi",
       NotSyncYet: "Henüz senkronize edilmedi",
+      Syncing: "Senkronizasyon devam ediyor, lütfen sayfayı kapatmayın",
       Success: "Senkronizasyon başarılı",
       Fail: "Senkronizasyon başarısız",
 
@@ -231,6 +232,17 @@ const tr: PartialLocaleType = {
         return `${overview.chat} konuşma, ${overview.message} mesaj, ${overview.prompt} ipucu, ${overview.mask} maske`;
       },
       ImportFailed: "İçeri aktarma başarısız",
+
+      Interval: {
+        Title: "Otomatik Senkronizasyon Aralığı",
+        Selection: {
+          Hourly: "Saatlik",
+          Daily: "Günlük",
+          Weekly: "Haftalık",
+          Monthly: "Aylık",
+          Never: "Hiçbir zaman",
+        },
+      },
     },
     Mask: {
       Splash: {

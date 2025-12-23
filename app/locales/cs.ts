@@ -191,6 +191,7 @@ const cs: PartialLocaleType = {
     Sync: {
       CloudState: "Data na cloudu",
       NotSyncYet: "Ještě nebylo synchronizováno",
+      Syncing: "Synchronizace probíhá, prosím neuzavírejte stránku",
       Success: "Synchronizace úspěšná",
       Fail: "Synchronizace selhala",
 
@@ -231,6 +232,17 @@ const cs: PartialLocaleType = {
         return `${overview.chat} konverzací, ${overview.message} zpráv, ${overview.prompt} promptů, ${overview.mask} masek`;
       },
       ImportFailed: "Import selhal",
+
+      Interval: {
+        Title: "Interval automatické synchronizace",
+        Selection: {
+          Hourly: "Každou hodinu",
+          Daily: "Denně",
+          Weekly: "Týdně",
+          Monthly: "Měsíčně",
+          Never: "Nikdy",
+        },
+      },
     },
     Mask: {
       Splash: {

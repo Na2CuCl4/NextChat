@@ -1021,32 +1021,24 @@ function _Chat() {
     if (!couldSync || autoSyncTriggeredRef.current) return;
 
     const lastSync = syncStore.lastSyncTime;
-    const ONE_DAY_MS = 24 * 60 * 60 * 1000;
-    const needAutoSync = !lastSync || Date.now() - lastSync > ONE_DAY_MS;
+    const needAutoSync =
+      syncStore.autoSyncInterval > 0 &&
+      (!lastSync || Date.now() - lastSync > syncStore.autoSyncInterval);
 
     if (!needAutoSync) return;
 
     autoSyncTriggeredRef.current = true;
-    let cancelled = false;
 
     (async () => {
-      showToast("正在同步，请勿关闭网页");
+      showToast(Locale.Settings.Sync.Syncing);
       try {
         await syncStore.sync();
-        if (!cancelled) {
-          showToast(Locale.Settings.Sync.Success);
-        }
+        showToast(Locale.Settings.Sync.Success);
       } catch (e) {
-        if (!cancelled) {
-          showToast(Locale.Settings.Sync.Fail);
-          console.error("[AutoSync]", e);
-        }
+        showToast(Locale.Settings.Sync.Fail);
+        console.error("[AutoSync]", e);
       }
     })();
-
-    return () => {
-      cancelled = true;
-    };
   }, [couldSync, syncStore.lastSyncTime, syncStore]);
 
   const inputRef = useRef<HTMLTextAreaElement>(null);
