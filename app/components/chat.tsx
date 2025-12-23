@@ -69,6 +69,7 @@ import {
   useChatStore,
   usePluginStore,
 } from "../store";
+import { useSyncStore } from "../store/sync";
 
 import {
   autoGrowTextArea,
@@ -1011,6 +1012,42 @@ function _Chat() {
   const fontFamily = config.fontFamily;
 
   const [showExport, setShowExport] = useState(false);
+
+  // Auto sync on chat page load if enabled and outdated
+  const syncStore = useSyncStore();
+  const couldSync = useMemo(() => syncStore.cloudSync(), [syncStore]);
+  const autoSyncTriggeredRef = useRef(false);
+  useEffect(() => {
+    if (!couldSync || autoSyncTriggeredRef.current) return;
+
+    const lastSync = syncStore.lastSyncTime;
+    const ONE_DAY_MS = 24 * 60 * 60 * 1000;
+    const needAutoSync = !lastSync || Date.now() - lastSync > ONE_DAY_MS;
+
+    if (!needAutoSync) return;
+
+    autoSyncTriggeredRef.current = true;
+    let cancelled = false;
+
+    (async () => {
+      showToast("正在同步，请勿关闭网页");
+      try {
+        await syncStore.sync();
+        if (!cancelled) {
+          showToast(Locale.Settings.Sync.Success);
+        }
+      } catch (e) {
+        if (!cancelled) {
+          showToast(Locale.Settings.Sync.Fail);
+          console.error("[AutoSync]", e);
+        }
+      }
+    })();
+
+    return () => {
+      cancelled = true;
+    };
+  }, [couldSync, syncStore.lastSyncTime, syncStore]);
 
   const inputRef = useRef<HTMLTextAreaElement>(null);
   const [userInput, setUserInput] = useState("");
