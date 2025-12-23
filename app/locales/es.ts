@@ -1,21 +1,10 @@
 import { SubmitKey } from "../store/config";
 import type { PartialLocaleType } from "./index";
-import { getClientConfig } from "../config/client";
-import { SAAS_CHAT_UTM_URL } from "@/app/constant";
-const isApp = !!getClientConfig()?.isApp;
 
 const es: PartialLocaleType = {
   WIP: "En construcción...",
   Error: {
-    Unauthorized: isApp
-      ? `😆 La conversación encontró algunos problemas, no te preocupes:
-    \\ 1️⃣ Si deseas comenzar sin configuración, [haz clic aquí para empezar a chatear inmediatamente 🚀](${SAAS_CHAT_UTM_URL})
-    \\ 2️⃣ Si deseas usar tus propios recursos de OpenAI, haz clic [aquí](/#/settings) para modificar la configuración ⚙️`
-      : `😆 La conversación encontró algunos problemas, no te preocupes:
-    \ 1️⃣ Si deseas comenzar sin configuración, [haz clic aquí para empezar a chatear inmediatamente 🚀](${SAAS_CHAT_UTM_URL})
-    \ 2️⃣ Si estás utilizando una versión de implementación privada, haz clic [aquí](/#/auth) para ingresar la clave de acceso 🔑
-    \ 3️⃣ Si deseas usar tus propios recursos de OpenAI, haz clic [aquí](/#/settings) para modificar la configuración ⚙️
- `,
+    Unauthorized: `😆 La conversación encontró algunos problemas, no te preocupes: Si estás utilizando una versión de implementación privada, haz clic [aquí](/#/auth) para ingresar la clave de acceso 🔑`,
   },
   Auth: {
     Title: "Se requiere contraseña",
@@ -25,10 +14,6 @@ const es: PartialLocaleType = {
     Confirm: "Confirmar",
     Later: "Más tarde",
     Return: "Regresar",
-    SaasTips:
-      "La configuración es demasiado complicada, quiero usarlo de inmediato",
-    TopTips:
-      "🥳 Oferta de lanzamiento de NextChat AI, desbloquea OpenAI o1, GPT-4o, Claude-3.5 y los últimos grandes modelos",
   },
   ChatItem: {
     ChatItemCount: (count: number) => `${count} conversaciones`,
@@ -79,7 +64,9 @@ const es: PartialLocaleType = {
       Clear: "Limpiar chat",
       Settings: "Configuración de conversación",
       UploadImage: "Subir imagen",
+      UploadFile: "Subir archivo",
     },
+    Parsed: "Analizado",
     Rename: "Renombrar conversación",
     Typing: "Escribiendo…",
     Input: (submitKey: string) => {
@@ -211,6 +198,7 @@ const es: PartialLocaleType = {
     Sync: {
       CloudState: "Datos en la nube",
       NotSyncYet: "Aún no se ha sincronizado",
+      Syncing: "Sincronizando, por favor no cierres la página",
       Success: "Sincronización exitosa",
       Fail: "Sincronización fallida",
 
@@ -251,6 +239,17 @@ const es: PartialLocaleType = {
         return `${overview.chat} conversaciones, ${overview.message} mensajes, ${overview.prompt} prompts, ${overview.mask} máscaras`;
       },
       ImportFailed: "Importación fallida",
+
+      Interval: {
+        Title: "Intervalo de sincronización automática",
+        Selection: {
+          Hourly: "Cada hora",
+          Daily: "Diariamente",
+          Weekly: "Semanalmente",
+          Monthly: "Mensualmente",
+          Never: "Nunca",
+        },
+      },
     },
     Mask: {
       Splash: {
@@ -305,14 +304,6 @@ const es: PartialLocaleType = {
     },
 
     Access: {
-      SaasStart: {
-        Title: "Use NextChat AI",
-        Label: "(The most cost-effective solution)",
-        SubTitle:
-          "Officially maintained by NextChat, zero configuration ready to use, supports the latest large models like OpenAI o1, GPT-4o, and Claude-3.5",
-        ChatNow: "Chat Now",
-      },
-
       AccessCode: {
         Title: "Contraseña de acceso",
         SubTitle: "El administrador ha habilitado el acceso encriptado",

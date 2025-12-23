@@ -41,6 +41,8 @@ const DEFAULT_SYNC_STATE = {
 
   lastSyncTime: 0,
   lastProvider: "",
+
+  autoSyncInterval: 0, // in ms, 0 means never
 };
 
 export const useSyncStore = createPersistStore(
@@ -122,6 +124,41 @@ export const useSyncStore = createPersistStore(
     async check() {
       const client = this.getClient();
       return await client.check();
+    },
+
+    getSyncInterval() {
+      switch (get().autoSyncInterval) {
+        case 60 * 60 * 1000:
+          return Locale.Settings.Sync.Interval.Selection.Hourly;
+        case 24 * 60 * 60 * 1000:
+          return Locale.Settings.Sync.Interval.Selection.Daily;
+        case 7 * 24 * 60 * 60 * 1000:
+          return Locale.Settings.Sync.Interval.Selection.Weekly;
+        case 30 * 24 * 60 * 60 * 1000:
+          return Locale.Settings.Sync.Interval.Selection.Monthly;
+        default:
+          return Locale.Settings.Sync.Interval.Selection.Never;
+      }
+    },
+
+    setSyncInterval(v: string) {
+      switch (v) {
+        case Locale.Settings.Sync.Interval.Selection.Hourly:
+          set({ autoSyncInterval: 60 * 60 * 1000 });
+          break;
+        case Locale.Settings.Sync.Interval.Selection.Daily:
+          set({ autoSyncInterval: 24 * 60 * 60 * 1000 });
+          break;
+        case Locale.Settings.Sync.Interval.Selection.Weekly:
+          set({ autoSyncInterval: 7 * 24 * 60 * 60 * 1000 });
+          break;
+        case Locale.Settings.Sync.Interval.Selection.Monthly:
+          set({ autoSyncInterval: 30 * 24 * 60 * 60 * 1000 });
+          break;
+        default:
+          set({ autoSyncInterval: 0 });
+          break;
+      }
     },
   }),
   {

@@ -1,21 +1,9 @@
-import { getClientConfig } from "../config/client";
 import { SubmitKey } from "../store/config";
-import { SAAS_CHAT_UTM_URL } from "@/app/constant";
-
-const isApp = !!getClientConfig()?.isApp;
 
 const cn = {
   WIP: "该功能仍在开发中……",
   Error: {
-    Unauthorized: isApp
-      ? `😆 对话遇到了一些问题，不用慌:
-       \\ 1️⃣ 想要零配置开箱即用，[点击这里立刻开启对话 🚀](${SAAS_CHAT_UTM_URL})
-       \\ 2️⃣ 如果你想消耗自己的 OpenAI 资源，点击[这里](/#/settings)修改设置 ⚙️`
-      : `😆 对话遇到了一些问题，不用慌:
-       \ 1️⃣ 想要零配置开箱即用，[点击这里立刻开启对话 🚀](${SAAS_CHAT_UTM_URL})
-       \ 2️⃣ 如果你正在使用私有部署版本，点击[这里](/#/auth)输入访问秘钥 🔑
-       \ 3️⃣ 如果你想消耗自己的 OpenAI 资源，点击[这里](/#/settings)修改设置 ⚙️
-       `,
+    Unauthorized: `😆 对话遇到了一些问题，不用慌：如果你正在使用私有部署版本，点击[这里](/#/auth)输入访问秘钥 🔑`,
   },
   Auth: {
     Return: "返回",
@@ -25,9 +13,6 @@ const cn = {
     Input: "在此处填写访问码",
     Confirm: "确认",
     Later: "稍后再说",
-    SaasTips: "配置太麻烦，想要立即使用",
-    TopTips:
-      "🥳 NextChat AI 首发优惠，立刻解锁 OpenAI o1, GPT-4o, Claude-3.5 等最新大模型",
   },
   ChatItem: {
     ChatItemCount: (count: number) => `${count} 条对话`,
@@ -81,7 +66,9 @@ const cn = {
       Clear: "清除聊天",
       Settings: "对话设置",
       UploadImage: "上传图片",
+      UploadFile: "上传文件",
     },
+    Parsed: "已解析",
     Rename: "重命名对话",
     Typing: "正在输入…",
     Input: (submitKey: string) => {
@@ -223,6 +210,7 @@ const cn = {
     Sync: {
       CloudState: "云端数据",
       NotSyncYet: "还没有进行过同步",
+      Syncing: "正在同步，请勿关闭网页",
       Success: "同步成功",
       Fail: "同步失败",
 
@@ -262,6 +250,17 @@ const cn = {
         return `${overview.chat} 次对话，${overview.message} 条消息，${overview.prompt} 条提示词，${overview.mask} 个面具`;
       },
       ImportFailed: "导入失败",
+
+      Interval: {
+        Title: "自动同步间隔",
+        Selection: {
+          Hourly: "每小时",
+          Daily: "每天",
+          Weekly: "每周",
+          Monthly: "每月",
+          Never: "从不",
+        },
+      },
     },
     Mask: {
       Splash: {
@@ -311,13 +310,6 @@ const cn = {
     },
 
     Access: {
-      SaasStart: {
-        Title: "使用 NextChat AI",
-        Label: "（性价比最高的方案）",
-        SubTitle:
-          "由 NextChat 官方维护, 零配置开箱即用，支持 OpenAI o1, GPT-4o, Claude-3.5 等最新大模型",
-        ChatNow: "立刻对话",
-      },
       AccessCode: {
         Title: "访问密码",
         SubTitle: "管理员已开启加密访问",

@@ -1,20 +1,10 @@
-import { getClientConfig } from "../config/client";
 import { SubmitKey } from "../store/config";
-import { SAAS_CHAT_UTM_URL } from "@/app/constant";
-const isApp = !!getClientConfig()?.isApp;
+import type { PartialLocaleType } from "./index";
 
-const tw = {
+const tw: PartialLocaleType = {
   WIP: "此功能仍在開發中……",
   Error: {
-    Unauthorized: isApp
-      ? `😆 對話遇到了一些問題，不用慌:
-    \\ 1️⃣ 想要無須設定開箱即用，[點選這裡立刻開啟對話 🚀](${SAAS_CHAT_UTM_URL})
-    \\ 2️⃣ 如果你想消耗自己的 OpenAI 資源，點選[這裡](/#/settings)修改設定 ⚙️`
-      : `😆 對話遇到了一些問題，不用慌:
-    \ 1️⃣ 想要無須設定開箱即用，[點選這裡立刻開啟對話 🚀](${SAAS_CHAT_UTM_URL})
-    \ 2️⃣ 如果你正在使用私有部署版本，點選[這裡](/#/auth)輸入存取金鑰 🔑
-    \ 3️⃣ 如果你想消耗自己的 OpenAI 資源，點選[這裡](/#/settings)修改設定 ⚙️
- `,
+    Unauthorized: `😆 對話遇到了一些問題，不用慌：如果你正在使用私有部署版本，點選[這裡](/#/auth)輸入存取金鑰 🔑`,
   },
 
   Auth: {
@@ -25,9 +15,6 @@ const tw = {
     Confirm: "確認",
     Later: "稍候再說",
     Return: "返回",
-    SaasTips: "設定太麻煩，想要立即使用",
-    TopTips:
-      "🥳 NextChat AI 首發優惠，立刻解鎖 OpenAI o1, GPT-4o, Claude-3.5 等最新的大型語言模型",
   },
   ChatItem: {
     ChatItemCount: (count: number) => `${count} 則對話`,
@@ -77,7 +64,9 @@ const tw = {
       Clear: "清除聊天",
       Settings: "對話設定",
       UploadImage: "上傳圖片",
+      UploadFile: "上傳檔案",
     },
+    Parsed: "已解析",
     Rename: "重新命名對話",
     Typing: "正在輸入…",
     Input: (submitKey: string) => {
@@ -210,6 +199,7 @@ const tw = {
     Sync: {
       CloudState: "雲端資料",
       NotSyncYet: "還沒有進行過同步",
+      Syncing: "同步中，請勿關閉網頁",
       Success: "同步成功",
       Fail: "同步失敗",
 
@@ -249,6 +239,17 @@ const tw = {
         return `${overview.chat} 次對話，${overview.message} 則訊息，${overview.prompt} 條提示詞，${overview.mask} 個角色範本`;
       },
       ImportFailed: "匯入失敗",
+
+      Interval: {
+        Title: "自動同步間隔",
+        Selection: {
+          Hourly: "每小時",
+          Daily: "每天",
+          Weekly: "每週",
+          Monthly: "每月",
+          Never: "從不",
+        },
+      },
     },
     Mask: {
       Splash: {
@@ -298,14 +299,6 @@ const tw = {
     },
 
     Access: {
-      SaasStart: {
-        Title: "使用 NextChat AI",
-        Label: "(性價比最高的方案)",
-        SubTitle:
-          "由 NextChat 官方維護，無須設定開箱即用，支援 OpenAI o1、GPT-4o、Claude-3.5 等最新的大型語言模型",
-        ChatNow: "立刻開始對話",
-      },
-
       AccessCode: {
         Title: "存取密碼",
         SubTitle: "管理員已開啟加密存取",
@@ -546,14 +539,4 @@ const tw = {
   },
 };
 
-type DeepPartial<T> = T extends object
-  ? {
-      [P in keyof T]?: DeepPartial<T[P]>;
-    }
-  : T;
-
-export type LocaleType = typeof tw;
-export type PartialLocaleType = DeepPartial<typeof tw>;
-
 export default tw;
-// Translated by @chunkiuuu, feel free the submit new pr if there are typo/incorrect translations :D

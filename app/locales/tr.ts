@@ -1,21 +1,10 @@
 import { SubmitKey } from "../store/config";
 import type { PartialLocaleType } from "./index";
-import { getClientConfig } from "../config/client";
-import { SAAS_CHAT_UTM_URL } from "@/app/constant";
-const isApp = !!getClientConfig()?.isApp;
 
 const tr: PartialLocaleType = {
   WIP: "Çalışma devam ediyor...",
   Error: {
-    Unauthorized: isApp
-      ? `😆 Sohbet bazı sorunlarla karşılaştı, endişelenmeyin:
-    \\ 1️⃣ Eğer sıfır yapılandırma ile başlamak istiyorsanız, [buraya tıklayarak hemen sohbete başlayın 🚀](${SAAS_CHAT_UTM_URL})
-    \\ 2️⃣ Kendi OpenAI kaynaklarınızı kullanmak istiyorsanız, [buraya tıklayarak](/#/settings) ayarları değiştirin ⚙️`
-      : `😆 Sohbet bazı sorunlarla karşılaştı, endişelenmeyin:
-    \ 1️⃣ Eğer sıfır yapılandırma ile başlamak istiyorsanız, [buraya tıklayarak hemen sohbete başlayın 🚀](${SAAS_CHAT_UTM_URL})
-    \ 2️⃣ Eğer özel dağıtım sürümü kullanıyorsanız, [buraya tıklayarak](/#/auth) erişim anahtarını girin 🔑
-    \ 3️⃣ Kendi OpenAI kaynaklarınızı kullanmak istiyorsanız, [buraya tıklayarak](/#/settings) ayarları değiştirin ⚙️
- `,
+    Unauthorized: `😆 Sohbet bazı sorunlarla karşılaştı, endişelenmeyin: Eğer özel dağıtım sürümü kullanıyorsanız, [buraya tıklayarak](/#/auth) erişim anahtarını girin 🔑`,
   },
   Auth: {
     Title: "Şifre Gerekli",
@@ -25,9 +14,6 @@ const tr: PartialLocaleType = {
     Confirm: "Onayla",
     Later: "Sonra",
     Return: "Geri",
-    SaasTips: "Ayarlar çok karmaşık, hemen kullanmak istiyorum",
-    TopTips:
-      "🥳 NextChat AI lansman teklifi, OpenAI o1, GPT-4o, Claude-3.5 ve en son büyük modelleri şimdi açın",
   },
   ChatItem: {
     ChatItemCount: (count: number) => `${count} konuşma`,
@@ -77,7 +63,9 @@ const tr: PartialLocaleType = {
       Clear: "Sohbeti temizle",
       Settings: "Sohbet ayarları",
       UploadImage: "Resim yükle",
+      UploadFile: "Dosya yükle",
     },
+    Parsed: "Ayrıştırıldı",
     Rename: "Sohbeti yeniden adlandır",
     Typing: "Yazıyor…",
     Input: (submitKey: string) => {
@@ -203,6 +191,7 @@ const tr: PartialLocaleType = {
     Sync: {
       CloudState: "Bulut Verisi",
       NotSyncYet: "Henüz senkronize edilmedi",
+      Syncing: "Senkronizasyon devam ediyor, lütfen sayfayı kapatmayın",
       Success: "Senkronizasyon başarılı",
       Fail: "Senkronizasyon başarısız",
 
@@ -243,6 +232,17 @@ const tr: PartialLocaleType = {
         return `${overview.chat} konuşma, ${overview.message} mesaj, ${overview.prompt} ipucu, ${overview.mask} maske`;
       },
       ImportFailed: "İçeri aktarma başarısız",
+
+      Interval: {
+        Title: "Otomatik Senkronizasyon Aralığı",
+        Selection: {
+          Hourly: "Saatlik",
+          Daily: "Günlük",
+          Weekly: "Haftalık",
+          Monthly: "Aylık",
+          Never: "Hiçbir zaman",
+        },
+      },
     },
     Mask: {
       Splash: {
@@ -296,14 +296,6 @@ const tr: PartialLocaleType = {
     },
 
     Access: {
-      SaasStart: {
-        Title: "NextChat AI kullanın",
-        Label: "(En maliyet etkin çözüm)",
-        SubTitle:
-          "NextChat tarafından resmi olarak yönetilmektedir, yapılandırma olmadan hemen kullanıma hazırdır, OpenAI o1, GPT-4o, Claude-3.5 gibi en son büyük modelleri destekler",
-        ChatNow: "Şimdi sohbet et",
-      },
-
       AccessCode: {
         Title: "Erişim Şifresi",
         SubTitle: "Yönetici şifreli erişimi etkinleştirdi",

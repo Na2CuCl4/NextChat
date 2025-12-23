@@ -1,21 +1,10 @@
 import { SubmitKey } from "../store/config";
 import type { PartialLocaleType } from "./index";
-import { getClientConfig } from "../config/client";
-import { SAAS_CHAT_UTM_URL } from "@/app/constant";
-const isApp = !!getClientConfig()?.isApp;
 
 const de: PartialLocaleType = {
   WIP: "In Bearbeitung...",
   Error: {
-    Unauthorized: isApp
-      ? `😆 Das Gespräch hatte einige Probleme, keine Sorge:
-    \\ 1️⃣ Wenn du ohne Konfiguration sofort starten möchtest, [klicke hier, um sofort zu chatten 🚀](${SAAS_CHAT_UTM_URL})
-    \\ 2️⃣ Wenn du deine eigenen OpenAI-Ressourcen verwenden möchtest, klicke [hier](/#/settings), um die Einstellungen zu ändern ⚙️`
-      : `😆 Das Gespräch hatte einige Probleme, keine Sorge:
-    \ 1️⃣ Wenn du ohne Konfiguration sofort starten möchtest, [klicke hier, um sofort zu chatten 🚀](${SAAS_CHAT_UTM_URL})
-    \ 2️⃣ Wenn du eine private Bereitstellung verwendest, klicke [hier](/#/auth), um den Zugriffsschlüssel einzugeben 🔑
-    \ 3️⃣ Wenn du deine eigenen OpenAI-Ressourcen verwenden möchtest, klicke [hier](/#/settings), um die Einstellungen zu ändern ⚙️
- `,
+    Unauthorized: `😆 Das Gespräch hatte einige Probleme, keine Sorge: Wenn du eine private Bereitstellung verwendest, klicke [hier](/#/auth), um den Zugriffsschlüssel einzugeben 🔑`,
   },
   Auth: {
     Title: "Passwort erforderlich",
@@ -25,10 +14,6 @@ const de: PartialLocaleType = {
     Confirm: "Bestätigen",
     Later: "Später",
     Return: "Zurück",
-    SaasTips:
-      "Die Konfiguration ist zu kompliziert, ich möchte es sofort nutzen",
-    TopTips:
-      "🥳 NextChat AI Einführungsangebot, schalte jetzt OpenAI o1, GPT-4o, Claude-3.5 und die neuesten großen Modelle frei",
   },
   ChatItem: {
     ChatItemCount: (count: number) => `${count} Gespräche`,
@@ -78,7 +63,9 @@ const de: PartialLocaleType = {
       Clear: "Chat löschen",
       Settings: "Gesprächseinstellungen",
       UploadImage: "Bild hochladen",
+      UploadFile: "Datei hochladen",
     },
+    Parsed: "Analysiert",
     Rename: "Gespräch umbenennen",
     Typing: "Tippt…",
     Input: (submitKey: string) => {
@@ -208,6 +195,7 @@ const de: PartialLocaleType = {
     Sync: {
       CloudState: "Cloud-Daten",
       NotSyncYet: "Noch nicht synchronisiert",
+      Syncing: "Synchronisierung läuft, bitte schließen Sie die Seite nicht",
       Success: "Synchronisation erfolgreich",
       Fail: "Synchronisation fehlgeschlagen",
 
@@ -248,6 +236,17 @@ const de: PartialLocaleType = {
         return `${overview.chat} Chats, ${overview.message} Nachrichten, ${overview.prompt} Eingabeaufforderungen, ${overview.mask} Masken`;
       },
       ImportFailed: "Import fehlgeschlagen",
+
+      Interval: {
+        Title: "Automatisches Synchronisierungsintervall",
+        Selection: {
+          Hourly: "Stündlich",
+          Daily: "Täglich",
+          Weekly: "Wöchentlich",
+          Monthly: "Monatlich",
+          Never: "Nie",
+        },
+      },
     },
     Mask: {
       Splash: {
@@ -302,14 +301,6 @@ const de: PartialLocaleType = {
     },
 
     Access: {
-      SaasStart: {
-        Title: "NextChat AI verwenden",
-        Label: "(Die kosteneffektivste Lösung)",
-        SubTitle:
-          "Offiziell von NextChat verwaltet, sofort einsatzbereit ohne Konfiguration, unterstützt die neuesten großen Modelle wie OpenAI o1, GPT-4o und Claude-3.5",
-        ChatNow: "Jetzt chatten",
-      },
-
       AccessCode: {
         Title: "Zugangscode",
         SubTitle:
@@ -437,7 +428,8 @@ const de: PartialLocaleType = {
       AI302: {
         ApiKey: {
           Title: "Schnittstellenschlüssel",
-          SubTitle: "Verwenden Sie einen benutzerdefinierten 302.AI API-Schlüssel",
+          SubTitle:
+            "Verwenden Sie einen benutzerdefinierten 302.AI API-Schlüssel",
           Placeholder: "302.AI API-Schlüssel",
         },
         Endpoint: {

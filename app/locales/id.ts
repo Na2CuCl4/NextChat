@@ -1,21 +1,10 @@
 import { SubmitKey } from "../store/config";
 import type { PartialLocaleType } from "./index";
-import { getClientConfig } from "../config/client";
-import { SAAS_CHAT_UTM_URL } from "@/app/constant";
-const isApp = !!getClientConfig()?.isApp;
 
 const id: PartialLocaleType = {
   WIP: "Coming Soon...",
   Error: {
-    Unauthorized: isApp
-      ? `😆 Percakapan mengalami beberapa masalah, tidak perlu khawatir:
-   \\ 1️⃣ Jika Anda ingin memulai tanpa konfigurasi, [klik di sini untuk mulai mengobrol segera 🚀](${SAAS_CHAT_UTM_URL})
-   \\ 2️⃣ Jika Anda ingin menggunakan sumber daya OpenAI Anda sendiri, klik [di sini](/#/settings) untuk mengubah pengaturan ⚙️`
-      : `😆 Percakapan mengalami beberapa masalah, tidak perlu khawatir:
-   \ 1️⃣ Jika Anda ingin memulai tanpa konfigurasi, [klik di sini untuk mulai mengobrol segera 🚀](${SAAS_CHAT_UTM_URL})
-   \ 2️⃣ Jika Anda menggunakan versi penyebaran pribadi, klik [di sini](/#/auth) untuk memasukkan kunci akses 🔑
-   \ 3️⃣ Jika Anda ingin menggunakan sumber daya OpenAI Anda sendiri, klik [di sini](/#/settings) untuk mengubah pengaturan ⚙️
-`,
+    Unauthorized: `😆 Percakapan mengalami beberapa masalah, tidak perlu khawatir: Jika Anda menggunakan versi penyebaran pribadi, klik [di sini](/#/auth) untuk memasukkan kunci akses 🔑`,
   },
   Auth: {
     Title: "Kebutuhan Kata Sandi",
@@ -25,9 +14,6 @@ const id: PartialLocaleType = {
     Confirm: "Konfirmasi",
     Later: "Nanti",
     Return: "Kembali",
-    SaasTips: "Konfigurasi terlalu rumit, saya ingin menggunakannya segera",
-    TopTips:
-      "🥳 Penawaran Peluncuran NextChat AI, buka OpenAI o1, GPT-4o, Claude-3.5 dan model besar terbaru sekarang",
   },
   ChatItem: {
     ChatItemCount: (count: number) => `${count} percakapan`,
@@ -77,7 +63,9 @@ const id: PartialLocaleType = {
       Clear: "Hapus Obrolan",
       Settings: "Pengaturan Obrolan",
       UploadImage: "Unggah Gambar",
+      UploadFile: "Unggah Berkas",
     },
+    Parsed: "Sudah diurai",
     Rename: "Ganti Nama Obrolan",
     Typing: "Sedang Mengetik…",
     Input: (submitKey: string) => {
@@ -204,6 +192,7 @@ const id: PartialLocaleType = {
     Sync: {
       CloudState: "Data Cloud",
       NotSyncYet: "Belum disinkronkan",
+      Syncing: "Sedang disinkronkan, jangan tutup halaman",
       Success: "Sinkronisasi Berhasil",
       Fail: "Sinkronisasi Gagal",
 
@@ -244,6 +233,17 @@ const id: PartialLocaleType = {
         return `${overview.chat} percakapan, ${overview.message} pesan, ${overview.prompt} prompt, ${overview.mask} masker`;
       },
       ImportFailed: "Impor Gagal",
+
+      Interval: {
+        Title: "Interval Sinkronisasi Otomatis",
+        Selection: {
+          Hourly: "Per Jam",
+          Daily: "Harian",
+          Weekly: "Mingguan",
+          Monthly: "Bulanan",
+          Never: "Tidak Pernah",
+        },
+      },
     },
     Mask: {
       Splash: {
@@ -295,14 +295,6 @@ const id: PartialLocaleType = {
     },
 
     Access: {
-      SaasStart: {
-        Title: "Gunakan NextChat AI",
-        Label: "(Solusi paling hemat biaya)",
-        SubTitle:
-          "Dikelola secara resmi oleh NextChat, siap digunakan tanpa konfigurasi, mendukung model besar terbaru seperti OpenAI o1, GPT-4o, dan Claude-3.5",
-        ChatNow: "Chat Sekarang",
-      },
-
       AccessCode: {
         Title: "Kata Sandi Akses",
         SubTitle: "Administrator telah mengaktifkan akses terenkripsi",

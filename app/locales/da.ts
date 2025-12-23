@@ -1,21 +1,10 @@
-import { getClientConfig } from "../config/client";
 import { SubmitKey } from "../store/config";
-import { SAAS_CHAT_UTM_URL } from "@/app/constant";
-import { PartialLocaleType } from "./index";
+import type { PartialLocaleType } from "./index";
 
-const isApp = !!getClientConfig()?.isApp;
 const da: PartialLocaleType = {
   WIP: "Der kommer snart mere...",
   Error: {
-    Unauthorized: isApp
-      ? `Hov, der skete en fejl. Sådan kan du komme videre:
-       \\ 1️⃣ Er du ny her? [Tryk for at starte nu 🚀](${SAAS_CHAT_UTM_URL})
-       \\ 2️⃣ Vil du bruge dine egne OpenAI-nøgler? [Tryk her](/#/settings) for at ændre indstillinger ⚙️`
-      : `Hov, der skete en fejl. Lad os løse det:
-       \\ 1️⃣ Er du ny her? [Tryk for at starte nu 🚀](${SAAS_CHAT_UTM_URL})
-       \\ 2️⃣ Bruger du en privat opsætning? [Tryk her](/#/auth) for at taste din nøgle 🔑
-       \\ 3️⃣ Vil du bruge dine egne OpenAI-nøgler? [Tryk her](/#/settings) for at ændre indstillinger ⚙️
-       `,
+    Unauthorized: ` Hov, der skete en fejl. Lad os løse det: Bruger du en privat opsætning? [Tryk her](/#/auth) for at taste din nøgle 🔑`,
   },
   Auth: {
     Return: "Tilbage",
@@ -25,7 +14,6 @@ const da: PartialLocaleType = {
     Input: "Adgangskode",
     Confirm: "OK",
     Later: "Senere",
-    SaasTips: "Hvis det er for svært, kan du starte nu",
   },
   ChatItem: {
     ChatItemCount: (count: number) => `${count} beskeder`,
@@ -79,7 +67,9 @@ const da: PartialLocaleType = {
       Clear: "Ryd kontekst",
       Settings: "Indstillinger",
       UploadImage: "Upload billeder",
+      UploadFile: "Upload filer",
     },
+    Parsed: "Fortolket",
     Rename: "Omdøb chat",
     Typing: "Skriver…",
     Input: (submitKey: string) => {
@@ -222,6 +212,7 @@ const da: PartialLocaleType = {
     Sync: {
       CloudState: "Seneste opdatering",
       NotSyncYet: "Endnu ikke synkroniseret",
+      Syncing: "Synkroniserer, luk ikke siden",
       Success: "Synkronisering lykkedes",
       Fail: "Synkronisering mislykkedes",
       Config: {
@@ -256,6 +247,17 @@ const da: PartialLocaleType = {
       Overview: (overview: any) =>
         `${overview.chat} chats, ${overview.message} beskeder, ${overview.prompt} prompts, ${overview.mask} personaer`,
       ImportFailed: "Import mislykkedes",
+
+      Interval: {
+        Title: "Interval for automatisk synkronisering",
+        Selection: {
+          Hourly: "Hver time",
+          Daily: "Dagligt",
+          Weekly: "Ugentlig",
+          Monthly: "Månedlig",
+          Never: "Aldrig",
+        },
+      },
     },
     Mask: {
       Splash: {

@@ -1,21 +1,10 @@
 import { SubmitKey } from "../store/config";
 import type { PartialLocaleType } from "./index";
-import { getClientConfig } from "../config/client";
-import { SAAS_CHAT_UTM_URL } from "@/app/constant";
-const isApp = !!getClientConfig()?.isApp;
 
 const jp: PartialLocaleType = {
   WIP: "この機能は開発中です",
   Error: {
-    Unauthorized: isApp
-      ? `😆 会話中に問題が発生しましたが、心配しないでください:
-    \\ 1️⃣ 設定なしで始めたい場合は、[ここをクリックしてすぐにチャットを開始 🚀](${SAAS_CHAT_UTM_URL})
-    \\ 2️⃣ 自分のOpenAIリソースを使用したい場合は、[ここをクリックして](/#/settings)設定を変更してください ⚙️`
-      : `😆 会話中に問題が発生しましたが、心配しないでください:
-    \ 1️⃣ 設定なしで始めたい場合は、[ここをクリックしてすぐにチャットを開始 🚀](${SAAS_CHAT_UTM_URL})
-    \ 2️⃣ プライベートデプロイ版を使用している場合は、[ここをクリックして](/#/auth)アクセストークンを入力してください 🔑
-    \ 3️⃣ 自分のOpenAIリソースを使用したい場合は、[ここをクリックして](/#/settings)設定を変更してください ⚙️
- `,
+    Unauthorized: `😆 会話中に問題が発生しましたが、心配しないでください：プライベートデプロイ版を使用している場合は、[ここをクリックして](/#/auth)アクセストークンを入力してください 🔑`,
   },
   Auth: {
     Title: "パスワードが必要です",
@@ -25,9 +14,6 @@ const jp: PartialLocaleType = {
     Confirm: "確認",
     Later: "後で",
     Return: "戻る",
-    SaasTips: "設定が面倒すぎる、すぐに使いたい",
-    TopTips:
-      "🥳 NextChat AIの発売特典で、OpenAI o1、GPT-4o、Claude-3.5などの最新の大規模モデルを今すぐアンロック",
   },
   ChatItem: {
     ChatItemCount: (count: number) => `${count}件の会話`,
@@ -77,7 +63,9 @@ const jp: PartialLocaleType = {
       Clear: "チャットをクリア",
       Settings: "チャット設定",
       UploadImage: "画像をアップロード",
+      UploadFile: "ファイルをアップロード",
     },
+    Parsed: "解析済み",
     Rename: "チャットの名前を変更",
     Typing: "入力中…",
     Input: (submitKey: string) => {
@@ -203,6 +191,7 @@ const jp: PartialLocaleType = {
     Sync: {
       CloudState: "クラウドデータ",
       NotSyncYet: "まだ同期されていません",
+      Syncing: "同期中です。ページを閉じないでください",
       Success: "同期に成功しました",
       Fail: "同期に失敗しました",
 
@@ -243,6 +232,17 @@ const jp: PartialLocaleType = {
         return `${overview.chat} 回の対話、${overview.message} 件のメッセージ、${overview.prompt} 件のプロンプト、${overview.mask} 件のマスク`;
       },
       ImportFailed: "インポートに失敗しました",
+
+      Interval: {
+        Title: "自動同期間隔",
+        Selection: {
+          Hourly: "毎時",
+          Daily: "毎日",
+          Weekly: "毎週",
+          Monthly: "毎月",
+          Never: "なし",
+        },
+      },
     },
     Mask: {
       Splash: {
@@ -292,14 +292,6 @@ const jp: PartialLocaleType = {
     },
 
     Access: {
-      SaasStart: {
-        Title: "NextChat AIを使用する",
-        Label: "(コストパフォーマンスの最も高いソリューション)",
-        SubTitle:
-          "NextChatによって公式に管理されており、設定なしですぐに使用でき、OpenAI o1、GPT-4o、Claude-3.5などの最新の大規模モデルをサポートしています",
-        ChatNow: "今すぐチャット",
-      },
-
       AccessCode: {
         Title: "アクセスパスワード",
         SubTitle: "管理者が暗号化アクセスを有効にしました",

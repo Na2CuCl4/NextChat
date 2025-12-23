@@ -1,21 +1,10 @@
 import { SubmitKey } from "../store/config";
 import type { PartialLocaleType } from "./index";
-import { getClientConfig } from "../config/client";
-import { SAAS_CHAT_UTM_URL } from "@/app/constant";
-const isApp = !!getClientConfig()?.isApp;
 
 const no: PartialLocaleType = {
   WIP: "Arbeid pågår ...",
   Error: {
-    Unauthorized: isApp
-      ? `😆 Samtalen har støtt på noen problemer, ikke bekymre deg:
-    \\ 1️⃣ Hvis du vil starte uten konfigurasjon, [klikk her for å begynne å chatte umiddelbart 🚀](${SAAS_CHAT_UTM_URL})
-    \\ 2️⃣ Hvis du vil bruke dine egne OpenAI-ressurser, klikk [her](/#/settings) for å endre innstillingene ⚙️`
-      : `😆 Samtalen har støtt på noen problemer, ikke bekymre deg:
-    \ 1️⃣ Hvis du vil starte uten konfigurasjon, [klikk her for å begynne å chatte umiddelbart 🚀](${SAAS_CHAT_UTM_URL})
-    \ 2️⃣ Hvis du bruker en privat distribusjonsversjon, klikk [her](/#/auth) for å skrive inn tilgangsnøkkelen 🔑
-    \ 3️⃣ Hvis du vil bruke dine egne OpenAI-ressurser, klikk [her](/#/settings) for å endre innstillingene ⚙️
- `,
+    Unauthorized: `😆 Samtalen har støtt på noen problemer, ikke bekymre deg: Hvis du bruker en privat distribusjonsversjon, klikk [her](/#/auth) for å skrive inn tilgangsnøkkelen 🔑`,
   },
   Auth: {
     Title: "Passord påkrevd",
@@ -25,10 +14,6 @@ const no: PartialLocaleType = {
     Confirm: "Bekreft",
     Later: "Kom tilbake senere",
     Return: "Tilbake",
-    SaasTips:
-      "Konfigurasjonen er for komplisert, jeg vil bruke det med en gang",
-    TopTips:
-      "🥳 NextChat AI lanseringstilbud, lås opp OpenAI o1, GPT-4o, Claude-3.5 og de nyeste store modellene nå",
   },
   ChatItem: {
     ChatItemCount: (count: number) => `${count} samtaler`,
@@ -79,7 +64,9 @@ const no: PartialLocaleType = {
       Clear: "Rydd samtale",
       Settings: "Samtaleinnstillinger",
       UploadImage: "Last opp bilde",
+      UploadFile: "Last opp fil",
     },
+    Parsed: "Analysert",
     Rename: "Gi nytt navn til samtale",
     Typing: "Skriver…",
     Input: (submitKey: string) => {
@@ -209,6 +196,7 @@ const no: PartialLocaleType = {
     Sync: {
       CloudState: "Skydatasynkronisering",
       NotSyncYet: "Har ikke blitt synkronisert ennå",
+      Syncing: "Synkroniserer, vennligst ikke lukk siden",
       Success: "Synkronisering vellykket",
       Fail: "Synkronisering mislyktes",
 
@@ -249,6 +237,17 @@ const no: PartialLocaleType = {
         return `${overview.chat} samtaler, ${overview.message} meldinger, ${overview.prompt} oppfordringer, ${overview.mask} masker`;
       },
       ImportFailed: "Import mislyktes",
+
+      Interval: {
+        Title: "Intervall for automatisk synkronisering",
+        Selection: {
+          Hourly: "Hver time",
+          Daily: "Daglig",
+          Weekly: "Ukentlig",
+          Monthly: "Månedlig",
+          Never: "Aldri",
+        },
+      },
     },
     Mask: {
       Splash: {
@@ -299,14 +298,6 @@ const no: PartialLocaleType = {
     },
 
     Access: {
-      SaasStart: {
-        Title: "Bruk NextChat AI",
-        Label: "(Den mest kostnadseffektive løsningen)",
-        SubTitle:
-          "Offisielt vedlikeholdt av NextChat, klar til bruk uten konfigurasjon, støtter de nyeste store modellene som OpenAI o1, GPT-4o og Claude-3.5",
-        ChatNow: "Chat nå",
-      },
-
       AccessCode: {
         Title: "Adgangskode",
         SubTitle: "Administrator har aktivert kryptert tilgang",
