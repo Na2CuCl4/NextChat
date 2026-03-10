@@ -1862,7 +1862,20 @@ function _Chat() {
               {!session.topic ? DEFAULT_TOPIC : session.topic}
             </div>
             <div className="window-header-sub-title">
-              {Locale.Chat.SubTitle(session.messages.length)}
+              {syncStore.isSyncing ? (
+                <span
+                  style={{
+                    display: "inline-flex",
+                    alignItems: "center",
+                    gap: 4,
+                  }}
+                >
+                  <LoadingButtonIcon />
+                  {Locale.Settings.Sync.Syncing}
+                </span>
+              ) : (
+                Locale.Chat.SubTitle(session.messages.length)
+              )}
             </div>
           </div>
           <div className="window-actions">

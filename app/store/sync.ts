@@ -127,6 +127,8 @@ const DEFAULT_SYNC_STATE = {
   lastProvider: "",
 
   autoSyncInterval: 0, // in ms, 0 means never
+
+  isSyncing: false,
 };
 
 export const useSyncStore = createPersistStore(
@@ -180,6 +182,7 @@ export const useSyncStore = createPersistStore(
       }
 
       inFlightSyncPromise = (async () => {
+        set({ isSyncing: true } as any);
         return await runSyncWithGlobalLock(async () => {
           const localState = getLocalAppState();
           const provider = get().provider;
@@ -216,6 +219,7 @@ export const useSyncStore = createPersistStore(
         return await inFlightSyncPromise;
       } finally {
         inFlightSyncPromise = null;
+        set({ isSyncing: false } as any);
       }
     },
 
