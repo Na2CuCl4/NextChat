@@ -534,8 +534,10 @@ function SyncItems() {
                 text={Locale.UI.Sync}
                 onClick={async () => {
                   try {
-                    await syncStore.sync();
-                    showToast(Locale.Settings.Sync.Success);
+                    const executed = await syncStore.sync();
+                    if (executed) {
+                      showToast(Locale.Settings.Sync.Success);
+                    }
                   } catch (e) {
                     showToast(Locale.Settings.Sync.Fail);
                     console.error("[Sync]", e);

@@ -1027,13 +1027,13 @@ function _Chat() {
 
     if (!needAutoSync) return;
 
-    autoSyncTriggeredRef.current = true;
-
     (async () => {
-      showToast(Locale.Settings.Sync.Syncing);
       try {
-        await syncStore.sync();
-        showToast(Locale.Settings.Sync.Success);
+        const executed = await syncStore.sync();
+        if (executed) {
+          autoSyncTriggeredRef.current = true;
+          showToast(Locale.Settings.Sync.Success);
+        }
       } catch (e) {
         showToast(Locale.Settings.Sync.Fail);
         console.error("[AutoSync]", e);

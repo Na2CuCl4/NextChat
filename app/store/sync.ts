@@ -13,6 +13,90 @@ import { showToast } from "../components/ui-lib";
 import Locale from "../locales";
 import { createSyncClient, ProviderType } from "../utils/cloud";
 
+const SYNC_LOCK_NAME = "nextchat-sync-lock";
+const SYNC_LOCK_KEY = "nextchat-sync-lock-owner";
+const SYNC_LOCK_TTL = 5 * 60 * 1000;
+const SYNC_LOCK_OWNER = `${Date.now()}-${Math.random().toString(36).slice(2)}`;
+
+let inFlightSyncPromise: Promise<boolean> | null = null;
+
+function getNow() {
+  return Date.now();
+}
+
+function tryAcquireStorageLock() {
+  if (typeof window === "undefined") return false;
+
+  try {
+    const now = getNow();
+    const raw = window.localStorage.getItem(SYNC_LOCK_KEY);
+    if (raw) {
+      const parsed = JSON.parse(raw) as { owner: string; expireAt: number };
+      if (parsed.expireAt > now && parsed.owner !== SYNC_LOCK_OWNER) {
+        return false;
+      }
+    }
+
+    const lockValue = JSON.stringify({
+      owner: SYNC_LOCK_OWNER,
+      expireAt: now + SYNC_LOCK_TTL,
+    });
+    window.localStorage.setItem(SYNC_LOCK_KEY, lockValue);
+
+    const confirmed = window.localStorage.getItem(SYNC_LOCK_KEY);
+    if (!confirmed) return false;
+    const confirmedParsed = JSON.parse(confirmed) as {
+      owner: string;
+      expireAt: number;
+    };
+    return confirmedParsed.owner === SYNC_LOCK_OWNER;
+  } catch {
+    return false;
+  }
+}
+
+function releaseStorageLock() {
+  if (typeof window === "undefined") return;
+
+  try {
+    const raw = window.localStorage.getItem(SYNC_LOCK_KEY);
+    if (!raw) return;
+    const parsed = JSON.parse(raw) as { owner: string; expireAt: number };
+    if (parsed.owner === SYNC_LOCK_OWNER) {
+      window.localStorage.removeItem(SYNC_LOCK_KEY);
+    }
+  } catch {
+    // ignore lock release errors
+  }
+}
+
+async function runSyncWithGlobalLock(task: () => Promise<void>) {
+  if (typeof navigator !== "undefined" && navigator.locks?.request) {
+    let executed = false;
+    await navigator.locks.request(
+      SYNC_LOCK_NAME,
+      { mode: "exclusive", ifAvailable: true },
+      async (lock) => {
+        if (!lock) return;
+        executed = true;
+        await task();
+      },
+    );
+    return executed;
+  }
+
+  if (!tryAcquireStorageLock()) {
+    return false;
+  }
+
+  try {
+    await task();
+    return true;
+  } finally {
+    releaseStorageLock();
+  }
+}
+
 export interface WebDavConfig {
   server: string;
   username: string;
@@ -91,34 +175,48 @@ export const useSyncStore = createPersistStore(
     },
 
     async sync() {
-      const localState = getLocalAppState();
-      const provider = get().provider;
-      const config = get()[provider];
-      const client = this.getClient();
-
-      try {
-        const remoteState = await client.get(config.username);
-        if (!remoteState || remoteState === "") {
-          await client.set(config.username, JSON.stringify(localState));
-          console.log(
-            "[Sync] Remote state is empty, using local state instead.",
-          );
-          return;
-        } else {
-          const parsedRemoteState = JSON.parse(
-            await client.get(config.username),
-          ) as AppState;
-          mergeAppState(localState, parsedRemoteState);
-          setLocalAppState(localState);
-        }
-      } catch (e) {
-        console.log("[Sync] failed to get remote state", e);
-        throw e;
+      if (inFlightSyncPromise) {
+        return false;
       }
 
-      await client.set(config.username, JSON.stringify(localState));
+      inFlightSyncPromise = (async () => {
+        return await runSyncWithGlobalLock(async () => {
+          const localState = getLocalAppState();
+          const provider = get().provider;
+          const config = get()[provider];
+          const client = this.getClient();
 
-      this.markSyncTime();
+          try {
+            const remoteState = await client.get(config.username);
+            if (!remoteState || remoteState === "") {
+              await client.set(config.username, JSON.stringify(localState));
+              console.log(
+                "[Sync] Remote state is empty, using local state instead.",
+              );
+              return;
+            } else {
+              const parsedRemoteState = JSON.parse(
+                await client.get(config.username),
+              ) as AppState;
+              mergeAppState(localState, parsedRemoteState);
+              setLocalAppState(localState);
+            }
+          } catch (e) {
+            console.log("[Sync] failed to get remote state", e);
+            throw e;
+          }
+
+          await client.set(config.username, JSON.stringify(localState));
+
+          this.markSyncTime();
+        });
+      })();
+
+      try {
+        return await inFlightSyncPromise;
+      } finally {
+        inFlightSyncPromise = null;
+      }
     },
 
     async check() {
