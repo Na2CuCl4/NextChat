@@ -9,13 +9,22 @@ export interface RequestMessage {
 }
 
 export type DalleSize = "1024x1024" | "1792x1024" | "1024x1792";
-export type DalleQuality = "standard" | "hd";
+export type DalleQuality =
+  | "standard"
+  | "hd"
+  | "auto"
+  | "low"
+  | "medium"
+  | "high";
 export type DalleStyle = "vivid" | "natural";
 
 export type ModelSize =
   | "1024x1024"
-  | "1792x1024"
-  | "1024x1792"
+  | "1792x1024" // DALL-E 3 landscape
+  | "1024x1792" // DALL-E 3 portrait
+  | "1024x1536" // gpt-image-1 portrait
+  | "1536x1024" // gpt-image-1 landscape
+  | "auto" // gpt-image-1 auto
   | "768x1344"
   | "864x1152"
   | "1344x768"

@@ -530,12 +530,19 @@ function SyncItems() {
             />
             {couldSync && (
               <IconButton
-                icon={<ResetIcon />}
-                text={Locale.UI.Sync}
+                icon={syncStore.isSyncing ? <LoadingIcon /> : <ResetIcon />}
+                text={
+                  syncStore.isSyncing
+                    ? Locale.Settings.Sync.Syncing
+                    : Locale.UI.Sync
+                }
                 onClick={async () => {
+                  if (syncStore.isSyncing) return;
                   try {
-                    await syncStore.sync();
-                    showToast(Locale.Settings.Sync.Success);
+                    const executed = await syncStore.sync();
+                    if (executed) {
+                      showToast(Locale.Settings.Sync.Success);
+                    }
                   } catch (e) {
                     showToast(Locale.Settings.Sync.Fail);
                     console.error("[Sync]", e);

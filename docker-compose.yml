@@ -1,38 +1,31 @@
-version: "3.9"
-services:
-  chatgpt-next-web:
-    profiles: [ "no-proxy" ]
-    container_name: chatgpt-next-web
-    image: yidadaa/chatgpt-next-web
-    ports:
-      - 3000:3000
-    environment:
-      - OPENAI_API_KEY=$OPENAI_API_KEY
-      - GOOGLE_API_KEY=$GOOGLE_API_KEY
-      - CODE=$CODE
-      - BASE_URL=$BASE_URL
-      - OPENAI_ORG_ID=$OPENAI_ORG_ID
-      - HIDE_USER_API_KEY=$HIDE_USER_API_KEY
-      - DISABLE_GPT4=$DISABLE_GPT4
-      - ENABLE_BALANCE_QUERY=$ENABLE_BALANCE_QUERY
-      - DISABLE_FAST_LINK=$DISABLE_FAST_LINK
-      - OPENAI_SB=$OPENAI_SB
+networks:
+  nextchat-network:
 
-  chatgpt-next-web-proxy:
-    profiles: [ "proxy" ]
-    container_name: chatgpt-next-web-proxy
-    image: yidadaa/chatgpt-next-web
+services:
+  nextchat:
+    image: na2cucl4/nextchat:latest
+    container_name: nextchat
     ports:
-      - 3000:3000
+      - 127.0.0.1:3001:3000
+    networks:
+      - nextchat-network
     environment:
-      - OPENAI_API_KEY=$OPENAI_API_KEY
-      - GOOGLE_API_KEY=$GOOGLE_API_KEY
-      - CODE=$CODE
-      - PROXY_URL=$PROXY_URL
-      - BASE_URL=$BASE_URL
-      - OPENAI_ORG_ID=$OPENAI_ORG_ID
-      - HIDE_USER_API_KEY=$HIDE_USER_API_KEY
-      - DISABLE_GPT4=$DISABLE_GPT4
-      - ENABLE_BALANCE_QUERY=$ENABLE_BALANCE_QUERY
-      - DISABLE_FAST_LINK=$DISABLE_FAST_LINK
-      - OPENAI_SB=$OPENAI_SB
+      AZURE_API_KEY: <azure-api-key>
+      AZURE_URL: <azure-endpoint>
+      AZURE_API_VERSION: 2024-12-01-preview
+      CODE: <code>
+      CUSTOM_MODELS: -all,+gpt-5.2@Azure,+gpt-5.2-chat@Azure,+gpt-5.1@Azure,+gpt-5.1-chat@Azure,+gpt-5@Azure,+gpt-5-mini@Azure,+gpt-5-nano@Azure,+gpt-5-chat@Azure,+gpt-4.1@Azure,+gpt-4.1-mini@Azure,+gpt-4.1-nano@Azure,+gpt-4o@Azure,+gpt-4o-mini@Azure,+o4-mini@Azure,+o3@Azure,+o3-mini@Azure,+o1@Azure,+o1-mini@Azure
+      DEFAULT_MODEL: gpt-5.4@Azure
+      FILE_READING_SERVER: http://nextchat-readfile:8000/read_file
+      HIDE_USER_API_KEY: 1
+      HIDE_BALANCE_QUERY: 1
+    restart: always
+
+  nextchat-readfile:
+    image: na2cucl4/nextchat-readfile:latest
+    container_name: nextchat-readfile
+    expose:
+      - 8000
+    networks:
+      - nextchat-network
+    restart: always
