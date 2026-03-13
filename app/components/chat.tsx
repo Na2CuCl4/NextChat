@@ -80,7 +80,9 @@ import {
   isVisionModel,
   safeLocalStorage,
   getModelSizes,
+  getModelQualities,
   supportsCustomSize,
+  supportsCustomQuality,
   useMobileScreen,
   selectOrCopy,
   showPlugins,
@@ -92,7 +94,7 @@ import { uploadFile as uploadFileRemote } from "@/app/utils/chat";
 import dynamic from "next/dynamic";
 
 import { ChatControllerPool } from "../client/controller";
-import { DalleQuality, DalleStyle, ModelSize } from "../typing";
+import { DalleStyle, ModelSize } from "../typing";
 import { Prompt, usePromptStore } from "../store/prompt";
 import Locale from "../locales";
 
@@ -571,11 +573,16 @@ export function ChatActions(props: {
   const [showQualitySelector, setShowQualitySelector] = useState(false);
   const [showStyleSelector, setShowStyleSelector] = useState(false);
   const modelSizes = getModelSizes(currentModel);
-  const dalle3Qualitys: DalleQuality[] = ["standard", "hd"];
+  const modelQualities = getModelQualities(currentModel);
   const dalle3Styles: DalleStyle[] = ["vivid", "natural"];
   const currentSize =
     session.mask.modelConfig?.size ?? ("1024x1024" as ModelSize);
-  const currentQuality = session.mask.modelConfig?.quality ?? "standard";
+  const storedQuality = session.mask.modelConfig?.quality;
+  const defaultQuality = isDalle3(currentModel) ? "standard" : "auto";
+  const currentQuality =
+    storedQuality && modelQualities.includes(storedQuality as any)
+      ? storedQuality
+      : defaultQuality;
   const currentStyle = session.mask.modelConfig?.style ?? "vivid";
 
   const isMobileScreen = useMobileScreen();
@@ -757,7 +764,7 @@ export function ChatActions(props: {
           />
         )}
 
-        {isDalle3(currentModel) && (
+        {supportsCustomQuality(currentModel) && (
           <ChatAction
             onClick={() => setShowQualitySelector(true)}
             text={currentQuality}
@@ -768,7 +775,7 @@ export function ChatActions(props: {
         {showQualitySelector && (
           <Selector
             defaultSelectedValue={currentQuality}
-            items={dalle3Qualitys.map((m) => ({
+            items={modelQualities.map((m) => ({
               title: m,
               value: m,
             }))}

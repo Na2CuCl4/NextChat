@@ -7,7 +7,7 @@ import { REQUEST_TIMEOUT_MS, ServiceProvider } from "./constant";
 import { fetch as tauriStreamFetch } from "./utils/stream";
 import { VISION_MODEL_REGEXES, EXCLUDE_VISION_MODEL_REGEXES } from "./constant";
 import { useAccessStore } from "./store";
-import { ModelSize } from "./typing";
+import { ModelSize, DalleQuality } from "./typing";
 
 export function trimTopic(topic: string) {
   // Fix an issue where double quotes still show in the Indonesian language
@@ -292,6 +292,24 @@ export function isDalle3(model: string) {
   return "dall-e-3" === model;
 }
 
+export function isGptImage1(model: string) {
+  return /^gpt-image-1/.test(model);
+}
+
+export function isImageGenerationModel(model: string) {
+  return isDalle3(model) || isGptImage1(model);
+}
+
+export function getModelQualities(model: string): DalleQuality[] {
+  if (isDalle3(model)) return ["standard", "hd"];
+  if (isGptImage1(model)) return ["auto", "high", "medium", "low"];
+  return [];
+}
+
+export function supportsCustomQuality(model: string): boolean {
+  return getModelQualities(model).length > 0;
+}
+
 export function getTimeoutMSByModel(model: string) {
   return REQUEST_TIMEOUT_MS;
 }
@@ -299,6 +317,9 @@ export function getTimeoutMSByModel(model: string) {
 export function getModelSizes(model: string): ModelSize[] {
   if (isDalle3(model)) {
     return ["1024x1024", "1792x1024", "1024x1792"];
+  }
+  if (isGptImage1(model)) {
+    return ["auto", "1024x1024", "1024x1536", "1536x1024"];
   }
   if (model.toLowerCase().includes("cogview")) {
     return [
