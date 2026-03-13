@@ -17,12 +17,7 @@ import {
   usePluginStore,
 } from "@/app/store";
 import { collectModelsWithDefaultModel } from "@/app/utils/model";
-import {
-  preProcessImageContent,
-  uploadImage,
-  base64Image2Blob,
-  streamWithThink,
-} from "@/app/utils/chat";
+import { preProcessImageContent, streamWithThink } from "@/app/utils/chat";
 import { cloudflareAIGatewayUrl } from "@/app/utils/cloudflare";
 import { ModelSize, DalleQuality, DalleStyle } from "@/app/typing";
 
@@ -140,8 +135,7 @@ export class ChatGPTApi implements LLMApi {
       let url = res.data?.at(0)?.url ?? "";
       const b64_json = res.data?.at(0)?.b64_json ?? "";
       if (!url && b64_json) {
-        // uploadImage
-        url = await uploadImage(base64Image2Blob(b64_json, "image/png"));
+        url = `data:image/png;base64,${b64_json}`;
       }
       return [
         {
