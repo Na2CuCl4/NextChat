@@ -673,10 +673,9 @@ export const useChatStore = createPersistStore(
         const session = targetSession;
         const modelConfig = session.mask.modelConfig;
         const isImageGen = isImageGenerationModel(modelConfig.model);
-        const [model, providerName] = [
-          modelConfig.compressModel,
-          modelConfig.compressProviderName,
-        ];
+        const model = modelConfig.compressModel || modelConfig.model;
+        const providerName =
+          modelConfig.compressProviderName || modelConfig.providerName;
         const api: ClientApi = getClientApi(providerName as ServiceProvider);
 
         // remove error messages if any
