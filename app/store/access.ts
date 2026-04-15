@@ -267,6 +267,11 @@ export const useAccessStore = createPersistStore(
             const [model, providerName] = getModelProvider(defaultModel);
             DEFAULT_CONFIG.modelConfig.model = model;
             DEFAULT_CONFIG.modelConfig.providerName = providerName as any;
+            DEFAULT_CONFIG.modelConfig.compressModel = model;
+            DEFAULT_CONFIG.modelConfig.compressProviderName =
+              providerName as any;
+            console.log("[Config] got default model from server", defaultModel);
+            console.log(DEFAULT_CONFIG.modelConfig);
           }
 
           return res;

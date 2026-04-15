@@ -19,13 +19,12 @@ export function ModelConfigList(props: {
     "provider.providerName",
   );
   const value = `${props.modelConfig.model}@${props.modelConfig?.providerName}`;
+  const compressModelValue = `${props.modelConfig.compressModel}@${props.modelConfig?.compressProviderName}`;
 
-  // 获取摘要模型的值，如果没有配置摘要模型，则使用默认模型作为摘要模型
-  const effectiveCompressModel =
-    props.modelConfig.compressModel || props.modelConfig.model;
-  const effectiveCompressProvider =
-    props.modelConfig.compressProviderName || props.modelConfig.providerName;
-  const compressModelValue = `${effectiveCompressModel}@${effectiveCompressProvider}`;
+  // 在 dev 模式下，在 console 输出当前的模型配置，方便调试
+  if (process.env.NODE_ENV === "development") {
+    console.log("Model Config:", props.modelConfig);
+  }
 
   return (
     <>
