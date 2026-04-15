@@ -101,6 +101,7 @@ export function Sd() {
 
   useEffect(() => {
     setSdImages(sdStore.draw);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [sdStore.currentId]);
 
   return (
@@ -162,6 +163,7 @@ export function Sd() {
                       className={styles["sd-img-item"]}
                     >
                       {item.status === "success" ? (
+                        // eslint-disable-next-line @next/next/no-img-element
                         <img
                           className={styles["img"]}
                           src={item.img_data}
