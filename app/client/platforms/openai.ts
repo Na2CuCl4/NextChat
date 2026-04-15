@@ -318,7 +318,9 @@ export class ChatGPTApi implements LLMApi {
         chatPath = this.path(
           (isImageGen ? Azure.ImagePath : Azure.ChatPath)(
             (model?.displayName ?? model?.name) as string,
-            useCustomConfig ? useAccessStore.getState().azureApiVersion : "",
+            useCustomConfig
+              ? useAccessStore.getState().azureApiVersion
+              : useAccessStore.getState().defaultAzureApiVersion,
           ),
         );
       } else {
