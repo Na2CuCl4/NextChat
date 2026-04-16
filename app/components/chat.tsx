@@ -1626,8 +1626,8 @@ function _Chat() {
             );
             const imagesLength = images.length;
 
-            if (imagesLength > 3) {
-              images.splice(3, imagesLength - 3);
+            if (imagesLength > 15) {
+              images.splice(15, imagesLength - 15);
             }
             setAttachImages(images);
           }
@@ -1657,10 +1657,7 @@ function _Chat() {
             uploadImageRemote(file)
               .then((dataUrl) => {
                 imagesData.push(dataUrl);
-                if (
-                  imagesData.length === 3 ||
-                  imagesData.length === files.length
-                ) {
+                if (imagesData.length === files.length) {
                   setUploading(false);
                   res(imagesData);
                 }
@@ -1676,8 +1673,8 @@ function _Chat() {
     );
 
     const imagesLength = images.length;
-    if (imagesLength > 3) {
-      images.splice(3, imagesLength - 3);
+    if (imagesLength > 15) {
+      images.splice(15, imagesLength - 15);
     }
     setAttachImages(images);
   }
