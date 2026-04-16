@@ -17,7 +17,12 @@ import {
   usePluginStore,
 } from "@/app/store";
 import { collectModelsWithDefaultModel } from "@/app/utils/model";
-import { preProcessImageContent, streamWithThink } from "@/app/utils/chat";
+import {
+  preProcessImageContent,
+  streamWithThink,
+  base64Image2Blob,
+  cacheImageToBase64Image,
+} from "@/app/utils/chat";
 import { cloudflareAIGatewayUrl } from "@/app/utils/cloudflare";
 import { ModelSize, DalleQuality, DalleStyle } from "@/app/typing";
 
@@ -39,6 +44,7 @@ import {
   isGptImage1 as _isGptImage1,
   isImageGenerationModel as _isImageGenerationModel,
   getTimeoutMSByModel,
+  getMessageImages,
 } from "@/app/utils";
 import { fetch } from "@/app/utils/stream";
 
@@ -290,6 +296,30 @@ export class ChatGPTApi implements LLMApi {
 
     console.log("[Request] openai payload: ", requestPayload);
 
+    // Determine whether gpt-image-1 should call /v1/images/edits instead of /v1/images/generations.
+    // Edits mode applies when:
+    //   (a) the current user message contains at least one uploaded image, OR
+    //   (b) the immediately preceding assistant message is a generated image result.
+    // Only gpt-image-1 supports /v1/images/edits; dall-e-3 does not.
+    let useImageEdits = false;
+    let editImageUrls: string[] = [];
+
+    if (isGptImage1) {
+      const msgs = options.messages;
+      // (a) images uploaded by user in the current turn
+      const userImages = getMessageImages(msgs[msgs.length - 1] as any);
+      // (b) images in the most recent preceding assistant message
+      let prevAssistantImages: string[] = [];
+      for (let i = msgs.length - 2; i >= 0; i--) {
+        if (msgs[i].role === "assistant") {
+          prevAssistantImages = getMessageImages(msgs[i] as any);
+          break;
+        }
+      }
+      editImageUrls = [...userImages, ...prevAssistantImages];
+      useImageEdits = editImageUrls.length > 0;
+    }
+
     const shouldStream = !isImageGen && !!options.config.stream;
     const controller = new AbortController();
     options.onController?.(controller);
@@ -316,7 +346,11 @@ export class ChatGPTApi implements LLMApi {
             model?.provider?.providerName === ServiceProvider.Azure,
         );
         chatPath = this.path(
-          (isImageGen ? Azure.ImagePath : Azure.ChatPath)(
+          (useImageEdits
+            ? Azure.ImageEditsPath
+            : isImageGen
+            ? Azure.ImagePath
+            : Azure.ChatPath)(
             (model?.displayName ?? model?.name) as string,
             useCustomConfig
               ? useAccessStore.getState().azureApiVersion
@@ -325,7 +359,11 @@ export class ChatGPTApi implements LLMApi {
         );
       } else {
         chatPath = this.path(
-          isImageGen ? OpenaiPath.ImagePath : OpenaiPath.ChatPath,
+          useImageEdits
+            ? OpenaiPath.ImageEditsPath
+            : isImageGen
+            ? OpenaiPath.ImagePath
+            : OpenaiPath.ChatPath,
         );
       }
       if (shouldStream) {
@@ -428,11 +466,44 @@ export class ChatGPTApi implements LLMApi {
           options,
         );
       } else {
+        let body: BodyInit;
+        let reqHeaders: Record<string, string>;
+
+        if (useImageEdits) {
+          // Build multipart/form-data for /v1/images/edits
+          const payload = requestPayload as GptImage1RequestPayload;
+          const formData = new FormData();
+          formData.append("model", payload.model);
+          formData.append("prompt", payload.prompt);
+          formData.append("n", String(payload.n ?? 1));
+          formData.append("size", payload.size ?? "1024x1024");
+          formData.append("quality", payload.quality ?? "auto");
+
+          for (const rawUrl of editImageUrls) {
+            // cacheImageToBase64Image resolves cache URLs to data URIs;
+            // if the URL is already a data URI it passes through unchanged.
+            const dataUrl = await cacheImageToBase64Image(rawUrl);
+            const matches = dataUrl.match(/^data:([^;]+);base64,(.+)$/);
+            if (!matches) continue;
+            const [, mimeType, base64Data] = matches;
+            const blob = base64Image2Blob(base64Data, mimeType);
+            const ext = mimeType.split("/")[1] ?? "png";
+            formData.append("image[]", blob, `image.${ext}`);
+          }
+
+          body = formData;
+          // Do NOT set Content-Type — browser sets it with the correct multipart boundary
+          reqHeaders = getHeaders(true);
+        } else {
+          body = JSON.stringify(requestPayload);
+          reqHeaders = getHeaders();
+        }
+
         const chatPayload = {
           method: "POST",
-          body: JSON.stringify(requestPayload),
+          body,
           signal: controller.signal,
-          headers: getHeaders(),
+          headers: reqHeaders,
         };
 
         // make a fetch request

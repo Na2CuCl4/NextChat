@@ -178,6 +178,7 @@ export const OpenaiPath = {
   ChatPath: "v1/chat/completions",
   SpeechPath: "v1/audio/speech",
   ImagePath: "v1/images/generations",
+  ImageEditsPath: "v1/images/edits",
   UsagePath: "dashboard/billing/usage",
   SubsPath: "dashboard/billing/subscription",
   ListModelPath: "v1/models",
@@ -189,6 +190,8 @@ export const Azure = {
   // https://<your_resource_name>.openai.azure.com/openai/deployments/<your_deployment_name>/images/generations?api-version=<api_version>
   ImagePath: (deployName: string, apiVersion: string) =>
     `deployments/${deployName}/images/generations?api-version=${apiVersion}`,
+  ImageEditsPath: (deployName: string, apiVersion: string) =>
+    `deployments/${deployName}/images/edits?api-version=${apiVersion}`,
   ExampleEndpoint: "https://{resource-url}/openai",
 };
 
