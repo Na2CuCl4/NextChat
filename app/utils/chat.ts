@@ -110,6 +110,22 @@ export async function preProcessImageContentForAlibabaDashScope(
   }));
 }
 
+export async function preProcessImageContentForResponses(
+  content: RequestMessage["content"],
+) {
+  if (typeof content === "string") {
+    return content;
+  }
+  const result = await preProcessImageContentBase(content, async (url) => ({
+    type: "input_image",
+    image_url: url,
+  }));
+  if (typeof result === "string") return result;
+  return (result as any[]).map((part) =>
+    part.type === "text" ? { ...part, type: "input_text" } : part,
+  );
+}
+
 const imageCaches: Record<string, string> = {};
 export function cacheImageToBase64Image(imageUrl: string) {
   if (imageUrl.includes(CACHE_URL_PREFIX)) {

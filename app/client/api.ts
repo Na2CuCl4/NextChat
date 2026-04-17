@@ -25,6 +25,7 @@ import { XAIApi } from "./platforms/xai";
 import { ChatGLMApi } from "./platforms/glm";
 import { SiliconflowApi } from "./platforms/siliconflow";
 import { Ai302Api } from "./platforms/ai302";
+import { OpenAIResponsesApi } from "./platforms/openairesponses";
 
 export const ROLES = ["system", "user", "assistant"] as const;
 export type MessageRole = (typeof ROLES)[number];
@@ -176,6 +177,9 @@ export class ClientApi {
         break;
       case ModelProvider["302.AI"]:
         this.llm = new Ai302Api();
+        break;
+      case ModelProvider.OpenAIResponses:
+        this.llm = new OpenAIResponsesApi();
         break;
       default:
         this.llm = new ChatGPTApi();
@@ -393,6 +397,8 @@ export function getClientApi(provider: ServiceProvider): ClientApi {
       return new ClientApi(ModelProvider.SiliconFlow);
     case ServiceProvider["302.AI"]:
       return new ClientApi(ModelProvider["302.AI"]);
+    case ServiceProvider.OpenAIResponses:
+      return new ClientApi(ModelProvider.OpenAIResponses);
     default:
       return new ClientApi(ModelProvider.GPT);
   }
