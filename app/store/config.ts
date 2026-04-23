@@ -66,17 +66,15 @@ export const DEFAULT_CONFIG = {
   modelConfig: {
     model: "" as ModelType,
     providerName: "" as ServiceProvider,
-    temperature: 0.5,
+    temperature: 1,
     top_p: 1,
     max_tokens: 128000,
-    presence_penalty: 0,
-    frequency_penalty: 0,
     sendMemory: true,
     historyMessageCount: 16,
     compressMessageLengthThreshold: 64000,
     compressModel: "" as ModelType,
     compressProviderName: "" as ServiceProvider,
-    enableInjectSystemPrompts: true,
+    enableInjectSystemPrompts: false,
     template: config?.template ?? DEFAULT_INPUT_TEMPLATE,
     size: "1024x1024" as ModelSize,
     quality: "standard" as DalleQuality,
@@ -146,12 +144,6 @@ export const ModalConfigValidator = {
   },
   max_tokens(x: number) {
     return limitNumber(x, 0, 512000, 1024);
-  },
-  presence_penalty(x: number) {
-    return limitNumber(x, -2, 2, 0);
-  },
-  frequency_penalty(x: number) {
-    return limitNumber(x, -2, 2, 0);
   },
   temperature(x: number) {
     return limitNumber(x, 0, 2, 1);
@@ -230,7 +222,7 @@ export const useAppConfig = createPersistStore(
       }
 
       if (version < 3.6) {
-        state.modelConfig.enableInjectSystemPrompts = true;
+        state.modelConfig.enableInjectSystemPrompts = false;
       }
 
       if (version < 3.7) {

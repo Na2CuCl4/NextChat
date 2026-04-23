@@ -33,8 +33,6 @@ interface ChatPayload extends BasePayload {
   messages: ChatOptions["messages"];
   stream?: boolean;
   temperature?: number;
-  presence_penalty?: number;
-  frequency_penalty?: number;
   top_p?: number;
 }
 
@@ -97,10 +95,10 @@ export class ChatGLMApi implements LLMApi {
           messages,
           stream: options.config.stream,
           model: modelConfig.model,
-          temperature: modelConfig.temperature,
-          presence_penalty: modelConfig.presence_penalty,
-          frequency_penalty: modelConfig.frequency_penalty,
-          top_p: modelConfig.top_p,
+          ...(modelConfig.temperature !== 1 && {
+            temperature: modelConfig.temperature,
+          }),
+          ...(modelConfig.top_p !== 1 && { top_p: modelConfig.top_p }),
         } as ChatPayload;
     }
   }

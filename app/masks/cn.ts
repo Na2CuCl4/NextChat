@@ -36,8 +36,7 @@ export const CN_MASKS: BuiltinMask[] = [
       model: "gpt-3.5-turbo",
       temperature: 1,
       max_tokens: 2000,
-      presence_penalty: 0,
-      frequency_penalty: 0,
+
       sendMemory: true,
       historyMessageCount: 32,
       compressMessageLengthThreshold: 1000,
@@ -62,8 +61,7 @@ export const CN_MASKS: BuiltinMask[] = [
       model: "gpt-3.5-turbo",
       temperature: 1,
       max_tokens: 2000,
-      presence_penalty: 0,
-      frequency_penalty: 0,
+
       sendMemory: true,
       historyMessageCount: 4,
       compressMessageLengthThreshold: 1000,
@@ -88,8 +86,7 @@ export const CN_MASKS: BuiltinMask[] = [
       model: "gpt-3.5-turbo",
       temperature: 1,
       max_tokens: 2000,
-      presence_penalty: 0,
-      frequency_penalty: 0,
+
       sendMemory: true,
       historyMessageCount: 4,
       compressMessageLengthThreshold: 1000,
@@ -114,8 +111,7 @@ export const CN_MASKS: BuiltinMask[] = [
       model: "gpt-3.5-turbo",
       temperature: 1,
       max_tokens: 2000,
-      presence_penalty: 0,
-      frequency_penalty: 0,
+
       sendMemory: true,
       historyMessageCount: 4,
       compressMessageLengthThreshold: 1000,
@@ -140,8 +136,7 @@ export const CN_MASKS: BuiltinMask[] = [
       model: "gpt-3.5-turbo",
       temperature: 1,
       max_tokens: 2000,
-      presence_penalty: 0,
-      frequency_penalty: 0,
+
       sendMemory: true,
       historyMessageCount: 4,
       compressMessageLengthThreshold: 1000,
@@ -166,8 +161,7 @@ export const CN_MASKS: BuiltinMask[] = [
       model: "gpt-3.5-turbo",
       temperature: 1,
       max_tokens: 2000,
-      presence_penalty: 0,
-      frequency_penalty: 0,
+
       sendMemory: false,
       historyMessageCount: 4,
       compressMessageLengthThreshold: 1000,
@@ -192,8 +186,7 @@ export const CN_MASKS: BuiltinMask[] = [
       model: "gpt-3.5-turbo",
       temperature: 1,
       max_tokens: 2000,
-      presence_penalty: 0,
-      frequency_penalty: 0,
+
       sendMemory: false,
       historyMessageCount: 4,
       compressMessageLengthThreshold: 1000,
@@ -218,8 +211,7 @@ export const CN_MASKS: BuiltinMask[] = [
       model: "gpt-3.5-turbo",
       temperature: 1,
       max_tokens: 2000,
-      presence_penalty: 0,
-      frequency_penalty: 0,
+
       sendMemory: false,
       historyMessageCount: 0,
       compressMessageLengthThreshold: 1000,
@@ -250,8 +242,7 @@ export const CN_MASKS: BuiltinMask[] = [
       model: "gpt-3.5-turbo",
       temperature: 0.5,
       max_tokens: 2000,
-      presence_penalty: 0,
-      frequency_penalty: 0,
+
       sendMemory: true,
       historyMessageCount: 4,
       compressMessageLengthThreshold: 1000,
@@ -276,8 +267,7 @@ export const CN_MASKS: BuiltinMask[] = [
       model: "gpt-3.5-turbo",
       temperature: 1,
       max_tokens: 2000,
-      presence_penalty: 0,
-      frequency_penalty: 0,
+
       sendMemory: true,
       historyMessageCount: 4,
       compressMessageLengthThreshold: 1000,
@@ -309,8 +299,7 @@ export const CN_MASKS: BuiltinMask[] = [
       model: "gpt-3.5-turbo",
       temperature: 1,
       max_tokens: 2000,
-      presence_penalty: 0,
-      frequency_penalty: 0,
+
       sendMemory: false,
       historyMessageCount: 4,
       compressMessageLengthThreshold: 1000,
@@ -342,8 +331,7 @@ export const CN_MASKS: BuiltinMask[] = [
       model: "gpt-3.5-turbo",
       temperature: 1,
       max_tokens: 2000,
-      presence_penalty: 0,
-      frequency_penalty: 0,
+
       sendMemory: false,
       historyMessageCount: 4,
       compressMessageLengthThreshold: 1000,
@@ -400,8 +388,7 @@ export const CN_MASKS: BuiltinMask[] = [
       model: "gpt-3.5-turbo",
       temperature: 1,
       max_tokens: 2000,
-      presence_penalty: 0,
-      frequency_penalty: 0,
+
       sendMemory: false,
       historyMessageCount: 4,
       compressMessageLengthThreshold: 1000,
@@ -432,8 +419,7 @@ export const CN_MASKS: BuiltinMask[] = [
       model: "gpt-4",
       temperature: 0.5,
       max_tokens: 2000,
-      presence_penalty: 0,
-      frequency_penalty: 0,
+
       sendMemory: true,
       historyMessageCount: 4,
       compressMessageLengthThreshold: 1000,
