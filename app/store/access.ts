@@ -23,7 +23,7 @@ import { getHeaders } from "../client/api";
 import { getClientConfig } from "../config/client";
 import { createPersistStore } from "../utils/store";
 import { ensure } from "../utils/clone";
-import { DEFAULT_CONFIG } from "./config";
+import { DEFAULT_CONFIG, useAppConfig, ModelType } from "./config";
 import { getModelProvider } from "../utils/model";
 
 let fetchState = 0; // 0 not fetch, 1 fetching, 2 done
@@ -272,6 +272,18 @@ export const useAccessStore = createPersistStore(
               providerName as any;
             console.log("[Config] got default model from server", defaultModel);
             console.log(DEFAULT_CONFIG.modelConfig);
+
+            if (useAppConfig.getState().modelConfig.model === "") {
+              useAppConfig.setState((state) => ({
+                modelConfig: {
+                  ...state.modelConfig,
+                  model: model as ModelType,
+                  providerName: providerName as ServiceProvider,
+                  compressModel: model as ModelType,
+                  compressProviderName: providerName as ServiceProvider,
+                },
+              }));
+            }
           }
 
           return res;
