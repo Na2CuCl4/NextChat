@@ -449,6 +449,16 @@ const cs: PartialLocaleType = {
       Title: "Omezení odpovědi (max_tokens)",
       SubTitle: "Maximální počet Tokenů použitých v jednom interakci",
     },
+    PresencePenalty: {
+      Title: "Čerstvost témat (presence_penalty)",
+      SubTitle:
+        "Čím vyšší hodnota, tím větší pravděpodobnost rozšíření na nová témata",
+    },
+    FrequencyPenalty: {
+      Title: "Penalizace frekvence (frequency_penalty)",
+      SubTitle:
+        "Čím vyšší hodnota, tím větší pravděpodobnost snížení opakování slov",
+    },
   },
   Store: {
     DefaultTopic: "Nový chat",

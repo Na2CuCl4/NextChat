@@ -455,6 +455,16 @@ const no: PartialLocaleType = {
       Title: "Maksimalt antall tokens per svar (max_tokens)",
       SubTitle: "Maksimalt antall tokens brukt i en enkelt interaksjon",
     },
+    PresencePenalty: {
+      Title: "Emnens ferskhet (presence_penalty)",
+      SubTitle:
+        "Høyere verdi gir større sannsynlighet for å utvide til nye emner",
+    },
+    FrequencyPenalty: {
+      Title: "Frekvensstraff (frequency_penalty)",
+      SubTitle:
+        "Høyere verdi gir større sannsynlighet for å redusere gjentakende ord",
+    },
   },
   Store: {
     DefaultTopic: "Ny samtale",

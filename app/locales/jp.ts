@@ -447,6 +447,14 @@ const jp: PartialLocaleType = {
       Title: "1回の応答制限 (max_tokens)",
       SubTitle: "1回の対話で使用される最大トークン数",
     },
+    PresencePenalty: {
+      Title: "新鮮度 (presence_penalty)",
+      SubTitle: "値が大きいほど新しいトピックに移行する可能性が高くなります",
+    },
+    FrequencyPenalty: {
+      Title: "頻度ペナルティ (frequency_penalty)",
+      SubTitle: "値が大きいほど繰り返しの単語が減少します",
+    },
   },
   Store: {
     DefaultTopic: "新しいチャット",

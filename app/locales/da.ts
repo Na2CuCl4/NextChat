@@ -548,6 +548,14 @@ const da: PartialLocaleType = {
       Title: "Maks. længde",
       SubTitle: "Hvor mange tokens (ord/stykker tekst) der kan bruges",
     },
+    PresencePenalty: {
+      Title: "Nye emner",
+      SubTitle: "Jo højere tal, jo mere nyt indhold",
+    },
+    FrequencyPenalty: {
+      Title: "Gentagelsesstraf",
+      SubTitle: "Jo højere tal, jo mindre gentagelse",
+    },
     TTS: {
       Enable: {
         Title: "Tænd for oplæsning (TTS)",

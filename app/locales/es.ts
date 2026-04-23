@@ -462,6 +462,16 @@ const es: PartialLocaleType = {
       Title: "Límite de tokens por respuesta (max_tokens)",
       SubTitle: "Número máximo de tokens utilizados en una sola interacción",
     },
+    PresencePenalty: {
+      Title: "Novedad de temas (presence_penalty)",
+      SubTitle:
+        "Cuanto mayor sea el valor, más probable es que se amplíen a nuevos temas",
+    },
+    FrequencyPenalty: {
+      Title: "Penalización de frecuencia (frequency_penalty)",
+      SubTitle:
+        "Cuanto mayor sea el valor, más probable es que se reduzcan las palabras repetidas",
+    },
   },
   Store: {
     DefaultTopic: "Nuevo chat",

@@ -462,6 +462,16 @@ const fr: PartialLocaleType = {
       Title: "Limite de réponse unique (max_tokens)",
       SubTitle: "Nombre maximal de tokens utilisés pour une interaction unique",
     },
+    PresencePenalty: {
+      Title: "Nouveauté du sujet (presence_penalty)",
+      SubTitle:
+        "Plus la valeur est élevée, plus il est probable d'élargir aux nouveaux sujets",
+    },
+    FrequencyPenalty: {
+      Title: "Pénalité de fréquence (frequency_penalty)",
+      SubTitle:
+        "Plus la valeur est élevée, plus il est probable de réduire les répétitions",
+    },
   },
   Store: {
     DefaultTopic: "Nouvelle discussion",

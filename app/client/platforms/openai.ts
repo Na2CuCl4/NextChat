@@ -65,9 +65,11 @@ export interface RequestPayload {
   stream?: boolean;
   model: string;
   temperature?: number;
+  presence_penalty: number;
+  frequency_penalty: number;
   top_p?: number;
   max_tokens?: number;
-  max_output_tokens?: number;
+  max_completion_tokens?: number;
 }
 
 export interface DalleRequestPayload {
@@ -255,7 +257,7 @@ export class ChatGPTApi implements LLMApi {
           messages.push({ role: v.role, content });
       }
 
-      // O1/O3 do not support temperature, top_p
+      // O1/O3 do not support image, tools (plugin in ChatGPTNextWeb) and system, stream, logprobs, temperature, top_p, n, presence_penalty, frequency_penalty yet.
       requestPayload = {
         messages,
         stream: options.config.stream,
@@ -265,6 +267,8 @@ export class ChatGPTApi implements LLMApi {
           modelConfig.temperature !== 1 && {
             temperature: modelConfig.temperature,
           }),
+        presence_penalty: !isO1OrO3 ? modelConfig.presence_penalty : 0,
+        frequency_penalty: !isO1OrO3 ? modelConfig.frequency_penalty : 0,
         ...(!isO1OrO3 &&
           modelConfig.top_p !== 1 && { top_p: modelConfig.top_p }),
         // max_tokens: Math.max(modelConfig.max_tokens, 1024),
@@ -274,8 +278,8 @@ export class ChatGPTApi implements LLMApi {
       if (isGpt5) {
         // Remove max_tokens if present
         delete requestPayload.max_tokens;
-        // Add max_output_tokens (or max_output_tokens if that's what you meant)
-        requestPayload["max_output_tokens"] = modelConfig.max_tokens;
+        // Add max_completion_tokens (or max_completion_tokens if that's what you meant)
+        requestPayload["max_completion_tokens"] = modelConfig.max_tokens;
       } else if (isO1OrO3) {
         // by default the o1/o3 models will not attempt to produce output that includes markdown formatting
         // manually add "Formatting re-enabled" developer message to encourage markdown inclusion in model responses
@@ -285,8 +289,8 @@ export class ChatGPTApi implements LLMApi {
           content: "Formatting re-enabled",
         });
 
-        // o1/o3 uses max_output_tokens to control the number of tokens (https://platform.openai.com/docs/guides/reasoning#controlling-costs)
-        requestPayload["max_output_tokens"] = modelConfig.max_tokens;
+        // o1/o3 uses max_completion_tokens to control the number of tokens (https://platform.openai.com/docs/guides/reasoning#controlling-costs)
+        requestPayload["max_completion_tokens"] = modelConfig.max_tokens;
       }
 
       // add max_tokens to vision model

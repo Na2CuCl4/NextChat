@@ -188,6 +188,7 @@ export class ClaudeApi implements LLMApi {
         temperature: modelConfig.temperature,
       }),
       ...(modelConfig.top_p !== 1 && { top_p: modelConfig.top_p }),
+      // top_k: modelConfig.top_k,
       top_k: 5,
     };
 

@@ -451,6 +451,16 @@ const id: PartialLocaleType = {
       Title: "Batas Token Per Respons",
       SubTitle: "Jumlah token maksimum yang digunakan per interaksi",
     },
+    PresencePenalty: {
+      Title: "Kedekatan Topik (presence_penalty)",
+      SubTitle:
+        "Semakin tinggi nilainya, semakin besar kemungkinan memperluas ke topik baru",
+    },
+    FrequencyPenalty: {
+      Title: "Hukuman Frekuensi (frequency_penalty)",
+      SubTitle:
+        "Semakin tinggi nilainya, semakin besar kemungkinan mengurangi kata-kata yang berulang",
+    },
   },
   Store: {
     DefaultTopic: "Obrolan Baru",

@@ -462,6 +462,16 @@ const de: PartialLocaleType = {
       Title: "Maximale Token-Anzahl pro Antwort",
       SubTitle: "Maximale Anzahl der Tokens pro Interaktion",
     },
+    PresencePenalty: {
+      Title: "Themenfrische (presence_penalty)",
+      SubTitle:
+        "Je höher der Wert, desto wahrscheinlicher wird auf neue Themen eingegangen",
+    },
+    FrequencyPenalty: {
+      Title: "Häufigkeitsstrafe (frequency_penalty)",
+      SubTitle:
+        "Je höher der Wert, desto wahrscheinlicher werden wiederholte Wörter reduziert",
+    },
   },
   Store: {
     DefaultTopic: "Neuer Chat",

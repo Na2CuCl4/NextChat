@@ -386,6 +386,16 @@ const pt: PartialLocaleType = {
       Title: "Máximo de Tokens",
       SubTitle: "Comprimento máximo de tokens de entrada e tokens gerados",
     },
+    PresencePenalty: {
+      Title: "Penalidade de Presença",
+      SubTitle:
+        "Um valor maior aumenta a probabilidade de falar sobre novos tópicos",
+    },
+    FrequencyPenalty: {
+      Title: "Penalidade de Frequência",
+      SubTitle:
+        "Um valor maior diminui a probabilidade de repetir a mesma linha",
+    },
   },
   Store: {
     DefaultTopic: "Nova Conversa",

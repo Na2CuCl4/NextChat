@@ -48,6 +48,7 @@ interface RequestParam {
   result_format: string;
   incremental_output?: boolean;
   temperature?: number;
+  repetition_penalty?: number;
   top_p?: number;
   max_tokens?: number;
 }
@@ -128,7 +129,8 @@ export class QwenApi implements LLMApi {
         ...(modelConfig.temperature !== 1 && {
           temperature: modelConfig.temperature,
         }),
-        ...(modelConfig.top_p !== 1 && { top_p: modelConfig.top_p }),
+        // max_tokens: modelConfig.max_tokens,
+        ...(modelConfig.top_p !== 1 && { top_p: modelConfig.top_p }), // qwen top_p is should be < 1
       },
     };
 

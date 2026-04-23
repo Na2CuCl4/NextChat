@@ -443,6 +443,14 @@ const ar: PartialLocaleType = {
       Title: "حد أقصى للرموز لكل رد (max_tokens)",
       SubTitle: "أقصى عدد للرموز في تفاعل واحد",
     },
+    PresencePenalty: {
+      Title: "تجدد الموضوع (presence_penalty)",
+      SubTitle: "كلما زادت القيمة، زادت احتمالية التوسع في مواضيع جديدة",
+    },
+    FrequencyPenalty: {
+      Title: "عقوبة التكرار (frequency_penalty)",
+      SubTitle: "كلما زادت القيمة، زادت احتمالية تقليل تكرار الكلمات",
+    },
   },
   Store: {
     DefaultTopic: "دردشة جديدة",

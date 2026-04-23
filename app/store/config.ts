@@ -69,6 +69,8 @@ export const DEFAULT_CONFIG = {
     temperature: 1,
     top_p: 1,
     max_tokens: 128000,
+    presence_penalty: 0,
+    frequency_penalty: 0,
     sendMemory: true,
     historyMessageCount: 16,
     compressMessageLengthThreshold: 64000,
@@ -145,6 +147,12 @@ export const ModalConfigValidator = {
   max_tokens(x: number) {
     return limitNumber(x, 0, 512000, 1024);
   },
+  presence_penalty(x: number) {
+    return limitNumber(x, -2, 2, 0);
+  },
+  frequency_penalty(x: number) {
+    return limitNumber(x, -2, 2, 0);
+  },
   temperature(x: number) {
     return limitNumber(x, 0, 2, 1);
   },
@@ -210,6 +218,8 @@ export const useAppConfig = createPersistStore(
         state.modelConfig.sendMemory = true;
         state.modelConfig.historyMessageCount = 4;
         state.modelConfig.compressMessageLengthThreshold = 1000;
+        state.modelConfig.presence_penalty = 0;
+        state.modelConfig.frequency_penalty = 0;
         state.modelConfig.top_p = 1;
         state.modelConfig.template = DEFAULT_INPUT_TEMPLATE;
         state.dontShowMaskSplashScreen = false;

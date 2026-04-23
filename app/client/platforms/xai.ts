@@ -83,6 +83,8 @@ export class XAIApi implements LLMApi {
       ...(modelConfig.temperature !== 1 && {
         temperature: modelConfig.temperature,
       }),
+      presence_penalty: modelConfig.presence_penalty,
+      frequency_penalty: modelConfig.frequency_penalty,
       ...(modelConfig.top_p !== 1 && { top_p: modelConfig.top_p }),
     };
 

@@ -562,6 +562,14 @@ const ko: PartialLocaleType = {
       Title: "단일 응답 제한 (max_tokens)",
       SubTitle: "단일 상호작용에 사용되는 최대 토큰 수",
     },
+    PresencePenalty: {
+      Title: "주제 신선도 (presence_penalty)",
+      SubTitle: "값이 클수록 새로운 주제로 확장할 가능성이 높음",
+    },
+    FrequencyPenalty: {
+      Title: "빈도 벌점 (frequency_penalty)",
+      SubTitle: "값이 클수록 중복 단어 감소 가능성 높음",
+    },
     TTS: {
       Enable: {
         Title: "TTS 활성화",

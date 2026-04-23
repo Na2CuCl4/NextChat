@@ -58,6 +58,8 @@ export interface LLMConfig {
   temperature?: number;
   top_p?: number;
   stream?: boolean;
+  presence_penalty?: number;
+  frequency_penalty?: number;
   size?: DalleRequestPayload["size"];
   quality?: DalleRequestPayload["quality"];
   style?: DalleRequestPayload["style"];

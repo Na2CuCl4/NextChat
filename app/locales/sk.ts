@@ -403,6 +403,16 @@ const sk: PartialLocaleType = {
       Title: "Maximálny počet tokenov",
       SubTitle: "Maximálna dĺžka vstupných tokenov a generovaných tokenov",
     },
+    PresencePenalty: {
+      Title: "Penalizácia za prítomnosť",
+      SubTitle:
+        "Vyššia hodnota zvyšuje pravdepodobnosť hovorenia o nových témach",
+    },
+    FrequencyPenalty: {
+      Title: "Penalizácia za frekvenciu",
+      SubTitle:
+        "Vyššia hodnota znižuje pravdepodobnosť opakovania rovnakej línie",
+    },
   },
   Store: {
     DefaultTopic: "Nová konverzácia",
