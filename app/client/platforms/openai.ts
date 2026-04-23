@@ -297,11 +297,11 @@ export class ChatGPTApi implements LLMApi {
 
     console.log("[Request] openai payload: ", requestPayload);
 
-    // Determine whether gpt-image-1 should call /v1/images/edits instead of /v1/images/generations.
+    // Determine whether gpt-image should call /v1/images/edits instead of /v1/images/generations.
     // Edits mode applies when:
     //   (a) the current user message contains at least one uploaded image, OR
     //   (b) the immediately preceding assistant message is a generated image result.
-    // Only gpt-image-1 supports /v1/images/edits; dall-e-3 does not.
+    // Only gpt-image supports /v1/images/edits; dall-e-3 does not.
     let useImageEdits = false;
     let editImageUrls: string[] = [];
 

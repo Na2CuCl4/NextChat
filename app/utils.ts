@@ -293,7 +293,7 @@ export function isDalle3(model: string) {
 }
 
 export function isGptImage1(model: string) {
-  return /^gpt-image-1/.test(model);
+  return /^gpt-image/.test(model);
 }
 
 export function isImageGenerationModel(model: string) {
