@@ -51,6 +51,9 @@ import RobotIcon from "../icons/robot.svg";
 import SizeIcon from "../icons/size.svg";
 import QualityIcon from "../icons/hd.svg";
 import StyleIcon from "../icons/palette.svg";
+import ReasoningEffortIcon from "../icons/reasoning_effort.svg";
+import ResponseFormatIcon from "../icons/response_format.svg";
+import VerbosityIcon from "../icons/verbosity.svg";
 import PluginIcon from "../icons/plugin.svg";
 import ShortcutkeyIcon from "../icons/shortcutkey.svg";
 import McpToolIcon from "../icons/tool.svg";
@@ -86,6 +89,7 @@ import {
   useMobileScreen,
   selectOrCopy,
   showPlugins,
+  isGpt5Model,
 } from "../utils";
 
 import { uploadImage as uploadImageRemote } from "@/app/utils/chat";
@@ -94,7 +98,13 @@ import { uploadFile as uploadFileRemote } from "@/app/utils/chat";
 import dynamic from "next/dynamic";
 
 import { ChatControllerPool } from "../client/controller";
-import { DalleStyle, ModelSize } from "../typing";
+import {
+  DalleStyle,
+  ModelSize,
+  ReasoningEffort,
+  ResponseFormatType,
+  Verbosity,
+} from "../typing";
 import { Prompt, usePromptStore } from "../store/prompt";
 import Locale from "../locales";
 
@@ -585,6 +595,19 @@ export function ChatActions(props: {
       : defaultQuality;
   const currentStyle = session.mask.modelConfig?.style ?? "vivid";
 
+  const [showReasoningEffortSelector, setShowReasoningEffortSelector] =
+    useState(false);
+  const [showVerbositySelector, setShowVerbositySelector] = useState(false);
+  const [showResponseFormatSelector, setShowResponseFormatSelector] =
+    useState(false);
+  const currentReasoningEffort: ReasoningEffort =
+    session.mask.modelConfig?.reasoning_effort ?? "medium";
+  const currentVerbosity: Verbosity =
+    session.mask.modelConfig?.verbosity ?? "medium";
+  const currentResponseFormat: ResponseFormatType =
+    session.mask.modelConfig?.response_format ?? "text";
+  const currentJsonSchema = session.mask.modelConfig?.json_schema ?? "";
+
   const isMobileScreen = useMobileScreen();
 
   useEffect(() => {
@@ -818,6 +841,99 @@ export function ChatActions(props: {
             }}
           />
         )}
+
+        {isGpt5Model(currentModel) && (
+          <ChatAction
+            onClick={() => setShowReasoningEffortSelector(true)}
+            text={currentReasoningEffort}
+            icon={<ReasoningEffortIcon />}
+          />
+        )}
+        {showReasoningEffortSelector && (
+          <Selector
+            defaultSelectedValue={currentReasoningEffort}
+            items={(
+              [
+                "none",
+                "minimal",
+                "low",
+                "medium",
+                "high",
+                "xhigh",
+              ] as ReasoningEffort[]
+            ).map((v) => ({ title: v, value: v }))}
+            onClose={() => setShowReasoningEffortSelector(false)}
+            onSelection={(s) => {
+              if (s.length === 0) return;
+              chatStore.updateTargetSession(session, (session) => {
+                session.mask.modelConfig.reasoning_effort = s[0];
+              });
+              showToast(s[0]);
+            }}
+          />
+        )}
+
+        {isGpt5Model(currentModel) && (
+          <ChatAction
+            onClick={() => setShowVerbositySelector(true)}
+            text={currentVerbosity}
+            icon={<VerbosityIcon />}
+          />
+        )}
+        {showVerbositySelector && (
+          <Selector
+            defaultSelectedValue={currentVerbosity}
+            items={(["low", "medium", "high"] as Verbosity[]).map((v) => ({
+              title: v,
+              value: v,
+            }))}
+            onClose={() => setShowVerbositySelector(false)}
+            onSelection={(v) => {
+              if (v.length === 0) return;
+              chatStore.updateTargetSession(session, (session) => {
+                session.mask.modelConfig.verbosity = v[0];
+              });
+              showToast(v[0]);
+            }}
+          />
+        )}
+
+        {isGpt5Model(currentModel) && (
+          <ChatAction
+            onClick={() => setShowResponseFormatSelector(true)}
+            text={currentResponseFormat}
+            icon={<ResponseFormatIcon />}
+          />
+        )}
+        {showResponseFormatSelector && (
+          <Selector
+            defaultSelectedValue={currentResponseFormat}
+            items={(
+              ["text", "json_object", "json_schema"] as ResponseFormatType[]
+            ).map((v) => ({ title: v, value: v }))}
+            onClose={() => setShowResponseFormatSelector(false)}
+            onSelection={(f) => {
+              if (f.length === 0) return;
+              chatStore.updateTargetSession(session, (session) => {
+                session.mask.modelConfig.response_format = f[0];
+              });
+              showToast(f[0]);
+            }}
+          />
+        )}
+        {isGpt5Model(currentModel) &&
+          currentResponseFormat === "json_schema" && (
+            <textarea
+              className={styles["json-schema-input"]}
+              value={currentJsonSchema}
+              placeholder='{"type": "object", "properties": {}}'
+              onChange={(e) => {
+                chatStore.updateTargetSession(session, (session) => {
+                  session.mask.modelConfig.json_schema = e.target.value;
+                });
+              }}
+            />
+          )}
 
         {showPlugins(currentProviderName, currentModel) && (
           <ChatAction

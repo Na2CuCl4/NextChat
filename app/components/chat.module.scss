@@ -852,4 +852,18 @@
       transform: translateX(0);
     }
   }
+
+  .json-schema-input {
+    width: 100%;
+    min-height: 80px;
+    font-family: monospace;
+    font-size: 12px;
+    padding: 6px 8px;
+    border-radius: 6px;
+    border: 1px solid var(--border-in-light);
+    background: var(--white);
+    color: var(--black);
+    resize: vertical;
+    box-sizing: border-box;
+  }
 }

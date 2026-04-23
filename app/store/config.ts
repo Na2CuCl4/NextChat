@@ -1,5 +1,12 @@
 import { LLMModel } from "../client/api";
-import { DalleQuality, DalleStyle, ModelSize } from "../typing";
+import {
+  DalleQuality,
+  DalleStyle,
+  ModelSize,
+  ReasoningEffort,
+  ResponseFormatType,
+  Verbosity,
+} from "../typing";
 import { getClientConfig } from "../config/client";
 import {
   DEFAULT_INPUT_TEMPLATE,
@@ -81,6 +88,10 @@ export const DEFAULT_CONFIG = {
     size: "1024x1024" as ModelSize,
     quality: "standard" as DalleQuality,
     style: "vivid" as DalleStyle,
+    reasoning_effort: "medium" as ReasoningEffort,
+    verbosity: "medium" as Verbosity,
+    response_format: "text" as ResponseFormatType,
+    json_schema: "",
   },
 
   ttsConfig: {

@@ -31,3 +31,13 @@ export type ModelSize =
   | "1152x864"
   | "1440x720"
   | "720x1440";
+
+export type ReasoningEffort =
+  | "none"
+  | "minimal"
+  | "low"
+  | "medium"
+  | "high"
+  | "xhigh";
+export type Verbosity = "low" | "medium" | "high";
+export type ResponseFormatType = "text" | "json_object" | "json_schema";

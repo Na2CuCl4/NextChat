@@ -113,6 +113,28 @@ export class OpenAIResponsesApi implements LLMApi {
       stream: options.config.stream,
     };
 
+    if (modelConfig.model.startsWith("gpt-5")) {
+      const effort = modelConfig.reasoning_effort ?? "medium";
+      if (effort !== "medium")
+        (requestPayload as any)["reasoning"] = { effort };
+
+      const fmt = modelConfig.response_format ?? "text";
+      const verbosity = modelConfig.verbosity ?? "medium";
+      const textObj: Record<string, any> = {};
+      if (verbosity !== "medium") textObj.verbosity = verbosity;
+      if (fmt === "json_schema") {
+        let schema = {};
+        try {
+          schema = JSON.parse(modelConfig.json_schema ?? "{}");
+        } catch {}
+        textObj.format = { type: "json_schema", json_schema: schema };
+      } else if (fmt !== "text") {
+        textObj.format = { type: fmt };
+      }
+      if (Object.keys(textObj).length > 0)
+        (requestPayload as any)["text"] = textObj;
+    }
+
     console.log("[Request] openai responses payload: ", requestPayload);
 
     const chatPath = this.path(OpenAIResponsesPath.ChatPath);

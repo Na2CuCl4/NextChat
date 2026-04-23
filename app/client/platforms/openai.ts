@@ -70,6 +70,9 @@ export interface RequestPayload {
   top_p?: number;
   max_tokens?: number;
   max_completion_tokens?: number;
+  reasoning_effort?: string;
+  verbosity?: string;
+  response_format?: { type: string; json_schema?: object };
 }
 
 export interface DalleRequestPayload {
@@ -280,6 +283,26 @@ export class ChatGPTApi implements LLMApi {
         delete requestPayload.max_tokens;
         // Add max_completion_tokens (or max_completion_tokens if that's what you meant)
         requestPayload["max_completion_tokens"] = modelConfig.max_tokens;
+
+        const effort = modelConfig.reasoning_effort ?? "medium";
+        if (effort !== "medium") requestPayload["reasoning_effort"] = effort;
+
+        const verbosity = modelConfig.verbosity ?? "medium";
+        if (verbosity !== "medium") requestPayload["verbosity"] = verbosity;
+
+        const fmt = modelConfig.response_format ?? "text";
+        if (fmt === "json_schema") {
+          let schema = {};
+          try {
+            schema = JSON.parse(modelConfig.json_schema ?? "{}");
+          } catch {}
+          requestPayload["response_format"] = {
+            type: "json_schema",
+            json_schema: schema,
+          };
+        } else if (fmt !== "text") {
+          requestPayload["response_format"] = { type: fmt };
+        }
       } else if (isO1OrO3) {
         // by default the o1/o3 models will not attempt to produce output that includes markdown formatting
         // manually add "Formatting re-enabled" developer message to encourage markdown inclusion in model responses

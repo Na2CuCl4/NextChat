@@ -296,6 +296,10 @@ export function isGptImage1(model: string) {
   return /^gpt-image/.test(model);
 }
 
+export function isGpt5Model(model: string) {
+  return model.startsWith("gpt-5");
+}
+
 export function isImageGenerationModel(model: string) {
   return isDalle3(model) || isGptImage1(model);
 }
