@@ -449,15 +449,6 @@ const vi: PartialLocaleType = {
       Title: "Giới hạn phản hồi (max_tokens)",
       SubTitle: "Số Token tối đa cho mỗi tương tác",
     },
-    PresencePenalty: {
-      Title: "Độ mới của chủ đề (presence_penalty)",
-      SubTitle:
-        "Giá trị càng lớn, khả năng mở rộng đến các chủ đề mới càng cao",
-    },
-    FrequencyPenalty: {
-      Title: "Hình phạt tần suất (frequency_penalty)",
-      SubTitle: "Giá trị càng lớn, khả năng giảm từ ngữ lặp lại càng cao",
-    },
   },
   Store: {
     DefaultTopic: "Trò chuyện mới",

@@ -454,15 +454,6 @@ const tr: PartialLocaleType = {
       Title: "Tek Yanıt Limiti (max_tokens)",
       SubTitle: "Tek etkileşimde kullanılan maksimum Token sayısı",
     },
-    PresencePenalty: {
-      Title: "Konu Tazeliği (presence_penalty)",
-      SubTitle: "Değer arttıkça, yeni konulara geçiş olasılığı artar",
-    },
-    FrequencyPenalty: {
-      Title: "Frekans Cezası (frequency_penalty)",
-      SubTitle:
-        "Değer arttıkça, tekrar eden kelimelerin azalması olasılığı artar",
-    },
   },
   Store: {
     DefaultTopic: "Yeni Sohbet",

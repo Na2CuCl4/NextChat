@@ -67,7 +67,7 @@ export interface RequestPayload {
   temperature?: number;
   top_p?: number;
   max_tokens?: number;
-  max_completion_tokens?: number;
+  max_output_tokens?: number;
 }
 
 export interface DalleRequestPayload {
@@ -255,7 +255,7 @@ export class ChatGPTApi implements LLMApi {
           messages.push({ role: v.role, content });
       }
 
-      // O1/O3 do not support temperature, top_p, presence_penalty, frequency_penalty.
+      // O1/O3 do not support temperature, top_p
       requestPayload = {
         messages,
         stream: options.config.stream,
@@ -274,8 +274,8 @@ export class ChatGPTApi implements LLMApi {
       if (isGpt5) {
         // Remove max_tokens if present
         delete requestPayload.max_tokens;
-        // Add max_completion_tokens (or max_completion_tokens if that's what you meant)
-        requestPayload["max_completion_tokens"] = modelConfig.max_tokens;
+        // Add max_output_tokens (or max_output_tokens if that's what you meant)
+        requestPayload["max_output_tokens"] = modelConfig.max_tokens;
       } else if (isO1OrO3) {
         // by default the o1/o3 models will not attempt to produce output that includes markdown formatting
         // manually add "Formatting re-enabled" developer message to encourage markdown inclusion in model responses
@@ -285,8 +285,8 @@ export class ChatGPTApi implements LLMApi {
           content: "Formatting re-enabled",
         });
 
-        // o1/o3 uses max_completion_tokens to control the number of tokens (https://platform.openai.com/docs/guides/reasoning#controlling-costs)
-        requestPayload["max_completion_tokens"] = modelConfig.max_tokens;
+        // o1/o3 uses max_output_tokens to control the number of tokens (https://platform.openai.com/docs/guides/reasoning#controlling-costs)
+        requestPayload["max_output_tokens"] = modelConfig.max_tokens;
       }
 
       // add max_tokens to vision model

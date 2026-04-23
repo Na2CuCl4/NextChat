@@ -48,7 +48,6 @@ interface RequestParam {
   result_format: string;
   incremental_output?: boolean;
   temperature?: number;
-  repetition_penalty?: number;
   top_p?: number;
   max_tokens?: number;
 }
