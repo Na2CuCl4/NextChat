@@ -61,6 +61,8 @@ export type ChatMessage = RequestMessage & {
   audio_url?: string;
   isMcpResponse?: boolean;
   attachFiles?: AttachedFileMeta[];
+  responseFormat?: string;
+  jsonSchema?: string;
 };
 
 export function createMessage(override: Partial<ChatMessage>): ChatMessage {
@@ -438,12 +440,25 @@ export const useChatStore = createPersistStore(
           content: mContent,
           isMcpResponse,
           attachFiles: attachedFileMetas,
+          jsonSchema:
+            modelConfig.response_format === "json_schema" &&
+            modelConfig.json_schema
+              ? modelConfig.json_schema
+              : undefined,
         });
 
         const botMessage: ChatMessage = createMessage({
           role: "assistant",
           streaming: true,
           model: modelConfig.model,
+          responseFormat:
+            modelConfig.response_format !== "text"
+              ? modelConfig.response_format
+              : undefined,
+          jsonSchema:
+            modelConfig.response_format === "json_schema"
+              ? modelConfig.json_schema
+              : undefined,
         });
 
         // get recent messages

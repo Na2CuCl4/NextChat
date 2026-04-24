@@ -28,6 +28,36 @@
   width: 100%;
 }
 
+.chat-message-json-schema {
+  margin-top: 8px;
+  border-radius: 8px;
+  background: #1a1b26;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  overflow: hidden;
+  max-width: 100%;
+}
+
+.chat-message-json-schema-label {
+  padding: 4px 10px;
+  font-size: 11px;
+  color: rgba(255, 255, 255, 0.5);
+  font-family: monospace;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(0, 0, 0, 0.2);
+}
+
+.chat-message-json-schema-content {
+  margin: 0;
+  padding: 8px 10px;
+  font-size: 12px;
+  font-family: "Consolas", "Monaco", monospace;
+  color: #cbd2ea;
+  white-space: pre-wrap;
+  word-break: break-all;
+  max-height: 200px;
+  overflow-y: auto;
+}
+
 .chat-message-files .attach-file-card {
   flex: 0 1 240px;
   max-width: 240px;

@@ -2144,6 +2144,9 @@ function _Chat() {
                             {!isUser && (
                               <div className={styles["chat-model-name"]}>
                                 {message.model}
+                                {message.responseFormat &&
+                                  message.responseFormat !== "text" &&
+                                  ` (${message.responseFormat})`}
                               </div>
                             )}
 
@@ -2342,6 +2345,25 @@ function _Chat() {
                                 ))}
                               </div>
                             )}
+
+                          {isUser && message.jsonSchema && (
+                            <div className={styles["chat-message-json-schema"]}>
+                              <div
+                                className={
+                                  styles["chat-message-json-schema-label"]
+                                }
+                              >
+                                JSON Schema
+                              </div>
+                              <pre
+                                className={
+                                  styles["chat-message-json-schema-content"]
+                                }
+                              >
+                                {message.jsonSchema}
+                              </pre>
+                            </div>
+                          )}
 
                           <div className={styles["chat-message-action-date"]}>
                             {isContext
