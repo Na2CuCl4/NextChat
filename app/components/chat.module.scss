@@ -853,17 +853,49 @@
     }
   }
 
-  .json-schema-input {
-    width: 100%;
-    min-height: 80px;
+  .json-schema-editor {
+    display: flex;
+    flex-direction: column;
+    margin: 10px 0;
+    border-radius: 10px;
+    background: #1a1b26;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  .json-schema-label {
+    padding: 8px 12px;
+    font-size: 11px;
+    color: rgba(255, 255, 255, 0.5);
     font-family: monospace;
-    font-size: 12px;
-    padding: 6px 8px;
-    border-radius: 6px;
-    border: 1px solid var(--border-in-light);
-    background: var(--white);
-    color: var(--black);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    background: rgba(0, 0, 0, 0.2);
+    flex-shrink: 0;
+  }
+
+  .json-schema-textarea {
+    display: block;
+    width: 100%;
+    min-height: 107px;
+    height: 107px;
+    padding: 12px;
+    background: transparent;
+    border: none;
+    outline: none;
     resize: vertical;
+    overflow-y: scroll;
+    border-radius: 0 0 10px 10px;
     box-sizing: border-box;
+
+    color: #cbd2ea;
+
+    font-family: "Consolas", "Monaco", "Andale Mono", "Ubuntu Mono", monospace;
+    font-size: 13px;
+    line-height: 1.6;
+    white-space: pre;
+    word-wrap: normal;
+
+    &::placeholder {
+      color: rgba(203, 210, 234, 0.4);
+    }
   }
 }

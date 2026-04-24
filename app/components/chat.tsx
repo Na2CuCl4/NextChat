@@ -921,19 +921,6 @@ export function ChatActions(props: {
             }}
           />
         )}
-        {isGpt5Model(currentModel) &&
-          currentResponseFormat === "json_schema" && (
-            <textarea
-              className={styles["json-schema-input"]}
-              value={currentJsonSchema}
-              placeholder='{"type": "object", "properties": {}}'
-              onChange={(e) => {
-                chatStore.updateTargetSession(session, (session) => {
-                  session.mask.modelConfig.json_schema = e.target.value;
-                });
-              }}
-            />
-          )}
 
         {showPlugins(currentProviderName, currentModel) && (
           <ChatAction
@@ -2398,6 +2385,29 @@ function _Chat() {
                 setUserInput={setUserInput}
                 setShowChatSidePanel={setShowChatSidePanel}
               />
+
+              {isGpt5Model(session.mask.modelConfig.model) &&
+                session.mask.modelConfig.response_format === "json_schema" && (
+                  <div className={styles["json-schema-editor"]}>
+                    <div className={styles["json-schema-label"]}>
+                      JSON Schema
+                    </div>
+                    <textarea
+                      className={styles["json-schema-textarea"]}
+                      value={session.mask.modelConfig.json_schema ?? ""}
+                      placeholder={
+                        '{\n  "type": "object",\n  "properties": {}\n}'
+                      }
+                      spellCheck={false}
+                      onChange={(e) => {
+                        chatStore.updateTargetSession(session, (session) => {
+                          session.mask.modelConfig.json_schema = e.target.value;
+                        });
+                      }}
+                    />
+                  </div>
+                )}
+
               <label
                 className={clsx(styles["chat-input-panel-inner"], {
                   [styles["chat-input-panel-inner-attach"]]:
