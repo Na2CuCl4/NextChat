@@ -722,7 +722,7 @@ export function ChatActions(props: {
 
         <ChatAction
           onClick={() => setShowModelSelector(true)}
-          text={currentModelName}
+          text={`${Locale.Chat.InputActions.Model}: ${currentModelName}`}
           icon={<RobotIcon />}
         />
 
@@ -764,7 +764,7 @@ export function ChatActions(props: {
         {supportsCustomSize(currentModel) && (
           <ChatAction
             onClick={() => setShowSizeSelector(true)}
-            text={currentSize}
+            text={`${Locale.Chat.InputActions.Size}: ${currentSize}`}
             icon={<SizeIcon />}
           />
         )}
@@ -791,7 +791,7 @@ export function ChatActions(props: {
         {supportsCustomQuality(currentModel) && (
           <ChatAction
             onClick={() => setShowQualitySelector(true)}
-            text={currentQuality}
+            text={`${Locale.Chat.InputActions.Quality}: ${currentQuality}`}
             icon={<QualityIcon />}
           />
         )}
@@ -818,7 +818,7 @@ export function ChatActions(props: {
         {isDalle3(currentModel) && (
           <ChatAction
             onClick={() => setShowStyleSelector(true)}
-            text={currentStyle}
+            text={`${Locale.Chat.InputActions.Style}: ${currentStyle}`}
             icon={<StyleIcon />}
           />
         )}
@@ -845,7 +845,7 @@ export function ChatActions(props: {
         {isGpt5Model(currentModel) && (
           <ChatAction
             onClick={() => setShowReasoningEffortSelector(true)}
-            text={currentReasoningEffort}
+            text={`${Locale.Chat.InputActions.ReasoningEffort}: ${currentReasoningEffort}`}
             icon={<ReasoningEffortIcon />}
           />
         )}
@@ -876,7 +876,7 @@ export function ChatActions(props: {
         {isGpt5Model(currentModel) && (
           <ChatAction
             onClick={() => setShowVerbositySelector(true)}
-            text={currentVerbosity}
+            text={`${Locale.Chat.InputActions.Verbosity}: ${currentVerbosity}`}
             icon={<VerbosityIcon />}
           />
         )}
@@ -901,7 +901,7 @@ export function ChatActions(props: {
         {isGpt5Model(currentModel) && (
           <ChatAction
             onClick={() => setShowResponseFormatSelector(true)}
-            text={currentResponseFormat}
+            text={`${Locale.Chat.InputActions.ResponseFormat}: ${currentResponseFormat}`}
             icon={<ResponseFormatIcon />}
           />
         )}
