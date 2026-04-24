@@ -284,24 +284,26 @@ export class ChatGPTApi implements LLMApi {
         // Add max_completion_tokens (or max_completion_tokens if that's what you meant)
         requestPayload["max_completion_tokens"] = modelConfig.max_tokens;
 
-        const effort = modelConfig.reasoning_effort ?? "medium";
-        if (effort !== "medium") requestPayload["reasoning_effort"] = effort;
+        if (!options.config.noExtraModelParams) {
+          const effort = modelConfig.reasoning_effort ?? "medium";
+          if (effort !== "medium") requestPayload["reasoning_effort"] = effort;
 
-        const verbosity = modelConfig.verbosity ?? "medium";
-        if (verbosity !== "medium") requestPayload["verbosity"] = verbosity;
+          const verbosity = modelConfig.verbosity ?? "medium";
+          if (verbosity !== "medium") requestPayload["verbosity"] = verbosity;
 
-        const fmt = modelConfig.response_format ?? "text";
-        if (fmt === "json_schema") {
-          let schema = {};
-          try {
-            schema = JSON.parse(modelConfig.json_schema ?? "{}");
-          } catch {}
-          requestPayload["response_format"] = {
-            type: "json_schema",
-            json_schema: schema,
-          };
-        } else if (fmt !== "text") {
-          requestPayload["response_format"] = { type: fmt };
+          const fmt = modelConfig.response_format ?? "text";
+          if (fmt === "json_schema") {
+            let schema = {};
+            try {
+              schema = JSON.parse(modelConfig.json_schema ?? "{}");
+            } catch {}
+            requestPayload["response_format"] = {
+              type: "json_schema",
+              json_schema: schema,
+            };
+          } else if (fmt !== "text") {
+            requestPayload["response_format"] = { type: fmt };
+          }
         }
       } else if (isO1OrO3) {
         // by default the o1/o3 models will not attempt to produce output that includes markdown formatting

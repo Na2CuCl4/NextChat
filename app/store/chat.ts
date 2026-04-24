@@ -725,6 +725,7 @@ export const useChatStore = createPersistStore(
               model,
               stream: false,
               providerName,
+              noExtraModelParams: true,
             },
             onFinish(message, responseRes) {
               if (responseRes?.status === 200) {

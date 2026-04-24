@@ -63,6 +63,7 @@ export interface LLMConfig {
   size?: DalleRequestPayload["size"];
   quality?: DalleRequestPayload["quality"];
   style?: DalleRequestPayload["style"];
+  noExtraModelParams?: boolean;
 }
 
 export interface SpeechOptions {
