@@ -868,6 +868,95 @@ const en: PartialLocaleType = {
     GenerateParams: "Generate Params",
     Detail: "Detail",
   },
+  FileConversion: {
+    Title: "File Conversion",
+    SubTitle:
+      "Convert binary files (e.g., DOCX / PPTX / XLSX / PDF) to text files (e.g., Markdown) for AI recognition and understanding.",
+    Settings: "Settings",
+    Conversion: "Conversion",
+    Engine: {
+      Title: "File Conversion Engine",
+      MarkItDown: "MarkItDown",
+      MarkItDownDocIntelligence: "MarkItDown + Document Intelligence",
+      MinerU: "MinerU",
+    },
+    DocIntelligence: {
+      Title: "Document Intelligence Settings",
+      Model: "Model",
+    },
+    MinerU: {
+      Title: "MinerU Settings",
+      ParseBackend: {
+        Title: "Parse Backend",
+        Pipeline: "pipeline",
+        PipelineDesc:
+          "Traditional multi-model pipeline, supports multiple languages, no hallucination.",
+        VlmAutoEngine: "vlm-auto-engine",
+        VlmAutoEngineDesc:
+          "Multi-modal VLM high-precision parsing, only supports Chinese and English.",
+        HybridAutoEngine: "hybrid-auto-engine",
+        HybridAutoEngineDesc:
+          "High-precision hybrid parsing, supports multiple languages.",
+      },
+      MaxPages: {
+        Title: "Max Conversion Pages",
+      },
+      EnableTableRecognition: {
+        Title: "Enable Table Recognition",
+        Desc: "When disabled, tables will be displayed as images.",
+      },
+      EnableInlineFormulaRecognition: {
+        Title: "Enable Inline Formula Recognition",
+        Desc: "When disabled, inline formulas will not be detected or parsed.",
+      },
+      EnableImageAnalysis: {
+        Title: "Enable Image Analysis",
+        Desc: "When disabled, image/chart blocks retain layout position but skip VLM image/chart analysis.",
+      },
+      ParseMethod: {
+        Title: "Parse Method",
+        Auto: "Automatically determined based on file type.",
+        Txt: "Use text extraction method.",
+        Ocr: "Use OCR method for image-based PDFs.",
+      },
+      OcrLanguage: {
+        Title: "OCR Language",
+        Ch: "Chinese, English, Chinese Traditional",
+        ChLite: "Chinese, English, Chinese Traditional, Japanese",
+        ChServer: "Chinese, English, Chinese Traditional, Japanese",
+        En: "English",
+        Korean: "Korean, English",
+        Japan: "Japanese, Chinese, English, Chinese Traditional",
+        ChineseCht: "Chinese Traditional, Chinese, English, Japanese",
+        Ta: "Tamil, English",
+        Te: "Telugu, English",
+        Ka: "Kannada",
+        Th: "Thai, English",
+        El: "Greek, English",
+        Latin: "French, German, etc. (Latin script languages)",
+        Arabic: "Arabic, Persian, Urdu, etc.",
+        EastSlavic: "Russian, Belarusian, Ukrainian, English",
+        Cyrillic: "Russian, Cyrillic languages",
+        Devanagari: "Hindi, Marathi, Nepali, etc.",
+      },
+    },
+    FileList: {
+      Upload: "Upload File",
+      ClearAll: "Clear All",
+      Convert: "Convert",
+      Name: "Name",
+      Size: "Size",
+      Status: {
+        Pending: "Pending",
+        Converting: "Converting",
+        Success: "Completed",
+        Error: "Failed",
+      },
+      Delete: "Delete",
+      AccessCodeError: "Access code is incorrect!",
+      DragDropHint: "Drop files here to upload",
+    },
+  },
 };
 
 export default en;

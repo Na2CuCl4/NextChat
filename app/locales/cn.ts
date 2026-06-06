@@ -859,6 +859,92 @@ const cn = {
     GenerateParams: "生成参数",
     Detail: "详情",
   },
+  FileConversion: {
+    Title: "文件转换",
+    SubTitle:
+      "将二进制文件（如 DOCX / PPTX / XLSX / PDF）转换为文本文件（如 Markdown），便于 AI 识别与理解。",
+    Settings: "设置",
+    Conversion: "转换",
+    Engine: {
+      Title: "文件转换引擎",
+      MarkItDown: "MarkItDown",
+      MarkItDownDocIntelligence: "MarkItDown + Document Intelligence",
+      MinerU: "MinerU",
+    },
+    DocIntelligence: {
+      Title: "Document Intelligence 设置",
+      Model: "模型",
+    },
+    MinerU: {
+      Title: "MinerU 设置",
+      ParseBackend: {
+        Title: "解析后端",
+        Pipeline: "pipeline",
+        PipelineDesc: "传统多模型管道解析，支持多语言，无幻觉。",
+        VlmAutoEngine: "vlm-auto-engine",
+        VlmAutoEngineDesc: "多模态大模型高精度解析，仅支持中英文文档。",
+        HybridAutoEngine: "hybrid-auto-engine",
+        HybridAutoEngineDesc: "高精度混合解析，支持多语言。",
+      },
+      MaxPages: {
+        Title: "最大转换页数",
+      },
+      EnableTableRecognition: {
+        Title: "启用表格识别",
+        Desc: "禁用后，表格将显示为图片。",
+      },
+      EnableInlineFormulaRecognition: {
+        Title: "启用行内公式识别",
+        Desc: "禁用后，行内公式将不会被检测或解析。",
+      },
+      EnableImageAnalysis: {
+        Title: "启用图片分析",
+        Desc: "禁用后，图片/图表块仍保留版面位置，但跳过 VLM 图片/图表分析。",
+      },
+      ParseMethod: {
+        Title: "解析方式",
+        Auto: "基于文件类型自动决定。",
+        Txt: "使用文本提取方法。",
+        Ocr: "对图片 PDF 使用 OCR 方法。",
+      },
+      OcrLanguage: {
+        Title: "OCR 语言",
+        Ch: "中文、英文、繁体中文",
+        ChLite: "中文、英文、繁体中文、日语",
+        ChServer: "中文、英文、繁体中文、日语",
+        En: "英文",
+        Korean: "韩文、英文",
+        Japan: "中文、英文、繁体中文、日语",
+        ChineseCht: "中文、英文、繁体中文、日语",
+        Ta: "泰米尔文、英文",
+        Te: "泰卢固文、英文",
+        Ka: "卡纳达文",
+        Th: "泰文、英文",
+        El: "希腊文、英文",
+        Latin: "法语、德语等拉丁语系语言",
+        Arabic: "阿拉伯语、波斯语、乌尔都语等",
+        EastSlavic: "俄语、白俄罗斯语、乌克兰语、英文",
+        Cyrillic: "俄语、西里尔语系语言",
+        Devanagari: "印地语、马拉地语、尼泊尔语等",
+      },
+    },
+    FileList: {
+      Upload: "上传文件",
+      ClearAll: "全部清除",
+      Convert: "转换",
+      Name: "名称",
+      Size: "大小",
+      Status: {
+        Pending: "待转换",
+        Converting: "转换中",
+        Success: "转换完成",
+        Error: "转换失败",
+      },
+      Delete: "删除",
+      AccessCodeError: "访问密码不正确！",
+      DragDropHint: "将文件拖放到此处上传",
+    },
+  },
 };
 
 type DeepPartial<T> = T extends object

@@ -77,6 +77,9 @@ const Sd = dynamic(async () => (await import("./sd")).Sd, {
 
 const McpMarketPage = dynamic(
   async () => (await import("./mcp-market")).McpMarketPage,
+);
+const FileConversion = dynamic(
+  async () => (await import("./file-conversion")).FileConversion,
   {
     loading: () => <Loading noLogo />,
   },
@@ -202,6 +205,7 @@ function Screen() {
             <Route path={Path.Chat} element={<Chat />} />
             <Route path={Path.Settings} element={<Settings />} />
             <Route path={Path.McpMarket} element={<McpMarketPage />} />
+            <Route path={Path.FileConversion} element={<FileConversion />} />
           </Routes>
         </WindowContent>
       </>

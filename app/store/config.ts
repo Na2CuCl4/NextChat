@@ -115,6 +115,38 @@ export const DEFAULT_CONFIG = {
     temperature: 0.9,
     voice: "alloy" as Voice,
   },
+
+  fileConversionConfig: {
+    engine: "markitdown" as "markitdown" | "markitdown-docintel" | "mineru",
+    docIntelModel: "",
+    minerUBackend: "pipeline" as
+      | "pipeline"
+      | "vlm-auto-engine"
+      | "hybrid-auto-engine",
+    maxPages: 1000,
+    enableTableRecognition: true,
+    enableInlineFormulaRecognition: true,
+    enableImageAnalysis: true,
+    parseMethod: "auto" as "auto" | "txt" | "ocr",
+    ocrLanguage: "ch" as
+      | "ch"
+      | "ch_lite"
+      | "ch_server"
+      | "en"
+      | "korean"
+      | "japan"
+      | "chinese_cht"
+      | "ta"
+      | "te"
+      | "ka"
+      | "th"
+      | "el"
+      | "latin"
+      | "arabic"
+      | "east_slavic"
+      | "cyrillic"
+      | "devanagari",
+  },
 };
 
 export type ChatConfig = typeof DEFAULT_CONFIG;
@@ -122,6 +154,7 @@ export type ChatConfig = typeof DEFAULT_CONFIG;
 export type ModelConfig = ChatConfig["modelConfig"];
 export type TTSConfig = ChatConfig["ttsConfig"];
 export type RealtimeConfig = ChatConfig["realtimeConfig"];
+export type FileConversionConfig = ChatConfig["fileConversionConfig"];
 
 export function limitNumber(
   x: number,

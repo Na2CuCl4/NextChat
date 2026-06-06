@@ -1,0 +1,148 @@
+.file-conversion {
+  padding: 20px;
+  overflow: auto;
+}
+
+.file-conversion-section {
+  margin-bottom: 24px;
+}
+
+.file-conversion-section-header {
+  font-size: 16px;
+  font-weight: 600;
+  margin-bottom: 12px;
+  color: var(--primary);
+}
+
+.file-conversion-sub-desc {
+  font-size: 12px;
+  color: var(--black);
+  opacity: 0.5;
+  margin-top: 4px;
+}
+
+.drop-zone {
+  border: var(--border-in-light);
+  border-radius: 10px;
+  padding: 16px;
+  transition: border-color 0.2s, background-color 0.2s;
+  min-height: 160px;
+  display: flex;
+  flex-direction: column;
+}
+
+.drop-zone-active {
+  border-color: var(--primary);
+  background-color: rgba(var(--primary-rgb, 0, 122, 255), 0.06);
+}
+
+.drop-zone-empty {
+  justify-content: center;
+}
+
+.file-list-actions {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 12px;
+  flex-shrink: 0;
+}
+
+.drag-drop-hint {
+  padding: 40px 20px;
+  color: var(--black);
+  opacity: 0.4;
+  font-size: 14px;
+  text-align: center;
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.file-table {
+  width: 100%;
+  border-collapse: collapse;
+
+  th {
+    text-align: left;
+    font-size: 12px;
+    color: var(--black);
+    opacity: 0.5;
+    font-weight: normal;
+    padding: 8px 6px;
+    border-bottom: var(--border-in-light);
+  }
+
+  td {
+    padding: 8px 6px;
+    vertical-align: middle;
+  }
+
+  tbody tr:last-child td {
+    border-bottom: none;
+  }
+
+  tbody td {
+    border-bottom: var(--border-in-light);
+  }
+
+  .file-icon-cell {
+    width: 24px;
+    padding-left: 12px;
+  }
+
+  .file-name-cell {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 180px;
+    font-size: 14px;
+  }
+
+  .file-size-cell {
+    font-size: 13px;
+    color: var(--black);
+    opacity: 0.5;
+    white-space: nowrap;
+  }
+
+  .file-delete-cell {
+    width: 40px;
+    text-align: right;
+    padding-right: 12px;
+  }
+}
+
+.file-icon {
+  width: 20px;
+  height: 20px;
+  display: block;
+}
+
+.file-status {
+  display: inline-block;
+  padding: 2px 8px;
+  border-radius: 4px;
+  font-size: 12px;
+  white-space: nowrap;
+
+  &.file-status-pending {
+    background: #6c757d;
+    color: #fff;
+  }
+
+  &.file-status-converting {
+    background: #007bff;
+    color: #fff;
+  }
+
+  &.file-status-success {
+    background: #28a745;
+    color: #fff;
+  }
+
+  &.file-status-error {
+    background: #dc3545;
+    color: #fff;
+  }
+}

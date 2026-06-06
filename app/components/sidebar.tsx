@@ -5,13 +5,13 @@ import styles from "./home.module.scss";
 import { IconButton } from "./button";
 import SettingsIcon from "../icons/settings.svg";
 import GithubIcon from "../icons/github.svg";
-import ChatGptIcon from "../icons/chatgpt.svg";
 import AddIcon from "../icons/add.svg";
 import DeleteIcon from "../icons/delete.svg";
 import MaskIcon from "../icons/mask.svg";
 import McpIcon from "../icons/mcp.svg";
 import DragIcon from "../icons/drag.svg";
 import DiscoveryIcon from "../icons/discovery.svg";
+import FileConversionIcon from "../icons/file-conversion.svg";
 
 import Locale from "../locales";
 
@@ -191,7 +191,15 @@ export function SideBarHeader(props: {
           </div>
           <div className={styles["sidebar-sub-title"]}>{subTitle}</div>
         </div>
-        <div className={clsx(styles["sidebar-logo"], "no-dark")}>{logo}</div>
+        <div className={styles["sidebar-action"]}>
+          <a href={REPO_URL} target="_blank" rel="noopener noreferrer">
+            <IconButton
+              aria={Locale.Export.MessageFromChatGPT}
+              icon={<GithubIcon />}
+              shadow
+            />
+          </a>
+        </div>
       </div>
       {children}
     </Fragment>
@@ -252,7 +260,7 @@ export function SideBar(props: { className?: string }) {
       <SideBarHeader
         title="NextChat"
         subTitle="Build your own AI assistant."
-        logo={<ChatGptIcon />}
+        logo={<GithubIcon />}
         shouldNarrow={shouldNarrow}
       >
         <div className={styles["sidebar-header-bar"]}>
@@ -337,13 +345,13 @@ export function SideBar(props: { className?: string }) {
               </Link>
             </div>
             <div className={styles["sidebar-action"]}>
-              <a href={REPO_URL} target="_blank" rel="noopener noreferrer">
+              <Link to={Path.FileConversion}>
                 <IconButton
-                  aria={Locale.Export.MessageFromChatGPT}
-                  icon={<GithubIcon />}
+                  aria={Locale.FileConversion.Title}
+                  icon={<FileConversionIcon />}
                   shadow
                 />
-              </a>
+              </Link>
             </div>
           </>
         }
