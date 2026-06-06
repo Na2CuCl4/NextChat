@@ -40,16 +40,3 @@ docker login
 ```bash
 docker push na2cucl4/nextchat:latest
 ```
-
-## 读文件插件的 Docker 配置
-
-```yaml
-# docker-compose.yml
-services:
-  nextchat-readfile:
-    image: na2cucl4/nextchat-readfile:latest
-    container_name: nextchat-readfile
-    ports:
-      - 127.0.0.1:8000:8000
-    restart: always
-```
