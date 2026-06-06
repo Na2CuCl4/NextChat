@@ -3,6 +3,7 @@ import {
   UPLOAD_URL,
   REQUEST_TIMEOUT_MS,
 } from "@/app/constant";
+import { useAppConfig } from "@/app/store";
 import { MultimodalContent, RequestMessage } from "@/app/client/api";
 import Locale from "@/app/locales";
 import {
@@ -191,6 +192,26 @@ export function removeImage(imageUrl: string) {
 export async function uploadFile(file: File): Promise<string> {
   const body = new FormData();
   body.append("file", file);
+
+  const fc = useAppConfig.getState().fileConversionConfig;
+  body.append("engine", fc.engine);
+
+  if (fc.engine === "markitdown" && fc.enableDocIntelligence) {
+    body.append("enableDocIntelligence", "true");
+  }
+
+  if (fc.engine === "mineru") {
+    body.append("minerUBackend", fc.minerUBackend);
+    body.append("parseMethod", fc.parseMethod);
+    body.append("ocrLanguage", fc.ocrLanguage);
+    body.append("enableTableRecognition", String(fc.enableTableRecognition));
+    body.append(
+      "enableInlineFormulaRecognition",
+      String(fc.enableInlineFormulaRecognition),
+    );
+    body.append("enableImageAnalysis", String(fc.enableImageAnalysis));
+    body.append("maxPages", String(fc.maxPages));
+  }
   const controller = new AbortController();
   const timeoutId = setTimeout(
     () => {

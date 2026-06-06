@@ -18,6 +18,7 @@ services:
       DEFAULT_MODEL: ${DEFAULT_MODEL}
       FILE_READING_SERVER: http://nextchat-readfile:8000/read_file
       HIDE_USER_API_KEY: 1
+      MINERU_SERVER: http://mineru-api:8000
 
   nextchat-readfile:
     image: na2cucl4/nextchat-readfile:latest
@@ -32,7 +33,7 @@ services:
       OPENAI_API_KEY: ${OPENAI_API_KEY}
       DOCINTEL_ENDPOINT: ${DOCINTEL_ENDPOINT}
       DOCINTEL_API_KEY: ${DOCINTEL_API_KEY}
-      DEFAULT_MODEL: ${DEFAULT_MODEL}
+      DOCINTEL_MODEL: ${DOCINTEL_MODEL}
 
   mineru-api:
     image: mineru:latest
@@ -44,7 +45,7 @@ services:
       MINERU_MODEL_SOURCE: local
     entrypoint: mineru-api
     command:
-      --host 0.0.0.0
+      --host 127.0.0.1
       --port 8000
       # --gpu-memory-utilization 0.5
     ulimits:

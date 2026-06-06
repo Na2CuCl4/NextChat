@@ -11,8 +11,69 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: "No file provided" }, { status: 400 });
     }
 
+    const engine = (inForm.get("engine") as string | null) ?? "markitdown";
+
+    // ── MinerU path ──────────────────────────────────────────────
+    if (engine === "mineru") {
+      if (!serverConfig.minerUServer) {
+        return NextResponse.json(
+          { error: "MinerU server not configured" },
+          { status: 503 },
+        );
+      }
+
+      const outForm = new FormData();
+      outForm.append("files", file);
+
+      const langList = inForm.get("ocrLanguage");
+      if (langList) outForm.append("lang_list", langList);
+
+      const backend = inForm.get("minerUBackend");
+      if (backend) outForm.append("backend", backend);
+
+      const parseMethod = inForm.get("parseMethod");
+      if (parseMethod) outForm.append("parse_method", parseMethod);
+
+      const tableEnable = inForm.get("enableTableRecognition");
+      if (tableEnable) outForm.append("table_enable", tableEnable);
+
+      const formulaEnable = inForm.get("enableInlineFormulaRecognition");
+      if (formulaEnable) outForm.append("formula_enable", formulaEnable);
+
+      const imageAnalysis = inForm.get("enableImageAnalysis");
+      if (imageAnalysis) outForm.append("image_analysis", imageAnalysis);
+
+      outForm.append("return_md", "true");
+
+      const maxPages = inForm.get("maxPages");
+      if (maxPages) outForm.append("end_page_id", maxPages);
+
+      const res = await fetch(`${serverConfig.minerUServer}/file_parse`, {
+        method: "POST",
+        body: outForm,
+      });
+
+      const json = await res.json().catch(() => null);
+      if (res.ok && json?.status === "completed" && json?.results) {
+        const fileName = json.file_names?.[0];
+        const mdContent = json.results[fileName]?.md_content ?? "";
+        return NextResponse.json({ data: mdContent });
+      }
+      return NextResponse.json(
+        { error: json?.error ?? json?.msg ?? "MinerU conversion failed" },
+        { status: 502 },
+      );
+    }
+
+    // ── MarkItDown path (default) ─────────────────────────────────
     const outForm = new FormData();
     outForm.append("file", file);
+
+    const enableDocIntel = inForm.get("enableDocIntelligence");
+    if (enableDocIntel === "true") {
+      outForm.append("docintel", "true");
+    }
+
     const res = await fetch(serverConfig.fileReadingServer, {
       method: "POST",
       body: outForm,

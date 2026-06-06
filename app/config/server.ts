@@ -26,6 +26,7 @@ declare global {
       VISION_MODELS?: string; // to control vision models
 
       FILE_READING_SERVER?: string; // server to read file content
+      MINERU_SERVER?: string; // server to handle mineru requests
 
       // stability only
       STABILITY_URL?: string;
@@ -154,7 +155,7 @@ export const getServerSideConfig = () => {
   }
 
   const fileReadingServer = process.env.FILE_READING_SERVER ?? "";
-
+  const minerUServer = process.env.MINERU_SERVER ?? "";
   const isStability = !!process.env.STABILITY_API_KEY;
 
   const isAzure = !!process.env.AZURE_URL;
@@ -279,6 +280,7 @@ export const getServerSideConfig = () => {
     allowedWebDavEndpoints,
     enableMcp: process.env.ENABLE_MCP === "true",
 
-    fileReadingServer: fileReadingServer,
+    fileReadingServer,
+    minerUServer,
   };
 };
