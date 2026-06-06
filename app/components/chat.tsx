@@ -38,7 +38,6 @@ import UploadFileIcon from "../icons/upload-file.svg";
 import PptxIcon from "../icons/pptx.svg";
 import DocxIcon from "../icons/docx.svg";
 import XlsxIcon from "../icons/xlsx.svg";
-import XlsIcon from "../icons/xls.svg";
 import PdfIcon from "../icons/pdf.svg";
 import TxtIcon from "../icons/txt.svg";
 
@@ -1782,7 +1781,7 @@ function _Chat() {
     setAttachImages(images);
   }
   async function uploadFile() {
-    const accept = ".pptx,.docx,.xlsx,.xls,.pdf,.txt";
+    const accept = ".pptx,.docx,.xlsx,.pdf,.txt";
     const newFiles: AttachedFile[] = [];
     await new Promise<void>((res) => {
       const fileInput = document.createElement("input");
@@ -1826,7 +1825,6 @@ function _Chat() {
     if (ext === "pptx") return <PptxIcon />;
     if (ext === "docx") return <DocxIcon />;
     if (ext === "xlsx") return <XlsxIcon />;
-    if (ext === "xls") return <XlsIcon />;
     if (ext === "pdf") return <PdfIcon />;
     return <TxtIcon />;
   }
