@@ -877,10 +877,28 @@ const en: PartialLocaleType = {
     Engine: {
       Title: "File Conversion Engine",
       MarkItDown: "MarkItDown",
-      DocIntelligence: "Document Intelligence",
+      MarkItDownDesc: "Convert documents using MarkItDown.",
       MinerU: "MinerU",
+      MinerUDesc:
+        "Convert documents using MinerU, a high-precision document parsing engine built for LLM · RAG · Agent scenarios.",
+    },
+    MarkItDown: {
+      EnableDocIntelligence: {
+        Title: "Use Document Intelligence",
+        Desc: "AI-based document conversion, improves quality for complex documents, significantly increases conversion time (about 4x).",
+      },
     },
     MinerU: {
+      HealthCheck: {
+        Title: "Check Availability",
+        Action: "Check",
+        Checking: "Checking…",
+        Unavailable: "MinerU service unavailable",
+        Status: "Status",
+        Version: "Version",
+        Queued: "Queued",
+        Processing: "Processing",
+      },
       ParseBackend: {
         Title: "Parse Backend",
         Pipeline: "pipeline",

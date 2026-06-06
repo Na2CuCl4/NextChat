@@ -117,9 +117,9 @@ export const DEFAULT_CONFIG = {
   },
 
   fileConversionConfig: {
-    engine: "markitdown" as "markitdown" | "docintel" | "mineru",
-    docIntelModel: "",
-    minerUBackend: "pipeline" as
+    engine: "markitdown" as "markitdown" | "mineru",
+    enableDocIntelligence: false,
+    minerUBackend: "hybrid-auto-engine" as
       | "pipeline"
       | "vlm-auto-engine"
       | "hybrid-auto-engine",

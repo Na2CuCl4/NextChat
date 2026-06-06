@@ -869,14 +869,27 @@ const cn = {
       Title: "文件转换引擎",
       MarkItDown: "MarkItDown",
       MarkItDownDesc: "使用 MarkItDown 进行文档转换。",
-      DocIntelligence: "Document Intelligence",
-      DocIntelligenceDesc:
-        "使用基于 Document Intelligence 的 MarkItDown 进行文档转换，提升复杂文档的转换质量，会显著增加转换时间（约 4x）。",
       MinerU: "MinerU",
       MinerUDesc:
         "使用 MinerU 进行文档转换，专为 LLM · RAG · Agent 场景构建的高精度文档解析引擎。",
     },
+    MarkItDown: {
+      EnableDocIntelligence: {
+        Title: "使用文档智能",
+        Desc: "基于 AI 进行文档转换，提升复杂文档的转换质量，会显著增加转换时间（约 4x）。",
+      },
+    },
     MinerU: {
+      HealthCheck: {
+        Title: "检查可用性",
+        Action: "检查",
+        Checking: "正在检查…",
+        Unavailable: "MinerU 服务不可用",
+        Status: "状态",
+        Version: "版本",
+        Queued: "排队任务",
+        Processing: "处理中",
+      },
       ParseBackend: {
         Title: "解析后端",
         Pipeline: "pipeline",

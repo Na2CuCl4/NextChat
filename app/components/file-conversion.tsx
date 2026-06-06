@@ -1,4 +1,4 @@
-import { useState, useRef, useCallback, useMemo } from "react";
+import { useState, useRef, useCallback } from "react";
 
 import styles from "./file-conversion.module.scss";
 
@@ -22,7 +22,7 @@ import { Path } from "../constant";
 import { useAppConfig, useAccessStore } from "../store";
 import { useNavigate } from "react-router-dom";
 
-type FileConversionEngine = "markitdown" | "docintel" | "mineru";
+type FileConversionEngine = "markitdown" | "mineru";
 type MinerUBackend = "pipeline" | "vlm-auto-engine" | "hybrid-auto-engine";
 type ParseMethod = "auto" | "txt" | "ocr";
 type OcrLanguage =
@@ -55,7 +55,6 @@ interface FileItem {
 
 const FILE_CONVERSION_ENGINES: Record<FileConversionEngine, string> = {
   markitdown: Locale.FileConversion.Engine.MarkItDownDesc,
-  docintel: Locale.FileConversion.Engine.DocIntelligenceDesc,
   mineru: Locale.FileConversion.Engine.MinerUDesc,
 };
 
@@ -138,12 +137,95 @@ function FileIcon({ ext }: { ext: string }) {
   return <Icon className={styles["file-icon"]} />;
 }
 
-function MinerUSettings() {
+function MarkItDownSettings() {
   const config = useAppConfig();
   const fc = config.fileConversionConfig;
 
   return (
     <>
+      <ListItem
+        title={Locale.FileConversion.MarkItDown.EnableDocIntelligence.Title}
+        subTitle={Locale.FileConversion.MarkItDown.EnableDocIntelligence.Desc}
+      >
+        <input
+          aria-label={
+            Locale.FileConversion.MarkItDown.EnableDocIntelligence.Title
+          }
+          type="checkbox"
+          checked={fc.enableDocIntelligence}
+          onChange={(e) => {
+            const checked = e.target.checked;
+            config.update(
+              (c) => (c.fileConversionConfig.enableDocIntelligence = checked),
+            );
+          }}
+        />
+      </ListItem>
+    </>
+  );
+}
+
+interface MinerUHealth {
+  status: string;
+  version: string;
+  queued_tasks: number;
+  processing_tasks: number;
+  completed_tasks: number;
+  failed_tasks: number;
+  max_concurrent_requests: number;
+}
+
+function MinerUSettings() {
+  const config = useAppConfig();
+  const fc = config.fileConversionConfig;
+  const [health, setHealth] = useState<MinerUHealth | null>(null);
+  const [checking, setChecking] = useState(false);
+  const [healthError, setHealthError] = useState(false);
+
+  const handleCheckHealth = useCallback(async () => {
+    setChecking(true);
+    setHealthError(false);
+    try {
+      const res = await fetch("/api/mineru/health");
+      const json = await res.json().catch(() => null);
+      if (res.ok && json?.status) {
+        setHealth(json);
+      } else {
+        setHealthError(true);
+        setHealth(null);
+      }
+    } catch {
+      setHealthError(true);
+      setHealth(null);
+    } finally {
+      setChecking(false);
+    }
+  }, []);
+
+  const healthSubTitle = health
+    ? `${Locale.FileConversion.MinerU.HealthCheck.Status}: ${health.status}  |  ${Locale.FileConversion.MinerU.HealthCheck.Version}: ${health.version}  |  ${Locale.FileConversion.MinerU.HealthCheck.Queued}: ${health.queued_tasks}  |  ${Locale.FileConversion.MinerU.HealthCheck.Processing}: ${health.processing_tasks}`
+    : healthError
+    ? Locale.FileConversion.MinerU.HealthCheck.Unavailable
+    : "";
+
+  return (
+    <>
+      <ListItem
+        title={Locale.FileConversion.MinerU.HealthCheck.Title}
+        subTitle={healthSubTitle}
+      >
+        <IconButton
+          aria={Locale.FileConversion.MinerU.HealthCheck.Action}
+          text={
+            checking
+              ? Locale.FileConversion.MinerU.HealthCheck.Checking
+              : Locale.FileConversion.MinerU.HealthCheck.Action
+          }
+          bordered
+          onClick={handleCheckHealth}
+        />
+      </ListItem>
+
       <ListItem
         title={Locale.FileConversion.MinerU.ParseBackend.Title}
         subTitle={MINERU_BACKEND[fc.minerUBackend]}
@@ -297,21 +379,10 @@ function addFilesToList(files: FileList | File[]): FileItem[] {
 export function FileConversion() {
   const navigate = useNavigate();
   const config = useAppConfig();
-  const accessStore = useAccessStore();
   const fc = config.fileConversionConfig;
   const fileInputRef = useRef<HTMLInputElement>(null);
   const [fileList, setFileList] = useState<FileItem[]>([]);
   const [dragOver, setDragOver] = useState(false);
-
-  const customModelNames = useMemo(() => {
-    const raw = [config.customModels, accessStore.customModels]
-      .filter(Boolean)
-      .join(",")
-      .split(",")
-      .map((s) => s.trim())
-      .filter(Boolean);
-    return [...new Set(raw)];
-  }, [config.customModels, accessStore.customModels]);
 
   const handleUpload = useCallback(() => {
     fileInputRef.current?.click();
@@ -435,14 +506,13 @@ export function FileConversion() {
                 <option value="markitdown">
                   {Locale.FileConversion.Engine.MarkItDown}
                 </option>
-                <option value="docintel">
-                  {Locale.FileConversion.Engine.DocIntelligence}
-                </option>
                 <option value="mineru">
                   {Locale.FileConversion.Engine.MinerU}
                 </option>
               </Select>
             </ListItem>
+
+            {fc.engine === "markitdown" && <MarkItDownSettings />}
 
             {fc.engine === "mineru" && <MinerUSettings />}
           </List>
