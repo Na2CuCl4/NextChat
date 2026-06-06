@@ -877,15 +877,10 @@ const en: PartialLocaleType = {
     Engine: {
       Title: "File Conversion Engine",
       MarkItDown: "MarkItDown",
-      MarkItDownDocIntelligence: "MarkItDown + Document Intelligence",
+      DocIntelligence: "Document Intelligence",
       MinerU: "MinerU",
     },
-    DocIntelligence: {
-      Title: "Document Intelligence Settings",
-      Model: "Model",
-    },
     MinerU: {
-      Title: "MinerU Settings",
       ParseBackend: {
         Title: "Parse Backend",
         Pipeline: "pipeline",

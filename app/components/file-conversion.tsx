@@ -22,7 +22,7 @@ import { Path } from "../constant";
 import { useAppConfig, useAccessStore } from "../store";
 import { useNavigate } from "react-router-dom";
 
-type FileConversionEngine = "markitdown" | "markitdown-docintel" | "mineru";
+type FileConversionEngine = "markitdown" | "docintel" | "mineru";
 type MinerUBackend = "pipeline" | "vlm-auto-engine" | "hybrid-auto-engine";
 type ParseMethod = "auto" | "txt" | "ocr";
 type OcrLanguage =
@@ -52,6 +52,12 @@ interface FileItem {
   size: number;
   status: FileStatus;
 }
+
+const FILE_CONVERSION_ENGINES: Record<FileConversionEngine, string> = {
+  markitdown: Locale.FileConversion.Engine.MarkItDownDesc,
+  docintel: Locale.FileConversion.Engine.DocIntelligenceDesc,
+  mineru: Locale.FileConversion.Engine.MinerUDesc,
+};
 
 const MINERU_BACKEND: Record<MinerUBackend, string> = {
   pipeline: Locale.FileConversion.MinerU.ParseBackend.PipelineDesc,
@@ -279,36 +285,6 @@ function MinerUSettings() {
   );
 }
 
-function DocIntelligenceSettings({
-  customModelNames,
-}: {
-  customModelNames: string[];
-}) {
-  const config = useAppConfig();
-  const fc = config.fileConversionConfig;
-
-  if (customModelNames.length === 0) return null;
-
-  return (
-    <ListItem title={Locale.FileConversion.DocIntelligence.Model}>
-      <Select
-        aria-label={Locale.FileConversion.DocIntelligence.Model}
-        value={fc.docIntelModel || customModelNames[0]}
-        onChange={(e) => {
-          const val = e.target.value;
-          config.update((c) => (c.fileConversionConfig.docIntelModel = val));
-        }}
-      >
-        {customModelNames.map((name) => (
-          <option key={name} value={name}>
-            {name}
-          </option>
-        ))}
-      </Select>
-    </ListItem>
-  );
-}
-
 function addFilesToList(files: FileList | File[]): FileItem[] {
   return Array.from(files).map((file) => ({
     id: Math.random().toString(36).slice(2, 9),
@@ -444,7 +420,10 @@ export function FileConversion() {
             {Locale.FileConversion.Settings}
           </div>
           <List>
-            <ListItem title={Locale.FileConversion.Engine.Title}>
+            <ListItem
+              title={Locale.FileConversion.Engine.Title}
+              subTitle={FILE_CONVERSION_ENGINES[fc.engine]}
+            >
               <Select
                 aria-label={Locale.FileConversion.Engine.Title}
                 value={fc.engine}
@@ -456,18 +435,14 @@ export function FileConversion() {
                 <option value="markitdown">
                   {Locale.FileConversion.Engine.MarkItDown}
                 </option>
-                <option value="markitdown-docintel">
-                  {Locale.FileConversion.Engine.MarkItDownDocIntelligence}
+                <option value="docintel">
+                  {Locale.FileConversion.Engine.DocIntelligence}
                 </option>
                 <option value="mineru">
                   {Locale.FileConversion.Engine.MinerU}
                 </option>
               </Select>
             </ListItem>
-
-            {fc.engine === "markitdown-docintel" && (
-              <DocIntelligenceSettings customModelNames={customModelNames} />
-            )}
 
             {fc.engine === "mineru" && <MinerUSettings />}
           </List>
