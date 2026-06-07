@@ -600,6 +600,116 @@ const id: PartialLocaleType = {
     Topic: "Topik",
     Time: "Waktu",
   },
+  FileConversion: {
+    Title: "Konversi File",
+    SubTitle:
+      "Konversi file biner (mis. DOCX / PPTX / XLSX / PDF) menjadi file teks (mis. Markdown) untuk pengenalan dan pemahaman AI.",
+    Settings: "Pengaturan",
+    Conversion: "Konversi",
+    Engine: {
+      Title: "Mesin Konversi File",
+      MarkItDown: "MarkItDown",
+      MarkItDownDesc: "Konversi dokumen menggunakan MarkItDown.",
+      MinerU: "MinerU",
+      MinerUDesc:
+        "Konversi dokumen menggunakan MinerU, mesin parsing dokumen presisi tinggi yang dibangun untuk skenario LLM · RAG · Agent.",
+    },
+    HealthCheck: {
+      Title: "Periksa Ketersediaan",
+      Action: "Periksa",
+      Checking: "Memeriksa…",
+      Unavailable: "Layanan tidak tersedia",
+      Version: "Versi",
+      Queueing: "Mengantre",
+      Processing: "Memproses",
+      Completed: "Selesai",
+      Failed: "Gagal",
+    },
+    MarkItDown: {
+      EnableDocIntelligence: {
+        Title: "Gunakan Document Intelligence",
+        Desc: "Konversi dokumen berbasis AI, meningkatkan kualitas untuk dokumen kompleks, secara signifikan menambah waktu konversi.",
+      },
+    },
+    MinerU: {
+      ParseBackend: {
+        Title: "Backend Parse",
+        Pipeline: "pipeline",
+        PipelineDesc:
+          "Pipeline multi-model tradisional, mendukung banyak bahasa, tanpa halusinasi.",
+        VlmAutoEngine: "vlm-auto-engine",
+        VlmAutoEngineDesc:
+          "Parsing presisi tinggi VLM multimodal, hanya mendukung bahasa Tionghoa dan Inggris.",
+        HybridAutoEngine: "hybrid-auto-engine",
+        HybridAutoEngineDesc:
+          "Parsing hibrida presisi tinggi, mendukung banyak bahasa.",
+      },
+      MaxPages: {
+        Title: "Halaman Konversi Maks",
+      },
+      EnableTableRecognition: {
+        Title: "Aktifkan Pengenalan Tabel",
+        Desc: "Saat dinonaktifkan, tabel akan ditampilkan sebagai gambar.",
+      },
+      EnableInlineFormulaRecognition: {
+        Title: "Aktifkan Pengenalan Rumus Inline",
+        Desc: "Saat dinonaktifkan, rumus inline tidak akan dideteksi atau diparse.",
+      },
+      EnableImageAnalysis: {
+        Title: "Aktifkan Analisis Gambar",
+        Desc: "Saat dinonaktifkan, blok gambar/grafik mempertahankan posisi tata letak tetapi melewati analisis VLM.",
+      },
+      ParseMethod: {
+        Title: "Metode Parse",
+        Auto: "Ditentukan otomatis berdasarkan jenis file.",
+        Txt: "Gunakan metode ekstraksi teks.",
+        Ocr: "Gunakan metode OCR untuk PDF berbasis gambar.",
+      },
+      OcrLanguage: {
+        Title: "Bahasa OCR",
+        Ch: "Tionghoa, Inggris, Tionghoa Tradisional",
+        ChLite: "Tionghoa, Inggris, Tionghoa Tradisional, Jepang",
+        ChServer: "Tionghoa, Inggris, Tionghoa Tradisional, Jepang",
+        En: "Inggris",
+        Korean: "Korea, Inggris",
+        Japan: "Jepang, Tionghoa, Inggris, Tionghoa Tradisional",
+        ChineseCht: "Tionghoa Tradisional, Tionghoa, Inggris, Jepang",
+        Ta: "Tamil, Inggris",
+        Te: "Telugu, Inggris",
+        Ka: "Kannada",
+        Th: "Thai, Inggris",
+        El: "Yunani, Inggris",
+        Latin: "Prancis, Jerman, dll. (bahasa aksara Latin)",
+        Arabic: "Arab, Persia, Urdu, dll.",
+        EastSlavic: "Rusia, Belarusia, Ukraina, Inggris",
+        Cyrillic: "Rusia, bahasa Kiril",
+        Devanagari: "Hindi, Marathi, Nepali, dll.",
+      },
+    },
+    FileList: {
+      Upload: "Unggah File",
+      ClearAll: "Hapus Semua",
+      Convert: "Mulai",
+      Stop: "Berhenti",
+      Name: "Nama",
+      Size: "Ukuran",
+      StatusLabel: "Status",
+      Status: {
+        pending: "Menunggu",
+        converting: "Mengonversi",
+        success: "Selesai",
+        error: "Gagal",
+      },
+      Delete: "Hapus",
+      AccessCodeError: "Kode akses salah!",
+      DragDropHint: "Taruh file di sini untuk mengunggah",
+      ActionsLabel: "Tindakan",
+      DownloadAll: "Unduh Semua",
+      ErrorInfo: "Info error",
+      UnknownError: "Error tak dikenal",
+      LogPlaceholder: "Log konversi akan muncul di sini",
+    },
+  },
 };
 
 export default id;

@@ -586,6 +586,115 @@ const ar: PartialLocaleType = {
     Topic: "الموضوع",
     Time: "الوقت",
   },
+  FileConversion: {
+    Title: "تحويل الملفات",
+    SubTitle:
+      "تحويل الملفات الثنائية (مثل DOCX / PPTX / XLSX / PDF) إلى ملفات نصية (مثل Markdown) للتعرف والفهم بواسطة الذكاء الاصطناعي.",
+    Settings: "الإعدادات",
+    Conversion: "التحويل",
+    Engine: {
+      Title: "محرك تحويل الملفات",
+      MarkItDown: "MarkItDown",
+      MarkItDownDesc: "تحويل المستندات باستخدام MarkItDown.",
+      MinerU: "MinerU",
+      MinerUDesc:
+        "تحويل المستندات باستخدام MinerU، محرك تحليل مستندات عالي الدقة مصمم لسيناريوهات LLM · RAG · Agent.",
+    },
+    HealthCheck: {
+      Title: "التحقق من التوفر",
+      Action: "تحقق",
+      Checking: "جارٍ التحقق…",
+      Unavailable: "الخدمة غير متوفرة",
+      Version: "الإصدار",
+      Queueing: "في الانتظار",
+      Processing: "قيد المعالجة",
+      Completed: "مكتمل",
+      Failed: "فشل",
+    },
+    MarkItDown: {
+      EnableDocIntelligence: {
+        Title: "استخدام ذكاء المستندات",
+        Desc: "تحويل مستندات قائم على الذكاء الاصطناعي، يحسن الجودة للمستندات المعقدة، ويزيد وقت التحويل بشكل كبير.",
+      },
+    },
+    MinerU: {
+      ParseBackend: {
+        Title: "خلفية التحليل",
+        Pipeline: "pipeline",
+        PipelineDesc:
+          "خط أنابيب تقليدي متعدد النماذج، يدعم لغات متعددة، بدون هلوسة.",
+        VlmAutoEngine: "vlm-auto-engine",
+        VlmAutoEngineDesc:
+          "تحليل عالي الدقة بنموذج VLM متعدد الوسائط، يدعم الصينية والإنجليزية فقط.",
+        HybridAutoEngine: "hybrid-auto-engine",
+        HybridAutoEngineDesc: "تحليل هجين عالي الدقة، يدعم لغات متعددة.",
+      },
+      MaxPages: {
+        Title: "الحد الأقصى لصفحات التحويل",
+      },
+      EnableTableRecognition: {
+        Title: "تفعيل التعرف على الجداول",
+        Desc: "عند التعطيل، ستظهر الجداول كصور.",
+      },
+      EnableInlineFormulaRecognition: {
+        Title: "تفعيل التعرف على الصيغ المضمنة",
+        Desc: "عند التعطيل، لن يتم اكتشاف أو تحليل الصيغ المضمنة.",
+      },
+      EnableImageAnalysis: {
+        Title: "تفعيل تحليل الصور",
+        Desc: "عند التعطيل، تحتفظ كتل الصور/الرسوم البيانية بموقعها ولكن يتم تخطي تحليل VLM.",
+      },
+      ParseMethod: {
+        Title: "طريقة التحليل",
+        Auto: "يتم تحديده تلقائيًا بناءً على نوع الملف.",
+        Txt: "استخدام طريقة استخراج النص.",
+        Ocr: "استخدام طريقة OCR للملفات PDF المبنية على الصور.",
+      },
+      OcrLanguage: {
+        Title: "لغة OCR",
+        Ch: "الصينية، الإنجليزية، الصينية التقليدية",
+        ChLite: "الصينية، الإنجليزية، الصينية التقليدية، اليابانية",
+        ChServer: "الصينية، الإنجليزية، الصينية التقليدية، اليابانية",
+        En: "الإنجليزية",
+        Korean: "الكورية، الإنجليزية",
+        Japan: "اليابانية، الصينية، الإنجليزية، الصينية التقليدية",
+        ChineseCht: "الصينية التقليدية، الصينية، الإنجليزية، اليابانية",
+        Ta: "التاميلية، الإنجليزية",
+        Te: "التيلوغوية، الإنجليزية",
+        Ka: "الكانادية",
+        Th: "التايلاندية، الإنجليزية",
+        El: "اليونانية، الإنجليزية",
+        Latin: "الفرنسية، الألمانية، إلخ (لغات الأبجدية اللاتينية)",
+        Arabic: "العربية، الفارسية، الأردية، إلخ.",
+        EastSlavic: "الروسية، البيلاروسية، الأوكرانية، الإنجليزية",
+        Cyrillic: "الروسية، اللغات السيريلية",
+        Devanagari: "الهندية، الماراثية، النيبالية، إلخ.",
+      },
+    },
+    FileList: {
+      Upload: "رفع ملف",
+      ClearAll: "مسح الكل",
+      Convert: "بدء",
+      Stop: "إيقاف",
+      Name: "الاسم",
+      Size: "الحجم",
+      StatusLabel: "الحالة",
+      Status: {
+        pending: "قيد الانتظار",
+        converting: "جارٍ التحويل",
+        success: "مكتمل",
+        error: "فشل",
+      },
+      Delete: "حذف",
+      AccessCodeError: "رمز الوصول غير صحيح!",
+      DragDropHint: "أسقط الملفات هنا للرفع",
+      ActionsLabel: "إجراءات",
+      DownloadAll: "تحميل الكل",
+      ErrorInfo: "معلومات الخطأ",
+      UnknownError: "خطأ غير معروف",
+      LogPlaceholder: "سيظهر سجل التحويل هنا",
+    },
+  },
 };
 
 export default ar;

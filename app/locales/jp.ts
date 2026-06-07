@@ -595,6 +595,115 @@ const jp: PartialLocaleType = {
     Topic: "テーマ",
     Time: "時間",
   },
+  FileConversion: {
+    Title: "ファイル変換",
+    SubTitle:
+      "バイナリファイル（例：DOCX / PPTX / XLSX / PDF）をテキストファイル（例：Markdown）に変換し、AI による認識と理解を可能にします。",
+    Settings: "設定",
+    Conversion: "変換",
+    Engine: {
+      Title: "ファイル変換エンジン",
+      MarkItDown: "MarkItDown",
+      MarkItDownDesc: "MarkItDown を使用してドキュメントを変換します。",
+      MinerU: "MinerU",
+      MinerUDesc:
+        "MinerU を使用してドキュメントを変換します。LLM · RAG · Agent シナリオ向けに構築された高精度ドキュメント解析エンジンです。",
+    },
+    HealthCheck: {
+      Title: "利用可能状況の確認",
+      Action: "確認",
+      Checking: "確認中…",
+      Unavailable: "サービス利用不可",
+      Version: "バージョン",
+      Queueing: "待機中",
+      Processing: "処理中",
+      Completed: "完了",
+      Failed: "失敗",
+    },
+    MarkItDown: {
+      EnableDocIntelligence: {
+        Title: "ドキュメント インテリジェンスを使用",
+        Desc: "AI ベースのドキュメント変換、複雑なドキュメントの品質を向上させますが、変換時間が大幅に増加します。",
+      },
+    },
+    MinerU: {
+      ParseBackend: {
+        Title: "解析バックエンド",
+        Pipeline: "pipeline",
+        PipelineDesc:
+          "従来のマルチモデルパイプライン、多言語対応、ハルシネーションなし。",
+        VlmAutoEngine: "vlm-auto-engine",
+        VlmAutoEngineDesc:
+          "マルチモーダル VLM 高精度解析、中国語と英語のみ対応。",
+        HybridAutoEngine: "hybrid-auto-engine",
+        HybridAutoEngineDesc: "高精度ハイブリッド解析、多言語対応。",
+      },
+      MaxPages: {
+        Title: "最大変換ページ数",
+      },
+      EnableTableRecognition: {
+        Title: "表認識を有効にする",
+        Desc: "無効にすると、表は画像として表示されます。",
+      },
+      EnableInlineFormulaRecognition: {
+        Title: "インライン数式認識を有効にする",
+        Desc: "無効にすると、インライン数式は検出・解析されません。",
+      },
+      EnableImageAnalysis: {
+        Title: "画像分析を有効にする",
+        Desc: "無効にすると、画像/グラフブロックはレイアウト位置を保持しますが、VLM 画像/グラフ分析はスキップされます。",
+      },
+      ParseMethod: {
+        Title: "解析方式",
+        Auto: "ファイルタイプに基づいて自動的に決定されます。",
+        Txt: "テキスト抽出方式を使用します。",
+        Ocr: "画像ベースの PDF に OCR 方式を使用します。",
+      },
+      OcrLanguage: {
+        Title: "OCR 言語",
+        Ch: "中国語、英語、繁体字中国語",
+        ChLite: "中国語、英語、繁体字中国語、日本語",
+        ChServer: "中国語、英語、繁体字中国語、日本語",
+        En: "英語",
+        Korean: "韓国語、英語",
+        Japan: "日本語、中国語、英語、繁体字中国語",
+        ChineseCht: "繁体字中国語、中国語、英語、日本語",
+        Ta: "タミル語、英語",
+        Te: "テルグ語、英語",
+        Ka: "カンナダ語",
+        Th: "タイ語、英語",
+        El: "ギリシャ語、英語",
+        Latin: "フランス語、ドイツ語など（ラテン文字言語）",
+        Arabic: "アラビア語、ペルシャ語、ウルドゥー語など",
+        EastSlavic: "ロシア語、ベラルーシ語、ウクライナ語、英語",
+        Cyrillic: "ロシア語、キリル文字言語",
+        Devanagari: "ヒンディー語、マラーティー語、ネパール語など",
+      },
+    },
+    FileList: {
+      Upload: "ファイルをアップロード",
+      ClearAll: "すべてクリア",
+      Convert: "変換開始",
+      Stop: "停止",
+      Name: "名前",
+      Size: "サイズ",
+      StatusLabel: "状態",
+      Status: {
+        pending: "待機中",
+        converting: "変換中",
+        success: "完了",
+        error: "失敗",
+      },
+      Delete: "削除",
+      AccessCodeError: "アクセスコードが正しくありません！",
+      DragDropHint: "ファイルをここにドロップしてアップロード",
+      ActionsLabel: "操作",
+      DownloadAll: "すべてダウンロード",
+      ErrorInfo: "エラー情報",
+      UnknownError: "不明なエラー",
+      LogPlaceholder: "変換ログがここに表示されます",
+    },
+  },
 };
 
 export default jp;

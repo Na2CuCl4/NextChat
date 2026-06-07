@@ -601,6 +601,116 @@ const tr: PartialLocaleType = {
     Topic: "Konu",
     Time: "Zaman",
   },
+  FileConversion: {
+    Title: "Dosya Dönüştürme",
+    SubTitle:
+      "İkili dosyaları (örn. DOCX / PPTX / XLSX / PDF) yapay zeka tarafından tanınması ve anlaşılması için metin dosyalarına (örn. Markdown) dönüştürün.",
+    Settings: "Ayarlar",
+    Conversion: "Dönüştürme",
+    Engine: {
+      Title: "Dosya Dönüştürme Motoru",
+      MarkItDown: "MarkItDown",
+      MarkItDownDesc: "MarkItDown kullanarak belgeleri dönüştürün.",
+      MinerU: "MinerU",
+      MinerUDesc:
+        "Belgeleri, LLM · RAG · Agent senaryoları için oluşturulmuş yüksek hassasiyetli bir belge ayrıştırma motoru olan MinerU ile dönüştürün.",
+    },
+    HealthCheck: {
+      Title: "Kullanılabilirliği Kontrol Et",
+      Action: "Kontrol Et",
+      Checking: "Kontrol ediliyor…",
+      Unavailable: "Hizmet kullanılamıyor",
+      Version: "Sürüm",
+      Queueing: "Sırada",
+      Processing: "İşleniyor",
+      Completed: "Tamamlandı",
+      Failed: "Başarısız",
+    },
+    MarkItDown: {
+      EnableDocIntelligence: {
+        Title: "Belge Zekasını Kullan",
+        Desc: "Yapay zeka tabanlı belge dönüştürme, karmaşık belgeler için kaliteyi artırır, dönüştürme süresini önemli ölçüde uzatır.",
+      },
+    },
+    MinerU: {
+      ParseBackend: {
+        Title: "Ayrıştırma Arka Ucu",
+        Pipeline: "pipeline",
+        PipelineDesc:
+          "Geleneksel çoklu model işlem hattı, birden çok dili destekler, halüsinasyon yok.",
+        VlmAutoEngine: "vlm-auto-engine",
+        VlmAutoEngineDesc:
+          "Çok modlu VLM yüksek hassasiyetli ayrıştırma, yalnızca Çince ve İngilizceyi destekler.",
+        HybridAutoEngine: "hybrid-auto-engine",
+        HybridAutoEngineDesc:
+          "Yüksek hassasiyetli hibrit ayrıştırma, birden çok dili destekler.",
+      },
+      MaxPages: {
+        Title: "Maksimum Dönüştürme Sayfası",
+      },
+      EnableTableRecognition: {
+        Title: "Tablo Tanımayı Etkinleştir",
+        Desc: "Devre dışı bırakıldığında, tablolar resim olarak görüntülenir.",
+      },
+      EnableInlineFormulaRecognition: {
+        Title: "Satır İçi Formül Tanımayı Etkinleştir",
+        Desc: "Devre dışı bırakıldığında, satır içi formüller algılanmaz veya ayrıştırılmaz.",
+      },
+      EnableImageAnalysis: {
+        Title: "Görüntü Analizini Etkinleştir",
+        Desc: "Devre dışı bırakıldığında, görüntü/grafik blokları düzen konumunu korur ancak VLM analizi atlanır.",
+      },
+      ParseMethod: {
+        Title: "Ayrıştırma Yöntemi",
+        Auto: "Dosya türüne göre otomatik olarak belirlenir.",
+        Txt: "Metin çıkarma yöntemini kullan.",
+        Ocr: "Görüntü tabanlı PDF'ler için OCR yöntemini kullan.",
+      },
+      OcrLanguage: {
+        Title: "OCR Dili",
+        Ch: "Çince, İngilizce, Geleneksel Çince",
+        ChLite: "Çince, İngilizce, Geleneksel Çince, Japonca",
+        ChServer: "Çince, İngilizce, Geleneksel Çince, Japonca",
+        En: "İngilizce",
+        Korean: "Korece, İngilizce",
+        Japan: "Japonca, Çince, İngilizce, Geleneksel Çince",
+        ChineseCht: "Geleneksel Çince, Çince, İngilizce, Japonca",
+        Ta: "Tamilce, İngilizce",
+        Te: "Teluguca, İngilizce",
+        Ka: "Kannada",
+        Th: "Tayca, İngilizce",
+        El: "Yunanca, İngilizce",
+        Latin: "Fransızca, Almanca vb. (Latin alfabesi dilleri)",
+        Arabic: "Arapça, Farsça, Urduca vb.",
+        EastSlavic: "Rusça, Belarusça, Ukraynaca, İngilizce",
+        Cyrillic: "Rusça, Kiril dilleri",
+        Devanagari: "Hintçe, Marathi, Nepalce vb.",
+      },
+    },
+    FileList: {
+      Upload: "Dosya Yükle",
+      ClearAll: "Tümünü Temizle",
+      Convert: "Başlat",
+      Stop: "Durdur",
+      Name: "Ad",
+      Size: "Boyut",
+      StatusLabel: "Durum",
+      Status: {
+        pending: "Bekliyor",
+        converting: "Dönüştürülüyor",
+        success: "Tamamlandı",
+        error: "Başarısız",
+      },
+      Delete: "Sil",
+      AccessCodeError: "Erişim kodu hatalı!",
+      DragDropHint: "Yüklemek için dosyaları buraya bırakın",
+      ActionsLabel: "İşlemler",
+      DownloadAll: "Tümünü İndir",
+      ErrorInfo: "Hata bilgisi",
+      UnknownError: "Bilinmeyen hata",
+      LogPlaceholder: "Dönüştürme günlüğü burada görünecek",
+    },
+  },
 };
 
 export default tr;

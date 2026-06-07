@@ -604,6 +604,116 @@ const no: PartialLocaleType = {
     Topic: "Emne",
     Time: "Tid",
   },
+  FileConversion: {
+    Title: "Filkonvertering",
+    SubTitle:
+      "Konverter binære filer (f.eks. DOCX / PPTX / XLSX / PDF) til tekstfiler (f.eks. Markdown) for AI-gjenkjenning og -forståelse.",
+    Settings: "Innstillinger",
+    Conversion: "Konvertering",
+    Engine: {
+      Title: "Filkonverteringsmotor",
+      MarkItDown: "MarkItDown",
+      MarkItDownDesc: "Konverter dokumenter med MarkItDown.",
+      MinerU: "MinerU",
+      MinerUDesc:
+        "Konverter dokumenter med MinerU, en høypresisjons dokumentparsingmotor bygget for LLM · RAG · Agent-scenarier.",
+    },
+    HealthCheck: {
+      Title: "Sjekk tilgjengelighet",
+      Action: "Sjekk",
+      Checking: "Sjekker…",
+      Unavailable: "Tjeneste utilgjengelig",
+      Version: "Versjon",
+      Queueing: "I kø",
+      Processing: "Behandler",
+      Completed: "Fullført",
+      Failed: "Mislyktes",
+    },
+    MarkItDown: {
+      EnableDocIntelligence: {
+        Title: "Bruk Document Intelligence",
+        Desc: "AI-basert dokumentkonvertering, forbedrer kvaliteten for komplekse dokumenter, øker konverteringstiden betydelig.",
+      },
+    },
+    MinerU: {
+      ParseBackend: {
+        Title: "Parse Backend",
+        Pipeline: "pipeline",
+        PipelineDesc:
+          "Tradisjonell flermodell-pipeline, støtter flere språk, ingen hallusinasjon.",
+        VlmAutoEngine: "vlm-auto-engine",
+        VlmAutoEngineDesc:
+          "Multimodal VLM høypresisjonsparsing, støtter kun kinesisk og engelsk.",
+        HybridAutoEngine: "hybrid-auto-engine",
+        HybridAutoEngineDesc:
+          "Høypresisjons hybrid parsing, støtter flere språk.",
+      },
+      MaxPages: {
+        Title: "Maks konverteringssider",
+      },
+      EnableTableRecognition: {
+        Title: "Aktiver tabellgjenkjenning",
+        Desc: "Når deaktivert, vises tabeller som bilder.",
+      },
+      EnableInlineFormulaRecognition: {
+        Title: "Aktiver innebygd formelgjenkjenning",
+        Desc: "Når deaktivert, vil innebygde formler ikke bli oppdaget eller parset.",
+      },
+      EnableImageAnalysis: {
+        Title: "Aktiver bildeanalyse",
+        Desc: "Når deaktivert, beholder bilde-/diagramblokker layoutposisjon men hopper over VLM-analyse.",
+      },
+      ParseMethod: {
+        Title: "Parsemetode",
+        Auto: "Bestemmes automatisk basert på filtype.",
+        Txt: "Bruk tekstutvinningsmetode.",
+        Ocr: "Bruk OCR-metode for bildebaserte PDF-er.",
+      },
+      OcrLanguage: {
+        Title: "OCR-språk",
+        Ch: "Kinesisk, engelsk, tradisjonell kinesisk",
+        ChLite: "Kinesisk, engelsk, tradisjonell kinesisk, japansk",
+        ChServer: "Kinesisk, engelsk, tradisjonell kinesisk, japansk",
+        En: "Engelsk",
+        Korean: "Koreansk, engelsk",
+        Japan: "Japansk, kinesisk, engelsk, tradisjonell kinesisk",
+        ChineseCht: "Tradisjonell kinesisk, kinesisk, engelsk, japansk",
+        Ta: "Tamil, engelsk",
+        Te: "Telugu, engelsk",
+        Ka: "Kannada",
+        Th: "Thai, engelsk",
+        El: "Gresk, engelsk",
+        Latin: "Fransk, tysk osv. (språk med latinsk skrift)",
+        Arabic: "Arabisk, persisk, urdu osv.",
+        EastSlavic: "Russisk, hviterussisk, ukrainsk, engelsk",
+        Cyrillic: "Russisk, kyrilliske språk",
+        Devanagari: "Hindi, marathi, nepalesisk osv.",
+      },
+    },
+    FileList: {
+      Upload: "Last opp fil",
+      ClearAll: "Tøm alt",
+      Convert: "Start",
+      Stop: "Stopp",
+      Name: "Navn",
+      Size: "Størrelse",
+      StatusLabel: "Status",
+      Status: {
+        pending: "Venter",
+        converting: "Konverterer",
+        success: "Fullført",
+        error: "Mislyktes",
+      },
+      Delete: "Slett",
+      AccessCodeError: "Tilgangskoden er feil!",
+      DragDropHint: "Slipp filer her for å laste opp",
+      ActionsLabel: "Handlinger",
+      DownloadAll: "Last ned alle",
+      ErrorInfo: "Feilinfo",
+      UnknownError: "Ukjent feil",
+      LogPlaceholder: "Konverteringslogg vises her",
+    },
+  },
 };
 
 export default no;

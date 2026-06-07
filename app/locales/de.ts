@@ -615,6 +615,117 @@ const de: PartialLocaleType = {
     Topic: "Thema",
     Time: "Zeit",
   },
+  FileConversion: {
+    Title: "Dateikonvertierung",
+    SubTitle:
+      "Konvertieren Sie Binärdateien (z. B. DOCX / PPTX / XLSX / PDF) in Textdateien (z. B. Markdown) zur KI-Erkennung und -Verarbeitung.",
+    Settings: "Einstellungen",
+    Conversion: "Konvertierung",
+    Engine: {
+      Title: "Dateikonvertierungs-Engine",
+      MarkItDown: "MarkItDown",
+      MarkItDownDesc: "Dokumente mit MarkItDown konvertieren.",
+      MinerU: "MinerU",
+      MinerUDesc:
+        "Dokumente mit MinerU konvertieren, einer hochpräzisen Dokumentenparsing-Engine für LLM · RAG · Agent-Szenarien.",
+    },
+    HealthCheck: {
+      Title: "Verfügbarkeit prüfen",
+      Action: "Prüfen",
+      Checking: "Prüfe…",
+      Unavailable: "Dienst nicht verfügbar",
+      Version: "Version",
+      Queueing: "In Warteschlange",
+      Processing: "In Bearbeitung",
+      Completed: "Abgeschlossen",
+      Failed: "Fehlgeschlagen",
+    },
+    MarkItDown: {
+      EnableDocIntelligence: {
+        Title: "Document Intelligence verwenden",
+        Desc: "KI-basierte Dokumentenkonvertierung, verbessert die Qualität bei komplexen Dokumenten, erhöht die Konvertierungszeit erheblich.",
+      },
+    },
+    MinerU: {
+      ParseBackend: {
+        Title: "Parse-Backend",
+        Pipeline: "pipeline",
+        PipelineDesc:
+          "Traditionelle Multi-Modell-Pipeline, unterstützt mehrere Sprachen, keine Halluzination.",
+        VlmAutoEngine: "vlm-auto-engine",
+        VlmAutoEngineDesc:
+          "Multimodales VLM-Hochpräzisionsparsing, unterstützt nur Chinesisch und Englisch.",
+        HybridAutoEngine: "hybrid-auto-engine",
+        HybridAutoEngineDesc:
+          "Hochpräzises Hybrid-Parsing, unterstützt mehrere Sprachen.",
+      },
+      MaxPages: {
+        Title: "Maximale Konvertierungsseiten",
+      },
+      EnableTableRecognition: {
+        Title: "Tabellenerkennung aktivieren",
+        Desc: "Wenn deaktiviert, werden Tabellen als Bilder angezeigt.",
+      },
+      EnableInlineFormulaRecognition: {
+        Title: "Inline-Formelerkennung aktivieren",
+        Desc: "Wenn deaktiviert, werden Inline-Formeln nicht erkannt oder geparst.",
+      },
+      EnableImageAnalysis: {
+        Title: "Bildanalyse aktivieren",
+        Desc: "Wenn deaktiviert, behalten Bild-/Diagrammblöcke ihre Layoutposition, überspringen aber die VLM-Analyse.",
+      },
+      ParseMethod: {
+        Title: "Parse-Methode",
+        Auto: "Automatisch basierend auf dem Dateityp bestimmt.",
+        Txt: "Textextraktionsmethode verwenden.",
+        Ocr: "OCR-Methode für bildbasierte PDFs verwenden.",
+      },
+      OcrLanguage: {
+        Title: "OCR-Sprache",
+        Ch: "Chinesisch, Englisch, Traditionelles Chinesisch",
+        ChLite: "Chinesisch, Englisch, Traditionelles Chinesisch, Japanisch",
+        ChServer: "Chinesisch, Englisch, Traditionelles Chinesisch, Japanisch",
+        En: "Englisch",
+        Korean: "Koreanisch, Englisch",
+        Japan: "Japanisch, Chinesisch, Englisch, Traditionelles Chinesisch",
+        ChineseCht:
+          "Traditionelles Chinesisch, Chinesisch, Englisch, Japanisch",
+        Ta: "Tamil, Englisch",
+        Te: "Telugu, Englisch",
+        Ka: "Kannada",
+        Th: "Thai, Englisch",
+        El: "Griechisch, Englisch",
+        Latin: "Französisch, Deutsch usw. (Sprachen mit lateinischer Schrift)",
+        Arabic: "Arabisch, Persisch, Urdu usw.",
+        EastSlavic: "Russisch, Weißrussisch, Ukrainisch, Englisch",
+        Cyrillic: "Russisch, kyrillische Sprachen",
+        Devanagari: "Hindi, Marathi, Nepalesisch usw.",
+      },
+    },
+    FileList: {
+      Upload: "Datei hochladen",
+      ClearAll: "Alles löschen",
+      Convert: "Start",
+      Stop: "Stopp",
+      Name: "Name",
+      Size: "Größe",
+      StatusLabel: "Status",
+      Status: {
+        pending: "Ausstehend",
+        converting: "Konvertiere",
+        success: "Abgeschlossen",
+        error: "Fehlgeschlagen",
+      },
+      Delete: "Löschen",
+      AccessCodeError: "Zugangscode ist falsch!",
+      DragDropHint: "Dateien hier ablegen zum Hochladen",
+      ActionsLabel: "Aktionen",
+      DownloadAll: "Alle herunterladen",
+      ErrorInfo: "Fehlerinfo",
+      UnknownError: "Unbekannter Fehler",
+      LogPlaceholder: "Konvertierungsprotokoll erscheint hier",
+    },
+  },
 };
 
 export default de;

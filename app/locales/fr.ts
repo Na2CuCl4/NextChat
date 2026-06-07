@@ -611,6 +611,116 @@ const fr: PartialLocaleType = {
     Topic: "Sujet",
     Time: "Temps",
   },
+  FileConversion: {
+    Title: "Conversion de fichiers",
+    SubTitle:
+      "Convertissez des fichiers binaires (ex. DOCX / PPTX / XLSX / PDF) en fichiers texte (ex. Markdown) pour la reconnaissance et la compréhension par l'IA.",
+    Settings: "Paramètres",
+    Conversion: "Conversion",
+    Engine: {
+      Title: "Moteur de conversion de fichiers",
+      MarkItDown: "MarkItDown",
+      MarkItDownDesc: "Convertir des documents avec MarkItDown.",
+      MinerU: "MinerU",
+      MinerUDesc:
+        "Convertir des documents avec MinerU, un moteur d'analyse de documents haute précision conçu pour les scénarios LLM · RAG · Agent.",
+    },
+    HealthCheck: {
+      Title: "Vérifier la disponibilité",
+      Action: "Vérifier",
+      Checking: "Vérification…",
+      Unavailable: "Service indisponible",
+      Version: "Version",
+      Queueing: "En file d'attente",
+      Processing: "En cours",
+      Completed: "Terminé",
+      Failed: "Échec",
+    },
+    MarkItDown: {
+      EnableDocIntelligence: {
+        Title: "Utiliser Document Intelligence",
+        Desc: "Conversion de documents basée sur l'IA, améliore la qualité des documents complexes, augmente considérablement le temps de conversion.",
+      },
+    },
+    MinerU: {
+      ParseBackend: {
+        Title: "Backend d'analyse",
+        Pipeline: "pipeline",
+        PipelineDesc:
+          "Pipeline multi-modèle traditionnel, prend en charge plusieurs langues, sans hallucination.",
+        VlmAutoEngine: "vlm-auto-engine",
+        VlmAutoEngineDesc:
+          "Analyse haute précision par VLM multimodal, prend en charge uniquement le chinois et l'anglais.",
+        HybridAutoEngine: "hybrid-auto-engine",
+        HybridAutoEngineDesc:
+          "Analyse hybride haute précision, prend en charge plusieurs langues.",
+      },
+      MaxPages: {
+        Title: "Pages max de conversion",
+      },
+      EnableTableRecognition: {
+        Title: "Activer la reconnaissance des tableaux",
+        Desc: "Lorsque désactivé, les tableaux seront affichés comme des images.",
+      },
+      EnableInlineFormulaRecognition: {
+        Title: "Activer la reconnaissance des formules en ligne",
+        Desc: "Lorsque désactivé, les formules en ligne ne seront pas détectées ni analysées.",
+      },
+      EnableImageAnalysis: {
+        Title: "Activer l'analyse d'images",
+        Desc: "Lorsque désactivé, les blocs image/graphique conservent leur position mais l'analyse VLM est ignorée.",
+      },
+      ParseMethod: {
+        Title: "Méthode d'analyse",
+        Auto: "Déterminé automatiquement selon le type de fichier.",
+        Txt: "Utiliser la méthode d'extraction de texte.",
+        Ocr: "Utiliser la méthode OCR pour les PDF basés sur des images.",
+      },
+      OcrLanguage: {
+        Title: "Langue OCR",
+        Ch: "Chinois, anglais, chinois traditionnel",
+        ChLite: "Chinois, anglais, chinois traditionnel, japonais",
+        ChServer: "Chinois, anglais, chinois traditionnel, japonais",
+        En: "Anglais",
+        Korean: "Coréen, anglais",
+        Japan: "Japonais, chinois, anglais, chinois traditionnel",
+        ChineseCht: "Chinois traditionnel, chinois, anglais, japonais",
+        Ta: "Tamoul, anglais",
+        Te: "Télougou, anglais",
+        Ka: "Kannada",
+        Th: "Thaï, anglais",
+        El: "Grec, anglais",
+        Latin: "Français, allemand, etc. (langues à écriture latine)",
+        Arabic: "Arabe, persan, ourdou, etc.",
+        EastSlavic: "Russe, biélorusse, ukrainien, anglais",
+        Cyrillic: "Russe, langues cyrilliques",
+        Devanagari: "Hindi, marathi, népalais, etc.",
+      },
+    },
+    FileList: {
+      Upload: "Télécharger un fichier",
+      ClearAll: "Tout effacer",
+      Convert: "Démarrer",
+      Stop: "Arrêter",
+      Name: "Nom",
+      Size: "Taille",
+      StatusLabel: "Statut",
+      Status: {
+        pending: "En attente",
+        converting: "Conversion en cours",
+        success: "Terminé",
+        error: "Échec",
+      },
+      Delete: "Supprimer",
+      AccessCodeError: "Code d'accès incorrect !",
+      DragDropHint: "Déposez les fichiers ici pour les télécharger",
+      ActionsLabel: "Actions",
+      DownloadAll: "Tout télécharger",
+      ErrorInfo: "Info erreur",
+      UnknownError: "Erreur inconnue",
+      LogPlaceholder: "Le journal de conversion apparaîtra ici",
+    },
+  },
 };
 
 export default fr;

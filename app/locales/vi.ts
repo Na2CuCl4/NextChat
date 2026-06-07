@@ -596,6 +596,116 @@ const vi: PartialLocaleType = {
     Topic: "Chủ đề",
     Time: "Thời gian",
   },
+  FileConversion: {
+    Title: "Chuyển đổi tệp",
+    SubTitle:
+      "Chuyển đổi tệp nhị phân (ví dụ: DOCX / PPTX / XLSX / PDF) thành tệp văn bản (ví dụ: Markdown) để AI nhận dạng và hiểu.",
+    Settings: "Cài đặt",
+    Conversion: "Chuyển đổi",
+    Engine: {
+      Title: "Công cụ chuyển đổi tệp",
+      MarkItDown: "MarkItDown",
+      MarkItDownDesc: "Chuyển đổi tài liệu bằng MarkItDown.",
+      MinerU: "MinerU",
+      MinerUDesc:
+        "Chuyển đổi tài liệu bằng MinerU, công cụ phân tích tài liệu độ chính xác cao được xây dựng cho các tình huống LLM · RAG · Agent.",
+    },
+    HealthCheck: {
+      Title: "Kiểm tra tình trạng",
+      Action: "Kiểm tra",
+      Checking: "Đang kiểm tra…",
+      Unavailable: "Dịch vụ không khả dụng",
+      Version: "Phiên bản",
+      Queueing: "Đang chờ",
+      Processing: "Đang xử lý",
+      Completed: "Hoàn thành",
+      Failed: "Thất bại",
+    },
+    MarkItDown: {
+      EnableDocIntelligence: {
+        Title: "Sử dụng Document Intelligence",
+        Desc: "Chuyển đổi tài liệu dựa trên AI, cải thiện chất lượng cho tài liệu phức tạp, tăng đáng kể thời gian chuyển đổi.",
+      },
+    },
+    MinerU: {
+      ParseBackend: {
+        Title: "Backend phân tích",
+        Pipeline: "pipeline",
+        PipelineDesc:
+          "Pipeline đa mô hình truyền thống, hỗ trợ nhiều ngôn ngữ, không ảo giác.",
+        VlmAutoEngine: "vlm-auto-engine",
+        VlmAutoEngineDesc:
+          "Phân tích độ chính xác cao VLM đa phương thức, chỉ hỗ trợ tiếng Trung và tiếng Anh.",
+        HybridAutoEngine: "hybrid-auto-engine",
+        HybridAutoEngineDesc:
+          "Phân tích lai độ chính xác cao, hỗ trợ nhiều ngôn ngữ.",
+      },
+      MaxPages: {
+        Title: "Số trang chuyển đổi tối đa",
+      },
+      EnableTableRecognition: {
+        Title: "Bật nhận dạng bảng",
+        Desc: "Khi tắt, bảng sẽ được hiển thị dưới dạng hình ảnh.",
+      },
+      EnableInlineFormulaRecognition: {
+        Title: "Bật nhận dạng công thức nội dòng",
+        Desc: "Khi tắt, công thức nội dòng sẽ không được phát hiện hoặc phân tích.",
+      },
+      EnableImageAnalysis: {
+        Title: "Bật phân tích hình ảnh",
+        Desc: "Khi tắt, khối hình ảnh/biểu đồ giữ nguyên vị trí bố cục nhưng bỏ qua phân tích VLM.",
+      },
+      ParseMethod: {
+        Title: "Phương thức phân tích",
+        Auto: "Tự động xác định dựa trên loại tệp.",
+        Txt: "Sử dụng phương thức trích xuất văn bản.",
+        Ocr: "Sử dụng phương thức OCR cho PDF dạng hình ảnh.",
+      },
+      OcrLanguage: {
+        Title: "Ngôn ngữ OCR",
+        Ch: "Tiếng Trung, tiếng Anh, tiếng Trung phồn thể",
+        ChLite: "Tiếng Trung, tiếng Anh, tiếng Trung phồn thể, tiếng Nhật",
+        ChServer: "Tiếng Trung, tiếng Anh, tiếng Trung phồn thể, tiếng Nhật",
+        En: "Tiếng Anh",
+        Korean: "Tiếng Hàn, tiếng Anh",
+        Japan: "Tiếng Nhật, tiếng Trung, tiếng Anh, tiếng Trung phồn thể",
+        ChineseCht: "Tiếng Trung phồn thể, tiếng Trung, tiếng Anh, tiếng Nhật",
+        Ta: "Tiếng Tamil, tiếng Anh",
+        Te: "Tiếng Telugu, tiếng Anh",
+        Ka: "Tiếng Kannada",
+        Th: "Tiếng Thái, tiếng Anh",
+        El: "Tiếng Hy Lạp, tiếng Anh",
+        Latin: "Tiếng Pháp, tiếng Đức, v.v. (ngôn ngữ chữ Latinh)",
+        Arabic: "Tiếng Ả Rập, tiếng Ba Tư, tiếng Urdu, v.v.",
+        EastSlavic: "Tiếng Nga, tiếng Belarus, tiếng Ukraina, tiếng Anh",
+        Cyrillic: "Tiếng Nga, các ngôn ngữ Kirin",
+        Devanagari: "Tiếng Hindi, tiếng Marathi, tiếng Nepal, v.v.",
+      },
+    },
+    FileList: {
+      Upload: "Tải tệp lên",
+      ClearAll: "Xóa tất cả",
+      Convert: "Bắt đầu",
+      Stop: "Dừng",
+      Name: "Tên",
+      Size: "Kích thước",
+      StatusLabel: "Trạng thái",
+      Status: {
+        pending: "Đang chờ",
+        converting: "Đang chuyển đổi",
+        success: "Hoàn thành",
+        error: "Thất bại",
+      },
+      Delete: "Xóa",
+      AccessCodeError: "Mã truy cập không chính xác!",
+      DragDropHint: "Thả tệp vào đây để tải lên",
+      ActionsLabel: "Thao tác",
+      DownloadAll: "Tải xuống tất cả",
+      ErrorInfo: "Thông tin lỗi",
+      UnknownError: "Lỗi không xác định",
+      LogPlaceholder: "Nhật ký chuyển đổi sẽ hiển thị ở đây",
+    },
+  },
 };
 
 export default vi;

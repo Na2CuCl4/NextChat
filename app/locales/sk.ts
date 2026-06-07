@@ -548,6 +548,116 @@ const sk: PartialLocaleType = {
     Code: "Zistený prístupový kód z URL, potvrdiť na aplikovanie?",
     Settings: "Zistené nastavenia z URL, potvrdiť na aplikovanie?",
   },
+  FileConversion: {
+    Title: "Konverzia súborov",
+    SubTitle:
+      "Konvertujte binárne súbory (napr. DOCX / PPTX / XLSX / PDF) na textové súbory (napr. Markdown) pre rozpoznanie a porozumenie AI.",
+    Settings: "Nastavenia",
+    Conversion: "Konverzia",
+    Engine: {
+      Title: "Engine konverzie súborov",
+      MarkItDown: "MarkItDown",
+      MarkItDownDesc: "Konvertovať dokumenty pomocou MarkItDown.",
+      MinerU: "MinerU",
+      MinerUDesc:
+        "Konvertovať dokumenty pomocou MinerU, vysoko presného enginu na parsovanie dokumentov vytvoreného pre scenáre LLM · RAG · Agent.",
+    },
+    HealthCheck: {
+      Title: "Kontrola dostupnosti",
+      Action: "Skontrolovať",
+      Checking: "Kontroluje sa…",
+      Unavailable: "Služba nie je dostupná",
+      Version: "Verzia",
+      Queueing: "Vo fronte",
+      Processing: "Spracováva sa",
+      Completed: "Dokončené",
+      Failed: "Zlyhanie",
+    },
+    MarkItDown: {
+      EnableDocIntelligence: {
+        Title: "Použiť Document Intelligence",
+        Desc: "Konverzia dokumentov založená na AI, zlepšuje kvalitu pri zložitých dokumentoch, výrazne predlžuje čas konverzie.",
+      },
+    },
+    MinerU: {
+      ParseBackend: {
+        Title: "Parse Backend",
+        Pipeline: "pipeline",
+        PipelineDesc:
+          "Tradičný viac-modelový pipeline, podporuje viac jazykov, bez halucinácie.",
+        VlmAutoEngine: "vlm-auto-engine",
+        VlmAutoEngineDesc:
+          "Multimodálne VLM vysoko presné parsovanie, podporuje iba čínštinu a angličtinu.",
+        HybridAutoEngine: "hybrid-auto-engine",
+        HybridAutoEngineDesc:
+          "Vysoko presné hybridné parsovanie, podporuje viac jazykov.",
+      },
+      MaxPages: {
+        Title: "Maximálny počet strán konverzie",
+      },
+      EnableTableRecognition: {
+        Title: "Povoliť rozpoznávanie tabuliek",
+        Desc: "Pri zakázaní sa tabuľky zobrazia ako obrázky.",
+      },
+      EnableInlineFormulaRecognition: {
+        Title: "Povoliť rozpoznávanie riadkových vzorcov",
+        Desc: "Pri zakázaní nebudú riadkové vzorce detegované ani parsované.",
+      },
+      EnableImageAnalysis: {
+        Title: "Povoliť analýzu obrázkov",
+        Desc: "Pri zakázaní si bloky obrázkov/grafov zachovajú pozíciu, ale preskočí sa VLM analýza.",
+      },
+      ParseMethod: {
+        Title: "Metóda parsovania",
+        Auto: "Automaticky určené podľa typu súboru.",
+        Txt: "Použiť metódu extrakcie textu.",
+        Ocr: "Použiť metódu OCR pre obrázkové PDF.",
+      },
+      OcrLanguage: {
+        Title: "Jazyk OCR",
+        Ch: "Čínština, angličtina, tradičná čínština",
+        ChLite: "Čínština, angličtina, tradičná čínština, japončina",
+        ChServer: "Čínština, angličtina, tradičná čínština, japončina",
+        En: "Angličtina",
+        Korean: "Kórejčina, angličtina",
+        Japan: "Japončina, čínština, angličtina, tradičná čínština",
+        ChineseCht: "Tradičná čínština, čínština, angličtina, japončina",
+        Ta: "Tamilčina, angličtina",
+        Te: "Telugčina, angličtina",
+        Ka: "Kannadčina",
+        Th: "Thajčina, angličtina",
+        El: "Gréčtina, angličtina",
+        Latin: "Francúzština, nemčina atď. (jazyky s latinkou)",
+        Arabic: "Arabčina, perzština, urdčina atď.",
+        EastSlavic: "Ruština, bieloruština, ukrajinčina, angličtina",
+        Cyrillic: "Ruština, cyrilické jazyky",
+        Devanagari: "Hindčina, maráthčina, nepálčina atď.",
+      },
+    },
+    FileList: {
+      Upload: "Nahrať súbor",
+      ClearAll: "Vymazať všetko",
+      Convert: "Spustiť",
+      Stop: "Zastaviť",
+      Name: "Názov",
+      Size: "Veľkosť",
+      StatusLabel: "Stav",
+      Status: {
+        pending: "Čakajúce",
+        converting: "Konvertuje sa",
+        success: "Dokončené",
+        error: "Zlyhanie",
+      },
+      Delete: "Zmazať",
+      AccessCodeError: "Prístupový kód je nesprávny!",
+      DragDropHint: "Presuňte súbory sem pre nahranie",
+      ActionsLabel: "Akcie",
+      DownloadAll: "Stiahnuť všetko",
+      ErrorInfo: "Informácie o chybe",
+      UnknownError: "Neznáma chyba",
+      LogPlaceholder: "Konverzný denník sa zobrazí tu",
+    },
+  },
 };
 
 export default sk;

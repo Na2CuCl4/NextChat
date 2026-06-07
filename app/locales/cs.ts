@@ -596,6 +596,116 @@ const cs: PartialLocaleType = {
     Topic: "Téma",
     Time: "Čas",
   },
+  FileConversion: {
+    Title: "Převod souborů",
+    SubTitle:
+      "Převeďte binární soubory (např. DOCX / PPTX / XLSX / PDF) na textové soubory (např. Markdown) pro rozpoznání a porozumění AI.",
+    Settings: "Nastavení",
+    Conversion: "Převod",
+    Engine: {
+      Title: "Engine převodu souborů",
+      MarkItDown: "MarkItDown",
+      MarkItDownDesc: "Převod dokumentů pomocí MarkItDown.",
+      MinerU: "MinerU",
+      MinerUDesc:
+        "Převod dokumentů pomocí MinerU, vysoce přesného enginu pro parsování dokumentů vytvořeného pro scénáře LLM · RAG · Agent.",
+    },
+    HealthCheck: {
+      Title: "Kontrola dostupnosti",
+      Action: "Zkontrolovat",
+      Checking: "Kontroluji…",
+      Unavailable: "Služba není dostupná",
+      Version: "Verze",
+      Queueing: "Ve frontě",
+      Processing: "Zpracovává se",
+      Completed: "Dokončeno",
+      Failed: "Chyba",
+    },
+    MarkItDown: {
+      EnableDocIntelligence: {
+        Title: "Použít Document Intelligence",
+        Desc: "Převod dokumentů založený na AI, zlepšuje kvalitu u složitých dokumentů, výrazně prodlužuje dobu převodu.",
+      },
+    },
+    MinerU: {
+      ParseBackend: {
+        Title: "Parse Backend",
+        Pipeline: "pipeline",
+        PipelineDesc:
+          "Tradiční více-modelový pipeline, podporuje více jazyků, bez halucinace.",
+        VlmAutoEngine: "vlm-auto-engine",
+        VlmAutoEngineDesc:
+          "Vysoce přesné parsování pomocí multimodálního VLM, podporuje pouze čínštinu a angličtinu.",
+        HybridAutoEngine: "hybrid-auto-engine",
+        HybridAutoEngineDesc:
+          "Vysoce přesné hybridní parsování, podporuje více jazyků.",
+      },
+      MaxPages: {
+        Title: "Maximální počet stran převodu",
+      },
+      EnableTableRecognition: {
+        Title: "Povolit rozpoznávání tabulek",
+        Desc: "Při zakázání se tabulky zobrazí jako obrázky.",
+      },
+      EnableInlineFormulaRecognition: {
+        Title: "Povolit rozpoznávání řádkových vzorců",
+        Desc: "Při zakázání nebudou řádkové vzorce detekovány ani parsovány.",
+      },
+      EnableImageAnalysis: {
+        Title: "Povolit analýzu obrázků",
+        Desc: "Při zakázání si bloky obrázků/grafů zachovají pozici, ale přeskočí se VLM analýza.",
+      },
+      ParseMethod: {
+        Title: "Metoda parsování",
+        Auto: "Automaticky určeno podle typu souboru.",
+        Txt: "Použít metodu extrakce textu.",
+        Ocr: "Použít metodu OCR pro obrázkové PDF.",
+      },
+      OcrLanguage: {
+        Title: "Jazyk OCR",
+        Ch: "Čínština, angličtina, tradiční čínština",
+        ChLite: "Čínština, angličtina, tradiční čínština, japonština",
+        ChServer: "Čínština, angličtina, tradiční čínština, japonština",
+        En: "Angličtina",
+        Korean: "Korejština, angličtina",
+        Japan: "Japonština, čínština, angličtina, tradiční čínština",
+        ChineseCht: "Tradiční čínština, čínština, angličtina, japonština",
+        Ta: "Tamilština, angličtina",
+        Te: "Telugština, angličtina",
+        Ka: "Kannadština",
+        Th: "Thajština, angličtina",
+        El: "Řečtina, angličtina",
+        Latin: "Francouzština, němčina atd. (jazyky s latinkou)",
+        Arabic: "Arabština, perština, urdština atd.",
+        EastSlavic: "Ruština, běloruština, ukrajinština, angličtina",
+        Cyrillic: "Ruština, cyrilické jazyky",
+        Devanagari: "Hindština, maráthština, nepálština atd.",
+      },
+    },
+    FileList: {
+      Upload: "Nahrát soubor",
+      ClearAll: "Vymazat vše",
+      Convert: "Spustit",
+      Stop: "Zastavit",
+      Name: "Název",
+      Size: "Velikost",
+      StatusLabel: "Stav",
+      Status: {
+        pending: "Čekající",
+        converting: "Převádění",
+        success: "Dokončeno",
+        error: "Chyba",
+      },
+      Delete: "Smazat",
+      AccessCodeError: "Přístupový kód je nesprávný!",
+      DragDropHint: "Přetáhněte soubory sem pro nahrání",
+      ActionsLabel: "Akce",
+      DownloadAll: "Stáhnout vše",
+      ErrorInfo: "Informace o chybě",
+      UnknownError: "Neznámá chyba",
+      LogPlaceholder: "Zde se zobrazí protokol převodu",
+    },
+  },
 };
 
 export default cs;
