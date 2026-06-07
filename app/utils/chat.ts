@@ -192,6 +192,7 @@ export function removeImage(imageUrl: string) {
 export async function uploadFile(
   file: File,
   externalSignal?: AbortSignal,
+  returnZip?: boolean,
 ): Promise<string> {
   const body = new FormData();
   body.append("file", file);
@@ -214,6 +215,10 @@ export async function uploadFile(
     );
     body.append("enableImageAnalysis", String(fc.enableImageAnalysis));
     body.append("maxPages", String(fc.maxPages));
+    if (returnZip) {
+      body.append("return_images", "true");
+      body.append("response_format_zip", "true");
+    }
   }
   const accessStore = useAccessStore.getState();
   const headers: Record<string, string> = {};

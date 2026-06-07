@@ -576,7 +576,7 @@ export function FileConversion() {
         );
 
         try {
-          const content = await uploadFile(file, controller.signal);
+          const content = await uploadFile(file, controller.signal, true);
           const elapsed = Math.floor((Date.now() - now) / 1000);
           addLog(
             `${item.name} ${Locale.FileConversion.FileList.Status.success}`,

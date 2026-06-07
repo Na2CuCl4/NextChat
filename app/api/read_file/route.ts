@@ -61,8 +61,12 @@ export async function POST(req: NextRequest) {
       const imageAnalysis = inForm.get("enableImageAnalysis");
       if (imageAnalysis) outForm.append("image_analysis", imageAnalysis);
 
-      outForm.append("return_images", "true");
-      outForm.append("response_format_zip", "true");
+      const returnImages = inForm.get("return_images");
+      if (returnImages) outForm.append("return_images", returnImages);
+
+      const responseFormatZip = inForm.get("response_format_zip");
+      if (responseFormatZip)
+        outForm.append("response_format_zip", responseFormatZip);
 
       const maxPages = inForm.get("maxPages");
       if (maxPages) outForm.append("end_page_id", maxPages);
@@ -86,6 +90,37 @@ export async function POST(req: NextRequest) {
         );
       }
 
+      // MinerU may return JSON (task-result format with
+      // results.{file_name}.md_content) or binary (ZIP).
+      const ct = (res.headers.get("content-type") || "").toLowerCase();
+
+      if (ct.includes("application/json") || ct.includes("text/")) {
+        const json = await res.json();
+
+        // Extract markdown content: results.{file_names[0]}.md_content
+        const fileNames: string[] = json?.file_names ?? [];
+        const firstFile = fileNames[0] ?? "";
+        const mdContent: string | undefined =
+          json?.results?.[firstFile]?.md_content;
+
+        if (mdContent) {
+          return NextResponse.json({ data: mdContent });
+        }
+
+        // If results structure not found, still an error
+        return NextResponse.json(
+          {
+            error:
+              json?.error ??
+              json?.msg ??
+              json?.detail ??
+              "MinerU returned unexpected response structure",
+          },
+          { status: 502 },
+        );
+      }
+
+      // Binary response (e.g. ZIP) — pass through
       const blob = await res.blob();
       return new NextResponse(blob, {
         headers: {
