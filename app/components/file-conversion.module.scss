@@ -47,6 +47,40 @@
   flex-shrink: 0;
 }
 
+.log-panel {
+  margin-bottom: 12px;
+  border: var(--border-in-light);
+  border-radius: 6px;
+  background: rgba(128, 128, 128, 0.08);
+  overflow: hidden;
+}
+
+.log-panel-inner {
+  height: 6em; // ~4 lines at 1.5em line-height
+  overflow-y: auto;
+  padding: 8px 10px;
+}
+
+.log-line {
+  font-family: "Cascadia Code", "Fira Code", "JetBrains Mono", "SF Mono",
+    "Consolas", "Liberation Mono", monospace;
+  font-size: 13px;
+  line-height: 1.5;
+  white-space: pre-wrap;
+  word-break: break-all;
+  color: var(--black);
+}
+
+.log-line-empty {
+  font-family: "Cascadia Code", "Fira Code", "JetBrains Mono", "SF Mono",
+    "Consolas", "Liberation Mono", monospace;
+  font-size: 13px;
+  line-height: 1.5;
+  color: var(--black);
+  opacity: 0.35;
+  text-align: center;
+}
+
 .drag-drop-hint {
   padding: 40px 20px;
   color: var(--black);
@@ -71,6 +105,22 @@
     font-weight: normal;
     padding: 8px 6px;
     border-bottom: var(--border-in-light);
+  }
+
+  th:nth-child(1) {
+    width: 36px; // icon column
+  }
+
+  th:nth-child(3) {
+    width: 80px; // size column
+  }
+
+  th:nth-child(4) {
+    width: 16%; // status column
+  }
+
+  th:nth-child(5) {
+    width: 72px; // actions column
   }
 
   td {
@@ -104,6 +154,12 @@
     color: var(--black);
     opacity: 0.5;
     white-space: nowrap;
+    width: 80px;
+  }
+
+  .file-status-cell {
+    width: 16%;
+    white-space: nowrap;
   }
 
   .file-actions-cell {
@@ -112,6 +168,7 @@
     justify-content: flex-end;
     gap: 4px;
     padding-right: 12px;
+    width: 72px;
   }
 }
 

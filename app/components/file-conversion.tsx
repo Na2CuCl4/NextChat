@@ -6,6 +6,7 @@ import CloseIcon from "../icons/close.svg";
 import UploadIcon from "../icons/upload.svg";
 import ClearIcon from "../icons/clear.svg";
 import FileConversionIcon from "../icons/file-conversion.svg";
+import PauseIcon from "../icons/pause.svg";
 import DocxIcon from "../icons/docx.svg";
 import PptxIcon from "../icons/pptx.svg";
 import XlsxIcon from "../icons/xlsx.svg";
@@ -55,6 +56,7 @@ interface FileItem {
   status: FileStatus;
   content?: string;
   convertingSince?: number;
+  totalElapsed?: number; // seconds, frozen on success
 }
 
 const FILE_CONVERSION_ENGINES: Record<FileConversionEngine, string> = {
@@ -394,7 +396,13 @@ export function FileConversion() {
   const fileInputRef = useRef<HTMLInputElement>(null);
   const [fileList, setFileList] = useState<FileItem[]>([]);
   const [dragOver, setDragOver] = useState(false);
+  const [converting, setConverting] = useState(false);
+  const [logLines, setLogLines] = useState<string[]>([
+    `====== ${Locale.FileConversion.FileList.LogPlaceholder} ======\n`,
+  ]);
   const fileRefs = useRef<Map<string, File>>(new Map());
+  const abortRef = useRef<AbortController | null>(null);
+  const logEndRef = useRef<HTMLDivElement>(null);
 
   const handleUpload = useCallback(() => {
     fileInputRef.current?.click();
@@ -423,12 +431,35 @@ export function FileConversion() {
     return () => clearInterval(id);
   }, [fileList]);
 
+  // Auto-scroll log panel to bottom
+  useEffect(() => {
+    if (logEndRef.current) {
+      logEndRef.current.scrollTop = logEndRef.current.scrollHeight;
+    }
+  }, [logLines]);
+
   function formatElapsed(since: number): string {
     const sec = Math.floor((Date.now() - since) / 1000);
     const m = Math.floor(sec / 60);
     const s = sec % 60;
     return `${m}:${String(s).padStart(2, "0")}`;
   }
+
+  function formatElapsedSeconds(totalSec: number): string {
+    const m = Math.floor(totalSec / 60);
+    const s = totalSec % 60;
+    return `${m}:${String(s).padStart(2, "0")}`;
+  }
+
+  const addLog = useCallback((message: string) => {
+    const now = new Date();
+    const time = [
+      String(now.getHours()).padStart(2, "0"),
+      String(now.getMinutes()).padStart(2, "0"),
+      String(now.getSeconds()).padStart(2, "0"),
+    ].join(":");
+    setLogLines((prev) => [...prev, `[${time}] ${message}`]);
+  }, []);
 
   const handleFileChange = useCallback(
     (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -477,6 +508,14 @@ export function FileConversion() {
     setFileList((prev) => prev.filter((f) => f.id !== id));
   }, []);
 
+  const handleStop = useCallback(() => {
+    if (abortRef.current) {
+      abortRef.current.abort();
+      abortRef.current = null;
+    }
+    setConverting(false);
+  }, []);
+
   const handleConvert = useCallback(async () => {
     const accessState = useAccessStore.getState();
     if (accessState.needCode && !accessState.accessCode) {
@@ -484,56 +523,115 @@ export function FileConversion() {
       return;
     }
 
-    const pending = fileList.filter((f) => f.status === "pending");
-    if (pending.length === 0) return;
+    // Process pending and error files, skip already-successful files
+    const toConvert = fileList.filter(
+      (f) => f.status === "pending" || f.status === "error",
+    );
+    if (toConvert.length === 0) return;
 
-    for (const item of pending) {
-      const file = fileRefs.current.get(item.id);
-      if (!file) {
-        setFileList((prev) =>
-          prev.map((f) =>
-            f.id === item.id ? { ...f, status: "error" as FileStatus } : f,
-          ),
+    const controller = new AbortController();
+    abortRef.current = controller;
+    setConverting(true);
+
+    try {
+      for (const item of toConvert) {
+        if (controller.signal.aborted) break;
+
+        const file = fileRefs.current.get(item.id);
+        if (!file) {
+          addLog(`${item.name} ${Locale.FileConversion.FileList.Status.error}`);
+          setFileList((prev) =>
+            prev.map((f) =>
+              f.id === item.id ? { ...f, status: "error" as FileStatus } : f,
+            ),
+          );
+          continue;
+        }
+
+        const now = Date.now();
+        addLog(
+          `${Locale.FileConversion.FileList.Status.converting} ${item.name}`,
         );
-        continue;
-      }
-
-      const now = Date.now();
-      setFileList((prev) =>
-        prev.map((f) =>
-          f.id === item.id
-            ? {
-                ...f,
-                status: "converting" as FileStatus,
-                convertingSince: now,
-              }
-            : f,
-        ),
-      );
-
-      try {
-        const content = await uploadFile(file);
         setFileList((prev) =>
           prev.map((f) =>
             f.id === item.id
               ? {
                   ...f,
-                  status: "success" as FileStatus,
-                  content,
-                  convertingSince: undefined,
+                  status: "converting" as FileStatus,
+                  convertingSince: now,
                 }
               : f,
           ),
         );
-      } catch {
-        setFileList((prev) =>
-          prev.map((f) =>
-            f.id === item.id ? { ...f, status: "error" as FileStatus } : f,
-          ),
-        );
+
+        try {
+          const content = await uploadFile(file, controller.signal);
+          const elapsed = Math.floor((Date.now() - now) / 1000);
+          addLog(
+            `${item.name} ${Locale.FileConversion.FileList.Status.success}`,
+          );
+          setFileList((prev) =>
+            prev.map((f) =>
+              f.id === item.id
+                ? {
+                    ...f,
+                    status: "success" as FileStatus,
+                    content,
+                    convertingSince: undefined,
+                    totalElapsed: elapsed,
+                  }
+                : f,
+            ),
+          );
+        } catch (err) {
+          if (controller.signal.aborted) {
+            addLog(`${Locale.FileConversion.FileList.Stop} ${item.name}`);
+            setFileList((prev) =>
+              prev.map((f) =>
+                f.id === item.id ? { ...f, status: "error" as FileStatus } : f,
+              ),
+            );
+            break;
+          }
+          const msg = (err as Error).message || "";
+
+          // Auth errors
+          if (
+            msg.includes("wrong access code") ||
+            msg.includes("empty access code")
+          ) {
+            showToast(Locale.FileConversion.FileList.AccessCodeError);
+            addLog(
+              `${item.name} ${Locale.FileConversion.FileList.Status.error}，${Locale.FileConversion.FileList.ErrorInfo}：\n${msg}`,
+            );
+            setFileList((prev) =>
+              prev.map((f) =>
+                f.id === item.id ? { ...f, status: "error" as FileStatus } : f,
+              ),
+            );
+            break;
+          }
+
+          // Conversion errors: network errors → UnknownError, server errors → use msg
+          const errorInfo =
+            err instanceof TypeError
+              ? Locale.FileConversion.FileList.UnknownError
+              : msg;
+          addLog(
+            `${item.name} ${Locale.FileConversion.FileList.Status.error}，${Locale.FileConversion.FileList.ErrorInfo}：\n${errorInfo}`,
+          );
+          setFileList((prev) =>
+            prev.map((f) =>
+              f.id === item.id ? { ...f, status: "error" as FileStatus } : f,
+            ),
+          );
+        }
       }
+    } finally {
+      abortRef.current = null;
+      setConverting(false);
     }
-  }, [fileList]);
+  }, [fileList, addLog]);
 
   const handleDownload = useCallback(
     (item: FileItem) => {
@@ -667,10 +765,14 @@ export function FileConversion() {
               />
               <div id="file-convert-btn">
                 <IconButton
-                  icon={<FileConversionIcon />}
-                  text={Locale.FileConversion.FileList.Convert}
+                  icon={converting ? <PauseIcon /> : <FileConversionIcon />}
+                  text={
+                    converting
+                      ? Locale.FileConversion.FileList.Stop
+                      : Locale.FileConversion.FileList.Convert
+                  }
                   type="primary"
-                  onClick={handleConvert}
+                  onClick={converting ? handleStop : handleConvert}
                 />
               </div>
               {hasConverted && (
@@ -681,6 +783,16 @@ export function FileConversion() {
                   onClick={handleDownloadAll}
                 />
               )}
+            </div>
+
+            <div className={styles["log-panel"]}>
+              <div className={styles["log-panel-inner"]} ref={logEndRef}>
+                {logLines.map((line, i) => (
+                  <div key={i} className={styles["log-line"]}>
+                    {line}
+                  </div>
+                ))}
+              </div>
             </div>
 
             {fileList.length > 0 ? (
@@ -704,7 +816,7 @@ export function FileConversion() {
                       <td className={styles["file-size-cell"]}>
                         {formatFileSize(file.size ?? 0)}
                       </td>
-                      <td>
+                      <td className={styles["file-status-cell"]}>
                         <span
                           className={`${styles["file-status-text"]} ${
                             styles[`status-${file.status}`]
@@ -718,6 +830,9 @@ export function FileConversion() {
                           {file.status === "converting" &&
                             file.convertingSince &&
                             ` ${formatElapsed(file.convertingSince)}`}
+                          {file.status === "success" &&
+                            file.totalElapsed != null &&
+                            ` ${formatElapsedSeconds(file.totalElapsed)}`}
                         </span>
                       </td>
                       <td className={styles["file-actions-cell"]}>
