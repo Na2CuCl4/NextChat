@@ -1,4 +1,4 @@
-import { useState, useRef, useCallback } from "react";
+import { useState, useRef, useCallback, useEffect } from "react";
 
 import styles from "./file-conversion.module.scss";
 
@@ -11,6 +11,7 @@ import PptxIcon from "../icons/pptx.svg";
 import XlsxIcon from "../icons/xlsx.svg";
 import PdfIcon from "../icons/pdf.svg";
 import ImageIcon from "../icons/image.svg";
+import DownloadIcon from "../icons/download.svg";
 
 import { IconButton } from "./button";
 import { InputRange } from "./input-range";
@@ -21,6 +22,7 @@ import Locale from "../locales";
 import { Path } from "../constant";
 import { useAppConfig, useAccessStore } from "../store";
 import { useNavigate } from "react-router-dom";
+import { uploadFile } from "../utils/chat";
 
 type FileConversionEngine = "markitdown" | "mineru";
 type MinerUBackend = "pipeline" | "vlm-auto-engine" | "hybrid-auto-engine";
@@ -51,6 +53,8 @@ interface FileItem {
   name: string;
   size: number;
   status: FileStatus;
+  content?: string;
+  convertingSince?: number;
 }
 
 const FILE_CONVERSION_ENGINES: Record<FileConversionEngine, string> = {
@@ -143,6 +147,8 @@ function MarkItDownSettings() {
 
   return (
     <>
+      <HealthCheckSection engine="markitdown" />
+
       <ListItem
         title={Locale.FileConversion.MarkItDown.EnableDocIntelligence.Title}
         subTitle={Locale.FileConversion.MarkItDown.EnableDocIntelligence.Desc}
@@ -165,20 +171,17 @@ function MarkItDownSettings() {
   );
 }
 
-interface MinerUHealth {
+interface HealthInfo {
   status: string;
   version: string;
-  queued_tasks: number;
+  queued_tasks?: number;
   processing_tasks: number;
   completed_tasks: number;
   failed_tasks: number;
-  max_concurrent_requests: number;
 }
 
-function MinerUSettings() {
-  const config = useAppConfig();
-  const fc = config.fileConversionConfig;
-  const [health, setHealth] = useState<MinerUHealth | null>(null);
+function HealthCheckSection({ engine }: { engine: FileConversionEngine }) {
+  const [health, setHealth] = useState<HealthInfo | null>(null);
   const [checking, setChecking] = useState(false);
   const [healthError, setHealthError] = useState(false);
 
@@ -186,7 +189,7 @@ function MinerUSettings() {
     setChecking(true);
     setHealthError(false);
     try {
-      const res = await fetch("/api/mineru/health");
+      const res = await fetch(`/api/health?engine=${engine}`);
       const json = await res.json().catch(() => null);
       if (res.ok && json?.status) {
         setHealth(json);
@@ -200,31 +203,48 @@ function MinerUSettings() {
     } finally {
       setChecking(false);
     }
-  }, []);
+  }, [engine]);
 
   const healthSubTitle = health
-    ? `${Locale.FileConversion.MinerU.HealthCheck.Status}: ${health.status}  |  ${Locale.FileConversion.MinerU.HealthCheck.Version}: ${health.version}  |  ${Locale.FileConversion.MinerU.HealthCheck.Queued}: ${health.queued_tasks}  |  ${Locale.FileConversion.MinerU.HealthCheck.Processing}: ${health.processing_tasks}`
+    ? `${Locale.FileConversion.HealthCheck.Version}: ${health.version}  |  ${
+        Locale.FileConversion.HealthCheck.Queueing
+      }: ${health.queued_tasks ?? "-"}  |  ${
+        Locale.FileConversion.HealthCheck.Processing
+      }: ${health.processing_tasks}  |  ${
+        Locale.FileConversion.HealthCheck.Completed
+      }: ${health.completed_tasks}  |  ${
+        Locale.FileConversion.HealthCheck.Failed
+      }: ${health.failed_tasks}`
     : healthError
-    ? Locale.FileConversion.MinerU.HealthCheck.Unavailable
+    ? Locale.FileConversion.HealthCheck.Unavailable
     : "";
 
   return (
+    <ListItem
+      title={Locale.FileConversion.HealthCheck.Title}
+      subTitle={healthSubTitle}
+    >
+      <IconButton
+        aria={Locale.FileConversion.HealthCheck.Action}
+        text={
+          checking
+            ? Locale.FileConversion.HealthCheck.Checking
+            : Locale.FileConversion.HealthCheck.Action
+        }
+        type="primary"
+        onClick={handleCheckHealth}
+      />
+    </ListItem>
+  );
+}
+
+function MinerUSettings() {
+  const config = useAppConfig();
+  const fc = config.fileConversionConfig;
+
+  return (
     <>
-      <ListItem
-        title={Locale.FileConversion.MinerU.HealthCheck.Title}
-        subTitle={healthSubTitle}
-      >
-        <IconButton
-          aria={Locale.FileConversion.MinerU.HealthCheck.Action}
-          text={
-            checking
-              ? Locale.FileConversion.MinerU.HealthCheck.Checking
-              : Locale.FileConversion.MinerU.HealthCheck.Action
-          }
-          bordered
-          onClick={handleCheckHealth}
-        />
-      </ListItem>
+      <HealthCheckSection engine="mineru" />
 
       <ListItem
         title={Locale.FileConversion.MinerU.ParseBackend.Title}
@@ -367,15 +387,6 @@ function MinerUSettings() {
   );
 }
 
-function addFilesToList(files: FileList | File[]): FileItem[] {
-  return Array.from(files).map((file) => ({
-    id: Math.random().toString(36).slice(2, 9),
-    name: file.name,
-    size: Number(file.size) || 0,
-    status: "pending" as FileStatus,
-  }));
-}
-
 export function FileConversion() {
   const navigate = useNavigate();
   const config = useAppConfig();
@@ -383,15 +394,41 @@ export function FileConversion() {
   const fileInputRef = useRef<HTMLInputElement>(null);
   const [fileList, setFileList] = useState<FileItem[]>([]);
   const [dragOver, setDragOver] = useState(false);
+  const fileRefs = useRef<Map<string, File>>(new Map());
 
   const handleUpload = useCallback(() => {
     fileInputRef.current?.click();
   }, []);
 
   const handleFiles = useCallback((files: FileList | File[]) => {
-    const newFiles = addFilesToList(files);
+    const newFiles: FileItem[] = [];
+    for (const file of Array.from(files)) {
+      const id = Math.random().toString(36).slice(2, 9);
+      fileRefs.current.set(id, file);
+      newFiles.push({
+        id,
+        name: file.name,
+        size: Number(file.size) || 0,
+        status: "pending" as FileStatus,
+      });
+    }
     setFileList((prev) => [...prev, ...newFiles]);
   }, []);
+
+  const [, setTick] = useState(0);
+  useEffect(() => {
+    const hasConverting = fileList.some((f) => f.status === "converting");
+    if (!hasConverting) return;
+    const id = setInterval(() => setTick((t) => t + 1), 1000);
+    return () => clearInterval(id);
+  }, [fileList]);
+
+  function formatElapsed(since: number): string {
+    const sec = Math.floor((Date.now() - since) / 1000);
+    const m = Math.floor(sec / 60);
+    const s = sec % 60;
+    return `${m}:${String(s).padStart(2, "0")}`;
+  }
 
   const handleFileChange = useCallback(
     (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -431,26 +468,105 @@ export function FileConversion() {
   );
 
   const handleClearAll = useCallback(() => {
+    fileRefs.current.clear();
     setFileList([]);
   }, []);
 
-  const handleConvert = useCallback(() => {
+  const handleDeleteFile = useCallback((id: string) => {
+    fileRefs.current.delete(id);
+    setFileList((prev) => prev.filter((f) => f.id !== id));
+  }, []);
+
+  const handleConvert = useCallback(async () => {
     const accessState = useAccessStore.getState();
     if (accessState.needCode && !accessState.accessCode) {
       showToast(Locale.FileConversion.FileList.AccessCodeError);
       return;
     }
-    if (fileList.length === 0) return;
-    setFileList((prev) =>
-      prev.map((f) =>
-        f.status === "pending" ? { ...f, status: "error" as FileStatus } : f,
-      ),
-    );
-  }, [fileList.length]);
 
-  const handleDeleteFile = useCallback((id: string) => {
-    setFileList((prev) => prev.filter((f) => f.id !== id));
-  }, []);
+    const pending = fileList.filter((f) => f.status === "pending");
+    if (pending.length === 0) return;
+
+    for (const item of pending) {
+      const file = fileRefs.current.get(item.id);
+      if (!file) {
+        setFileList((prev) =>
+          prev.map((f) =>
+            f.id === item.id ? { ...f, status: "error" as FileStatus } : f,
+          ),
+        );
+        continue;
+      }
+
+      const now = Date.now();
+      setFileList((prev) =>
+        prev.map((f) =>
+          f.id === item.id
+            ? {
+                ...f,
+                status: "converting" as FileStatus,
+                convertingSince: now,
+              }
+            : f,
+        ),
+      );
+
+      try {
+        const content = await uploadFile(file);
+        setFileList((prev) =>
+          prev.map((f) =>
+            f.id === item.id
+              ? {
+                  ...f,
+                  status: "success" as FileStatus,
+                  content,
+                  convertingSince: undefined,
+                }
+              : f,
+          ),
+        );
+      } catch {
+        setFileList((prev) =>
+          prev.map((f) =>
+            f.id === item.id ? { ...f, status: "error" as FileStatus } : f,
+          ),
+        );
+      }
+    }
+  }, [fileList]);
+
+  const handleDownload = useCallback(
+    (item: FileItem) => {
+      if (!item.content) return;
+      const isMinerU = config.fileConversionConfig.engine === "mineru";
+      if (isMinerU && item.content.startsWith("blob:")) {
+        const a = document.createElement("a");
+        a.href = item.content;
+        a.download = item.name.replace(/\.[^.]+$/, "") + ".zip";
+        a.click();
+        return;
+      }
+      const blob = new Blob([item.content], { type: "text/markdown" });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = item.name.replace(/\.[^.]+$/, "") + ".md";
+      a.click();
+      URL.revokeObjectURL(url);
+    },
+    [config.fileConversionConfig.engine],
+  );
+
+  const handleDownloadAll = useCallback(() => {
+    const successFiles = fileList.filter(
+      (f) => f.status === "success" && f.content,
+    );
+    for (const item of successFiles) {
+      handleDownload(item);
+    }
+  }, [fileList, handleDownload]);
+
+  const hasConverted = fileList.some((f) => f.status === "success");
 
   const dropZoneClass = [
     styles["drop-zone"],
@@ -557,6 +673,14 @@ export function FileConversion() {
                   onClick={handleConvert}
                 />
               </div>
+              {hasConverted && (
+                <IconButton
+                  icon={<DownloadIcon />}
+                  text={Locale.FileConversion.FileList.DownloadAll}
+                  bordered
+                  onClick={handleDownloadAll}
+                />
+              )}
             </div>
 
             {fileList.length > 0 ? (
@@ -566,8 +690,8 @@ export function FileConversion() {
                     <th></th>
                     <th>{Locale.FileConversion.FileList.Name}</th>
                     <th>{Locale.FileConversion.FileList.Size}</th>
-                    <th></th>
-                    <th></th>
+                    <th>{Locale.FileConversion.FileList.StatusLabel}</th>
+                    <th>{Locale.FileConversion.FileList.ActionsLabel}</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -582,8 +706,8 @@ export function FileConversion() {
                       </td>
                       <td>
                         <span
-                          className={`${styles["file-status"]} ${
-                            styles[`file-status-${file.status}`]
+                          className={`${styles["file-status-text"]} ${
+                            styles[`status-${file.status}`]
                           }`}
                         >
                           {
@@ -591,9 +715,18 @@ export function FileConversion() {
                               file.status as keyof typeof Locale.FileConversion.FileList.Status
                             ]
                           }
+                          {file.status === "converting" &&
+                            file.convertingSince &&
+                            ` ${formatElapsed(file.convertingSince)}`}
                         </span>
                       </td>
-                      <td className={styles["file-delete-cell"]}>
+                      <td className={styles["file-actions-cell"]}>
+                        {file.status === "success" && (
+                          <IconButton
+                            icon={<DownloadIcon />}
+                            onClick={() => handleDownload(file)}
+                          />
+                        )}
                         <IconButton
                           icon={<CloseIcon />}
                           onClick={() => handleDeleteFile(file.id)}

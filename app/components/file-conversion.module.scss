@@ -106,9 +106,11 @@
     white-space: nowrap;
   }
 
-  .file-delete-cell {
-    width: 40px;
-    text-align: right;
+  .file-actions-cell {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 4px;
     padding-right: 12px;
   }
 }
@@ -119,30 +121,23 @@
   display: block;
 }
 
-.file-status {
-  display: inline-block;
-  padding: 2px 8px;
-  border-radius: 4px;
-  font-size: 12px;
+.file-status-text {
+  font-size: 13px;
   white-space: nowrap;
+}
 
-  &.file-status-pending {
-    background: #6c757d;
-    color: #fff;
-  }
+.status-pending {
+  color: #6c757d;
+}
 
-  &.file-status-converting {
-    background: #007bff;
-    color: #fff;
-  }
+.status-converting {
+  color: #007bff;
+}
 
-  &.file-status-success {
-    background: #28a745;
-    color: #fff;
-  }
+.status-success {
+  color: #28a745;
+}
 
-  &.file-status-error {
-    background: #dc3545;
-    color: #fff;
-  }
+.status-error {
+  color: #dc3545;
 }

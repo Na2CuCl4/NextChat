@@ -873,6 +873,17 @@ const cn = {
       MinerUDesc:
         "使用 MinerU 进行文档转换，专为 LLM · RAG · Agent 场景构建的高精度文档解析引擎。",
     },
+    HealthCheck: {
+      Title: "检查可用性",
+      Action: "检查",
+      Checking: "正在检查…",
+      Unavailable: "服务不可用",
+      Version: "版本",
+      Queueing: "队列中",
+      Processing: "处理中",
+      Completed: "已完成",
+      Failed: "转换失败",
+    },
     MarkItDown: {
       EnableDocIntelligence: {
         Title: "使用文档智能",
@@ -880,16 +891,6 @@ const cn = {
       },
     },
     MinerU: {
-      HealthCheck: {
-        Title: "检查可用性",
-        Action: "检查",
-        Checking: "正在检查…",
-        Unavailable: "MinerU 服务不可用",
-        Status: "状态",
-        Version: "版本",
-        Queued: "排队任务",
-        Processing: "处理中",
-      },
       ParseBackend: {
         Title: "解析后端",
         Pipeline: "pipeline",
@@ -947,15 +948,18 @@ const cn = {
       Convert: "转换",
       Name: "名称",
       Size: "大小",
+      StatusLabel: "状态",
       Status: {
-        Pending: "待转换",
-        Converting: "转换中",
-        Success: "转换完成",
-        Error: "转换失败",
+        pending: "待转换",
+        converting: "正在转换",
+        success: "转换完成",
+        error: "转换失败",
       },
       Delete: "删除",
       AccessCodeError: "访问密码不正确！",
       DragDropHint: "将文件拖放到此处上传",
+      ActionsLabel: "操作",
+      DownloadAll: "全部下载",
     },
   },
 };
