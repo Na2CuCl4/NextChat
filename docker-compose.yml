@@ -24,6 +24,8 @@ services:
     image: na2cucl4/nextchat-readfile:latest
     container_name: nextchat-readfile
     restart: always
+    profiles:
+      - readfile
     expose:
       - 8000
     networks:
@@ -41,8 +43,12 @@ services:
     image: mineru:latest
     container_name: mineru-api
     restart: always
+    profiles:
+      - mineru
     expose:
       - 8000
+    networks:
+      - nextchat-network
     environment:
       MINERU_MODEL_SOURCE: local
     entrypoint: mineru-api
