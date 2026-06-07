@@ -1,8 +1,26 @@
 import { NextRequest, NextResponse } from "next/server";
 import { getServerSideConfig } from "@/app/config/server";
+import md5 from "spark-md5";
+import { ACCESS_CODE_PREFIX } from "@/app/constant";
 
 export async function POST(req: NextRequest) {
   const serverConfig = getServerSideConfig();
+
+  // ── Access code validation ────────────────────────────────────
+  if (serverConfig.needCode) {
+    const authToken = (req.headers.get("Authorization") ?? "").trim();
+    const token = authToken.replace(/^Bearer\s+/i, "").trim();
+    const accessCode = token.startsWith(ACCESS_CODE_PREFIX)
+      ? token.slice(ACCESS_CODE_PREFIX.length)
+      : "";
+    const hashedCode = md5.hash(accessCode).trim();
+    if (!serverConfig.codes.has(hashedCode)) {
+      return NextResponse.json(
+        { error: !accessCode ? "empty access code" : "wrong access code" },
+        { status: 403 },
+      );
+    }
+  }
 
   try {
     const inForm = await req.formData();
@@ -57,7 +75,13 @@ export async function POST(req: NextRequest) {
       if (!res.ok) {
         const json = await res.json().catch(() => null);
         return NextResponse.json(
-          { error: json?.error ?? json?.msg ?? "MinerU conversion failed" },
+          {
+            error:
+              json?.error ??
+              json?.detail ??
+              json?.msg ??
+              "MinerU conversion failed",
+          },
           { status: 502 },
         );
       }

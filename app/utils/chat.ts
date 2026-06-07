@@ -3,7 +3,7 @@ import {
   UPLOAD_URL,
   REQUEST_TIMEOUT_MS,
 } from "@/app/constant";
-import { useAppConfig } from "@/app/store";
+import { useAppConfig, useAccessStore } from "@/app/store";
 import { MultimodalContent, RequestMessage } from "@/app/client/api";
 import Locale from "@/app/locales";
 import {
@@ -189,7 +189,10 @@ export function removeImage(imageUrl: string) {
   });
 }
 
-export async function uploadFile(file: File): Promise<string> {
+export async function uploadFile(
+  file: File,
+  externalSignal?: AbortSignal,
+): Promise<string> {
   const body = new FormData();
   body.append("file", file);
 
@@ -212,6 +215,12 @@ export async function uploadFile(file: File): Promise<string> {
     body.append("enableImageAnalysis", String(fc.enableImageAnalysis));
     body.append("maxPages", String(fc.maxPages));
   }
+  const accessStore = useAccessStore.getState();
+  const headers: Record<string, string> = {};
+  if (accessStore.enabledAccessControl() && accessStore.accessCode) {
+    headers["Authorization"] = `Bearer nk-${accessStore.accessCode}`;
+  }
+
   const controller = new AbortController();
   const timeoutId = setTimeout(
     () => {
@@ -220,9 +229,21 @@ export async function uploadFile(file: File): Promise<string> {
     10 * 60 * 1000,
   );
 
+  // Forward external abort signal to the internal controller
+  if (externalSignal) {
+    if (externalSignal.aborted) {
+      controller.abort();
+    } else {
+      externalSignal.addEventListener("abort", () => controller.abort(), {
+        once: true,
+      });
+    }
+  }
+
   try {
     const res = await fetch("/api/read_file", {
       method: "POST",
+      headers,
       body,
       signal: controller.signal,
     });
@@ -230,7 +251,7 @@ export async function uploadFile(file: File): Promise<string> {
     if (!res.ok) {
       const json = await res.json().catch(() => null);
       const msg = json?.error || res.statusText;
-      throw new Error(`File Reading Server error ${res.status}: ${msg}`);
+      throw new Error(msg);
     }
 
     const contentType = res.headers.get("content-type") || "";
