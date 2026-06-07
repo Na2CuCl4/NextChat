@@ -809,20 +809,25 @@ export function FileConversion() {
               <table className={styles["file-table"]}>
                 <thead>
                   <tr>
-                    <th></th>
                     <th>{Locale.FileConversion.FileList.Name}</th>
                     <th>{Locale.FileConversion.FileList.Size}</th>
                     <th>{Locale.FileConversion.FileList.StatusLabel}</th>
-                    <th>{Locale.FileConversion.FileList.ActionsLabel}</th>
+                    <th className={styles["file-actions-header"]}>
+                      {Locale.FileConversion.FileList.ActionsLabel}
+                    </th>
                   </tr>
                 </thead>
                 <tbody>
                   {fileList.map((file) => (
                     <tr key={file.id}>
-                      <td className={styles["file-icon-cell"]}>
-                        <FileIcon ext={getFileExtension(file.name)} />
+                      <td className={styles["file-name-cell"]}>
+                        <div className={styles["file-name-inner"]}>
+                          <FileIcon ext={getFileExtension(file.name)} />
+                          <span className={styles["file-name-text"]}>
+                            {file.name}
+                          </span>
+                        </div>
                       </td>
-                      <td className={styles["file-name-cell"]}>{file.name}</td>
                       <td className={styles["file-size-cell"]}>
                         {formatFileSize(file.size ?? 0)}
                       </td>
@@ -846,16 +851,18 @@ export function FileConversion() {
                         </span>
                       </td>
                       <td className={styles["file-actions-cell"]}>
-                        {file.status === "success" && (
+                        <div className={styles["file-actions-inner"]}>
+                          {file.status === "success" && (
+                            <IconButton
+                              icon={<DownloadIcon />}
+                              onClick={() => handleDownload(file)}
+                            />
+                          )}
                           <IconButton
-                            icon={<DownloadIcon />}
-                            onClick={() => handleDownload(file)}
+                            icon={<CloseIcon />}
+                            onClick={() => handleDeleteFile(file.id)}
                           />
-                        )}
-                        <IconButton
-                          icon={<CloseIcon />}
-                          onClick={() => handleDeleteFile(file.id)}
-                        />
+                        </div>
                       </td>
                     </tr>
                   ))}

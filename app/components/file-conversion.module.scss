@@ -78,6 +78,7 @@
 
 .file-table {
   width: 100%;
+  table-layout: fixed;
   border-collapse: collapse;
 
   th {
@@ -88,27 +89,28 @@
     font-weight: normal;
     padding: 8px 6px;
     border-bottom: var(--border-in-light);
+    overflow: hidden;
   }
 
-  th:nth-child(1) {
-    width: 36px; // icon column
+  // Size column: adaptive but compact
+  th:nth-child(2) {
+    width: 13%;
   }
 
+  // Status column: adaptive
   th:nth-child(3) {
-    width: 80px; // size column
+    width: 22%;
   }
 
+  // Actions column: exactly 2-button wide
   th:nth-child(4) {
-    width: 16%; // status column
-  }
-
-  th:nth-child(5) {
-    width: 72px; // actions column
+    width: 74px;
   }
 
   td {
     padding: 8px 6px;
     vertical-align: middle;
+    overflow: hidden;
   }
 
   tbody tr:last-child td {
@@ -119,16 +121,25 @@
     border-bottom: var(--border-in-light);
   }
 
-  .file-icon-cell {
-    width: 24px;
+  .file-name-cell {
     padding-left: 12px;
   }
 
-  .file-name-cell {
-    white-space: nowrap;
+  .file-name-inner {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    min-width: 0; // allow text to shrink
+
+    .file-icon {
+      flex-shrink: 0;
+    }
+  }
+
+  .file-name-text {
     overflow: hidden;
+    white-space: nowrap;
     text-overflow: ellipsis;
-    max-width: 180px;
     font-size: 14px;
   }
 
@@ -137,21 +148,35 @@
     color: var(--black);
     opacity: 0.5;
     white-space: nowrap;
-    width: 80px;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 
   .file-status-cell {
-    width: 16%;
-    white-space: nowrap;
+    overflow: hidden;
+
+    .file-status-text {
+      display: block;
+      font-size: 13px;
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+    }
   }
 
   .file-actions-cell {
+    padding-right: 12px;
+  }
+
+  .file-actions-inner {
     display: flex;
     align-items: center;
     justify-content: flex-end;
     gap: 4px;
-    padding-right: 12px;
-    width: 72px;
+  }
+
+  .file-actions-header {
+    text-align: center;
   }
 }
 
@@ -159,11 +184,6 @@
   width: 20px;
   height: 20px;
   display: block;
-}
-
-.file-status-text {
-  font-size: 13px;
-  white-space: nowrap;
 }
 
 .status-pending {
