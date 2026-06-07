@@ -53,8 +53,9 @@ services:
       MINERU_MODEL_SOURCE: local
     entrypoint: mineru-api
     command:
-      --host 127.0.0.1
+      --host 0.0.0.0
       --port 8000
+      --allow-public-http-client
       # --gpu-memory-utilization 0.5
     ulimits:
       memlock: -1
