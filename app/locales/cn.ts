@@ -887,7 +887,7 @@ const cn = {
     MarkItDown: {
       EnableDocIntelligence: {
         Title: "使用文档智能",
-        Desc: "基于 AI 进行文档转换，提升复杂文档的转换质量，会显著增加转换时间（约 4x）。",
+        Desc: "基于 AI 进行文档转换，提升复杂文档的转换质量，会显著增加转换时间。",
       },
     },
     MinerU: {
@@ -946,6 +946,7 @@ const cn = {
       Upload: "上传文件",
       ClearAll: "全部清除",
       Convert: "转换",
+      Stop: "停止转换",
       Name: "名称",
       Size: "大小",
       StatusLabel: "状态",
@@ -960,6 +961,9 @@ const cn = {
       DragDropHint: "将文件拖放到此处上传",
       ActionsLabel: "操作",
       DownloadAll: "全部下载",
+      ErrorInfo: "错误信息",
+      UnknownError: "未知错误",
+      LogPlaceholder: "转换信息显示在这里",
     },
   },
 };

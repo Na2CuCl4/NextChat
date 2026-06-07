@@ -885,7 +885,7 @@ const en: PartialLocaleType = {
     MarkItDown: {
       EnableDocIntelligence: {
         Title: "Use Document Intelligence",
-        Desc: "AI-based document conversion, improves quality for complex documents, significantly increases conversion time (about 4x).",
+        Desc: "AI-based document conversion, improves quality for complex documents, significantly increases conversion time.",
       },
     },
     HealthCheck: {
@@ -958,6 +958,7 @@ const en: PartialLocaleType = {
       Upload: "Upload File",
       ClearAll: "Clear All",
       Convert: "Convert",
+      Stop: "Stop",
       Name: "Name",
       Size: "Size",
       StatusLabel: "Status",
@@ -972,6 +973,9 @@ const en: PartialLocaleType = {
       DragDropHint: "Drop files here to upload",
       ActionsLabel: "Actions",
       DownloadAll: "Download All",
+      ErrorInfo: "Error info",
+      UnknownError: "Unknown error",
+      LogPlaceholder: "Conversion log will appear here",
     },
   },
 };
