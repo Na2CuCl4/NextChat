@@ -43,7 +43,8 @@ export async function POST(req: NextRequest) {
       const imageAnalysis = inForm.get("enableImageAnalysis");
       if (imageAnalysis) outForm.append("image_analysis", imageAnalysis);
 
-      outForm.append("return_md", "true");
+      outForm.append("return_images", "true");
+      outForm.append("response_format_zip", "true");
 
       const maxPages = inForm.get("maxPages");
       if (maxPages) outForm.append("end_page_id", maxPages);
@@ -53,16 +54,21 @@ export async function POST(req: NextRequest) {
         body: outForm,
       });
 
-      const json = await res.json().catch(() => null);
-      if (res.ok && json?.status === "completed" && json?.results) {
-        const fileName = json.file_names?.[0];
-        const mdContent = json.results[fileName]?.md_content ?? "";
-        return NextResponse.json({ data: mdContent });
+      if (!res.ok) {
+        const json = await res.json().catch(() => null);
+        return NextResponse.json(
+          { error: json?.error ?? json?.msg ?? "MinerU conversion failed" },
+          { status: 502 },
+        );
       }
-      return NextResponse.json(
-        { error: json?.error ?? json?.msg ?? "MinerU conversion failed" },
-        { status: 502 },
-      );
+
+      const blob = await res.blob();
+      return new NextResponse(blob, {
+        headers: {
+          "Content-Type": "application/zip",
+          "Content-Disposition": 'attachment; filename="result.zip"',
+        },
+      });
     }
 
     // ── MarkItDown path (default) ─────────────────────────────────
@@ -74,7 +80,7 @@ export async function POST(req: NextRequest) {
       outForm.append("docintel", "true");
     }
 
-    const res = await fetch(serverConfig.fileReadingServer, {
+    const res = await fetch(`${serverConfig.fileReadingServer}/read_file`, {
       method: "POST",
       body: outForm,
     });

@@ -16,7 +16,7 @@ services:
       CODE: ${CODE}
       CUSTOM_MODELS: ${CUSTOM_MODELS}
       DEFAULT_MODEL: ${DEFAULT_MODEL}
-      FILE_READING_SERVER: http://nextchat-readfile:8000/read_file
+      FILE_READING_SERVER: http://nextchat-readfile:8000
       HIDE_USER_API_KEY: 1
       MINERU_SERVER: http://mineru-api:8000
 
@@ -34,6 +34,8 @@ services:
       DOCINTEL_ENDPOINT: ${DOCINTEL_ENDPOINT}
       DOCINTEL_API_KEY: ${DOCINTEL_API_KEY}
       DOCINTEL_MODEL: ${DOCINTEL_MODEL}
+    healthcheck:
+      test: ["CMD-SHELL", "curl -f http://localhost:8000 || exit 1"]
 
   mineru-api:
     image: mineru:latest

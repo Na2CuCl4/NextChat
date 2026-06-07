@@ -227,11 +227,19 @@ export async function uploadFile(file: File): Promise<string> {
       signal: controller.signal,
     });
 
-    const json = await res.json().catch(() => null);
     if (!res.ok) {
+      const json = await res.json().catch(() => null);
       const msg = json?.error || res.statusText;
       throw new Error(`File Reading Server error ${res.status}: ${msg}`);
     }
+
+    const contentType = res.headers.get("content-type") || "";
+    if (contentType.includes("application/zip")) {
+      const blob = await res.blob();
+      return URL.createObjectURL(blob);
+    }
+
+    const json = await res.json();
     return json.data as string;
   } finally {
     clearTimeout(timeoutId);
