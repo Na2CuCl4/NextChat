@@ -207,6 +207,10 @@ function HealthCheckSection({ engine }: { engine: FileConversionEngine }) {
     }
   }, [engine]);
 
+  useEffect(() => {
+    handleCheckHealth();
+  }, [handleCheckHealth]);
+
   const healthSubTitle = health
     ? `${Locale.FileConversion.HealthCheck.Version}: ${health.version}  |  ${
         Locale.FileConversion.HealthCheck.Queueing
