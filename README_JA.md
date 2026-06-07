@@ -1,67 +1,163 @@
 <div align="center">
-<img src="./docs/images/ent.svg" alt="プレビュー"/>
 
-<h1 align="center">NextChat</h1>
+# ![NextChat](docs/images/icon.svg) NextChat
 
-ワンクリックで無料であなた専用の ChatGPT ウェブアプリをデプロイ。GPT3、GPT4 & Gemini Pro モデルをサポート。
+[English](./README.md) / [简体中文](./README_CN.md) / 日本語 / [한국어](./README_KO.md)
 
-[NextChatAI](https://nextchat.club?utm_source=readme) / [企業版](#企業版) / [デモ](https://chat-gpt-next-web.vercel.app/) / [フィードバック](https://github.com/Yidadaa/ChatGPT-Next-Web/issues) / [Discordに参加](https://discord.gg/zrhvHCr79N)
+✨ 軽量で高速なAIアシスタント、Claude, DeepSeek, GPT & Gemini Pro 対応。
 
-[<img src="https://vercel.com/button" alt="Zeaburでデプロイ" height="30">](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2FChatGPTNextWeb%2FChatGPT-Next-Web&env=OPENAI_API_KEY&env=CODE&project-name=nextchat&repository-name=NextChat) [<img src="https://zeabur.com/button.svg" alt="Zeaburでデプロイ" height="30">](https://zeabur.com/templates/ZBUEFA) [<img src="https://gitpod.io/button/open-in-gitpod.svg" alt="Gitpodで開く" height="30">](https://gitpod.io/#https://github.com/Yidadaa/ChatGPT-Next-Web)
-
-</div>
-
-## Sponsor AI API
-
-<a href='https://302.ai/'>
-  <img src="https://github.com/user-attachments/assets/6cf24233-1010-43e0-9a83-a11159866175" width="100%" alt="icon"/>
-</a>
-
-[302.AI](https://302.ai/) は、オンデマンドで支払うAIアプリケーションプラットフォームで、最も安全なAI APIとAIオンラインアプリケーションを提供します。
-
-## 企業版
-
-あなたの会社のプライベートデプロイとカスタマイズのニーズに応える
-
-- **ブランドカスタマイズ**：企業向けに特別に設計された VI/UI、企業ブランドイメージとシームレスにマッチ
-- **リソース統合**：企業管理者が数十種類のAIリソースを統一管理、チームメンバーはすぐに使用可能
-- **権限管理**：メンバーの権限、リソースの権限、ナレッジベースの権限を明確にし、企業レベルのAdmin Panelで統一管理
-- **知識の統合**：企業内部のナレッジベースとAI機能を結びつけ、汎用AIよりも企業自身の業務ニーズに近づける
-- **セキュリティ監査**：機密質問を自動的にブロックし、すべての履歴対話を追跡可能にし、AIも企業の情報セキュリティ基準に従わせる
-- **プライベートデプロイ**：企業レベルのプライベートデプロイ、主要なプライベートクラウドデプロイをサポートし、データのセキュリティとプライバシーを保護
-- **継続的な更新**：マルチモーダル、エージェントなどの最先端機能を継続的に更新し、常に最新であり続ける
-
-企業版のお問い合わせ: **business@nextchat.dev**
-
-## 始めに
-
-1. [OpenAI API Key](https://platform.openai.com/account/api-keys)を準備する;
-2. 右側のボタンをクリックしてデプロイを開始：
-   [![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2FYidadaa%2FChatGPT-Next-Web&env=OPENAI_API_KEY&env=CODE&env=GOOGLE_API_KEY&project-name=chatgpt-next-web&repository-name=ChatGPT-Next-Web) 、GitHubアカウントで直接ログインし、環境変数ページにAPI Keyと[ページアクセスパスワード](#設定ページアクセスパスワード) CODEを入力してください;
-3. デプロイが完了したら、すぐに使用を開始できます;
-4. （オプション）[カスタムドメインをバインド](https://vercel.com/docs/concepts/projects/domains/add-a-domain)：Vercelが割り当てたドメインDNSは一部の地域で汚染されているため、カスタムドメインをバインドすると直接接続できます。
-
-<div align="center">
-   
-![メインインターフェース](./docs/images/cover.png)
+[<img src="https://zeabur.com/button.svg" alt="Deploy on Zeabur" height="30">](https://zeabur.com/templates/ZBUEFA) [<img src="https://vercel.com/button" alt="Deploy on Vercel" height="30">](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2FNa2CuCl4%2FNextChat&env=OPENAI_API_KEY&env=CODE&project-name=nextchat&repository-name=NextChat) [<img src="https://gitpod.io/button/open-in-gitpod.svg" alt="Open in Gitpod" height="30">](https://gitpod.io/#https://github.com/Na2CuCl4/NextChat)
 
 </div>
 
-## 更新を維持する
+## スクリーンショット
 
-もし上記の手順に従ってワンクリックでプロジェクトをデプロイした場合、「更新があります」というメッセージが常に表示されることがあります。これは、Vercel がデフォルトで新しいプロジェクトを作成するためで、本プロジェクトを fork していないことが原因です。そのため、正しく更新を検出できません。
+![Settings](./docs/images/settings.png)
 
-以下の手順に従って再デプロイすることをお勧めします：
+![More](./docs/images/more.png)
 
-- 元のリポジトリを削除する
-- ページ右上の fork ボタンを使って、本プロジェクトを fork する
-- Vercel で再度選択してデプロイする、[詳細な手順はこちらを参照してください](./docs/vercel-ja.md)。
+![メイン画面](./docs/images/cover.png)
 
-### 自動更新を開く
+## 機能
 
-> Upstream Sync の実行エラーが発生した場合は、[手動で Sync Fork](./README_JA.md#手動でコードを更新する) してください！
+- **無料デプロイ**：Vercelで1分以内にワンクリックデプロイ
+- **軽量クライアント**：Linux/Windows/MacOSで約5MB、[今すぐダウンロード](https://github.com/Na2CuCl4/NextChat/releases)
+- **セルフホストLLM対応**：[RWKV-Runner](https://github.com/josStorer/RWKV-Runner)や[LocalAI](https://github.com/go-skynet/LocalAI)と完全互換
+- **プライバシー優先**：全データをブラウザのローカルに保存
+- **Markdown対応**：LaTeX、Mermaid、コードハイライト等
+- **レスポンシブデザイン**：ダークモードとPWA対応
+- **高速読み込み**：初回画面約100kb、ストリーミング応答
+- **プロンプトテンプレート (Mask)**：チャットツールの作成・共有・デバッグ
+- **高品質プロンプト**：[awesome-chatgpt-prompts-zh](https://github.com/PlexPt/awesome-chatgpt-prompts-zh)と[awesome-chatgpt-prompts](https://github.com/f/awesome-chatgpt-prompts)を内蔵
+- **自動圧縮**：長文会話を自動圧縮しトークンを節約
+- **多言語**：English, 简体中文, 繁体中文, 日本語, Français, Español, Italiano, Türkçe, Deutsch, Tiếng Việt, Русский, Čeština, 한국어, Indonesia
+- **ファイルアップロード**：画像、ドキュメント等をアップロードしてモデルに処理
+- **画像生成**：GPT-Imageモデルによるtext-to-imageとimage-to-image生成
+- **OpenAI Responses形式**：`/v1/responses`とGPT-5シリーズの`reasoning_effort`、`response_format`、`verbosity`対応
+- **ファイル変換**：MarkItDownとMinerUエンジンによるバッチ変換ページを内蔵
+- **MCP対応**：Model Context Protocol統合（`ENABLE_MCP=true`で有効化）
+- **自動更新**：更新を自動検出して通知
 
-プロジェクトを fork した後、GitHub の制限により、fork 後のプロジェクトの Actions ページで Workflows を手動で有効にし、Upstream Sync Action を有効にする必要があります。有効化後、毎時の定期自動更新が可能になります：
+## 更新情報
+
+- **v2.19.0**：ファイル変換ページ（MarkItDown & MinerUエンジン）、Docker Compose profiles（readfile, mineru）、docker-build.shスクリプト
+- **v2.18.0**：OpenAI Responses形式`/v1/responses`、GPT-5シリーズ`reasoning_effort` / `response_format` / `verbosity`、image-to-image生成、アップロード上限15枚に拡大
+- **v2.17.0**：カスタム要約モデル、GPT-Imageファミリーtext-to-image生成、タブ切替時の複数同期問題を修正
+- **v2.16.2**：ファイルアップロード対応、自動更新検出、多言語改善、サーバー応答タイムアウト10分に延長
+- **v2.15.8**：リアルタイムチャット対応 [#5672](https://github.com/ChatGPTNextWeb/ChatGPT-Next-Web/issues/5672)
+- **v2.15.4**：TauriでLLM API取得、セキュリティ向上 [#5379](https://github.com/ChatGPTNextWeb/ChatGPT-Next-Web/issues/5379)
+- **v2.15.0**：プラグイン対応！[NextChat-Awesome-Plugins](https://github.com/ChatGPTNextWeb/NextChat-Awesome-Plugins)
+- **v2.14.0**：Artifacts & Stable Diffusion対応
+- **v2.10.1**：Google Gemini Proモデル対応
+- **v2.9.11**：Azureエンドポイント対応
+- **v2.8**：クロスプラットフォームデスクトップクライアント
+- **v2.7**：会話を画像またはShareGPTで共有
+- **v2.0**：プロンプトテンプレート — アイデアを現実に
+
+## ロードマップ
+
+- [x] **システムプロンプト**：ユーザー定義プロンプトをシステムプロンプトとして固定 [#138](https://github.com/Yidadaa/ChatGPT-Next-Web/issues/138)
+- [x] **ユーザープロンプト**：カスタムプロンプトの編集・保存
+- [x] **プロンプトテンプレート**：定義済みコンテキストで新規チャット作成 [#993](https://github.com/Yidadaa/ChatGPT-Next-Web/issues/993)
+- [x] **共有**：画像またはShareGPTで共有 [#1741](https://github.com/Yidadaa/ChatGPT-Next-Web/pull/1741)
+- [x] **デスクトップアプリ**：Tauriで構築されたクロスプラットフォームクライアント
+- [x] **セルフホストモデル**：[RWKV-Runner](https://github.com/josStorer/RWKV-Runner)と[LocalAI](https://github.com/go-skynet/LocalAI)に対応
+- [x] **Artifacts**：生成コンテンツを別ウィンドウでプレビュー・コピー・共有 [#5092](https://github.com/ChatGPTNextWeb/ChatGPT-Next-Web/pull/5092)
+- [x] **プラグイン**：ウェブ検索、計算機、カスタムAPI [#165](https://github.com/Yidadaa/ChatGPT-Next-Web/issues/165) [#5353](https://github.com/ChatGPTNextWeb/ChatGPT-Next-Web/issues/5353)
+- [x] **リアルタイムチャット**：WebSocketベースのリアルタイム会話 [#5672](https://github.com/ChatGPTNextWeb/ChatGPT-Next-Web/issues/5672)
+- [x] **ファイルアップロード**：会話内でファイルのアップロードと処理
+- [x] **画像生成**：GPT-Imageモデルによるtext-to-imageとimage-to-image
+- [x] **OpenAI Responses形式**：`/v1/responses`とGPT-5シリーズパラメータ対応
+- [x] **カスタム要約モデル**：会話要約用の専用モデル設定
+- [x] **ファイル変換**：MarkItDownとMinerUエンジンによるバッチ変換
+- [x] **Docker Compose Profiles**：オプションサービスデプロイ（readfile, mineru）
+
+## はじめに
+
+1. [OpenAI API Key](https://platform.openai.com/account/api-keys)を準備；
+2. [![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2FNa2CuCl4%2FNextChat&env=OPENAI_API_KEY&env=CODE&project-name=nextchat&repository-name=NextChat)をクリック、`CODE`をページパスワードに設定；
+3. お楽しみください :)
+
+## デプロイ
+
+### Docker Compose（推奨）
+
+```shell
+# リポジトリをクローン
+git clone https://github.com/Na2CuCl4/NextChat.git
+cd NextChat
+
+# .envファイルを作成して設定
+cp .env.template .env
+# .envを編集してAPIキーと設定を記入
+
+# メインサービスを起動
+docker compose up -d
+
+# オプションサービスも起動する場合：
+docker compose --profile readfile up -d                   # ファイル読み取りサービス
+docker compose --profile mineru up -d                     # MinerU APIサービス
+docker compose --profile readfile --profile mineru up -d  # 両方
+```
+
+### Docker
+
+```shell
+docker pull na2cucl4/nextchat:latest
+
+docker run -d -p 3000:3000 \
+   -e OPENAI_API_KEY=sk-xxxx \
+   -e CODE=ページパスワード \
+   na2cucl4/nextchat:latest
+```
+
+プロキシを使用する場合：
+
+```shell
+docker run -d -p 3000:3000 \
+   -e OPENAI_API_KEY=sk-xxxx \
+   -e CODE=ページパスワード \
+   -e PROXY_URL=http://localhost:7890 \
+   na2cucl4/nextchat:latest
+```
+
+プロキシに認証が必要な場合：
+
+```shell
+-e PROXY_URL="http://127.0.0.1:7890 user password"
+```
+
+MCPを有効にする場合：
+
+```shell
+docker run -d -p 3000:3000 \
+   -e OPENAI_API_KEY=sk-xxxx \
+   -e CODE=ページパスワード \
+   -e ENABLE_MCP=true \
+   na2cucl4/nextchat:latest
+```
+
+### Shell
+
+```shell
+bash <(curl -s https://raw.githubusercontent.com/Na2CuCl4/NextChat/main/scripts/setup.sh)
+```
+
+## 更新の維持
+
+Vercelでワンクリックデプロイした場合、「更新があります」と常に表示されることがあります。これはVercelがフォークではなく新規プロジェクトを作成するため、更新を正しく検出できないからです。
+
+以下の手順で再デプロイすることを推奨します：
+
+- 元のリポジトリを削除；
+- ページ右上のフォークボタンで本プロジェクトをフォーク；
+- Vercelで再選択してデプロイ、[詳細チュートリアルはこちら](./docs/vercel-ja.md)。
+
+### 自動更新を有効にする
+
+> Upstream Syncの実行エラーが発生した場合は、[手動でコードを更新](#手動でコードを更新する)してください。
+
+フォーク後、GitHubの制限により、ActionsページでWorkflowsとUpstream Sync Actionを手動で有効にする必要があります。有効後、1時間ごとに自動更新されます：
 
 ![自動更新](./docs/images/enable-actions.jpg)
 
@@ -69,255 +165,320 @@
 
 ### 手動でコードを更新する
 
-手動で即座に更新したい場合は、[GitHub のドキュメント](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/working-with-forks/syncing-a-fork)を参照して、fork したプロジェクトを上流のコードと同期する方法を確認してください。
+即時更新するには、[GitHubドキュメント](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/working-with-forks/syncing-a-fork)を参照してください。
 
-このプロジェクトをスターまたはウォッチしたり、作者をフォローすることで、新機能の更新通知をすぐに受け取ることができます。
-
-## ページアクセスパスワードを設定する
-
-> パスワードを設定すると、ユーザーは設定ページでアクセスコードを手動で入力しない限り、通常のチャットができず、未承認の状態であることを示すメッセージが表示されます。
-
-> **警告**：パスワードの桁数は十分に長く設定してください。7桁以上が望ましいです。さもないと、[ブルートフォース攻撃を受ける可能性があります](https://github.com/Yidadaa/ChatGPT-Next-Web/issues/518)。
-
-このプロジェクトは限られた権限管理機能を提供しています。Vercel プロジェクトのコントロールパネルで、環境変数ページに `CODE` という名前の環境変数を追加し、値をカンマで区切ったカスタムパスワードに設定してください：
-
-```
-code1,code2,code3
-```
-
-この環境変数を追加または変更した後、**プロジェクトを再デプロイ**して変更を有効にしてください。
-
-## 環境変数
-
-> 本プロジェクトのほとんどの設定は環境変数で行います。チュートリアル：[Vercel の環境変数を変更する方法](./docs/vercel-ja.md)。
-
-### `OPENAI_API_KEY` （必須）
-
-OpenAI の API キー。OpenAI アカウントページで申請したキーをカンマで区切って複数設定できます。これにより、ランダムにキーが選択されます。
-
-### `CODE` （オプション）
-
-アクセスパスワード。カンマで区切って複数設定可能。
-
-**警告**：この項目を設定しないと、誰でもデプロイしたウェブサイトを利用でき、トークンが急速に消耗する可能性があるため、設定をお勧めします。
-
-### `BASE_URL` （オプション）
-
-> デフォルト: `https://api.openai.com`
-
-> 例: `http://your-openai-proxy.com`
-
-OpenAI API のプロキシ URL。手動で OpenAI API のプロキシを設定している場合はこのオプションを設定してください。
-
-> SSL 証明書の問題がある場合は、`BASE_URL` のプロトコルを http に設定してください。
-
-### `OPENAI_ORG_ID` （オプション）
-
-OpenAI の組織 ID を指定します。
-
-### `AZURE_URL` （オプション）
-
-> 形式: https://{azure-resource-url}/openai/deployments/{deploy-name}
-> `CUSTOM_MODELS` で `displayName` 形式で {deploy-name} を設定した場合、`AZURE_URL` から {deploy-name} を省略できます。
-
-Azure のデプロイ URL。
-
-### `AZURE_API_KEY` （オプション）
-
-Azure の API キー。
-
-### `AZURE_API_VERSION` （オプション）
-
-Azure API バージョン。[Azure ドキュメント](https://learn.microsoft.com/en-us/azure/ai-services/openai/reference#chat-completions)で確認できます。
-
-### `GOOGLE_API_KEY` (オプション)
-
-Google Gemini Pro API キー。
-
-### `GOOGLE_URL` (オプション)
-
-Google Gemini Pro API の URL。
-
-### `ANTHROPIC_API_KEY` (オプション)
-
-Anthropic Claude API キー。
-
-### `ANTHROPIC_API_VERSION` (オプション)
-
-Anthropic Claude API バージョン。
-
-### `ANTHROPIC_URL` (オプション)
-
-Anthropic Claude API の URL。
-
-### `BAIDU_API_KEY` (オプション)
-
-Baidu API キー。
-
-### `BAIDU_SECRET_KEY` (オプション)
-
-Baidu シークレットキー。
-
-### `BAIDU_URL` (オプション)
-
-Baidu API の URL。
-
-### `BYTEDANCE_API_KEY` (オプション)
-
-ByteDance API キー。
-
-### `BYTEDANCE_URL` (オプション)
-
-ByteDance API の URL。
-
-### `ALIBABA_API_KEY` (オプション)
-
-アリババ（千问）API キー。
-
-### `ALIBABA_URL` (オプション)
-
-アリババ（千问）API の URL。
-
-### `HIDE_USER_API_KEY` （オプション）
-
-ユーザーが API キーを入力できないようにしたい場合は、この環境変数を 1 に設定します。
-
-### `DISABLE_GPT4` （オプション）
-
-ユーザーが GPT-4 を使用できないようにしたい場合は、この環境変数を 1 に設定します。
-
-### `ENABLE_BALANCE_QUERY` （オプション）
-
-バランスクエリ機能を有効にしたい場合は、この環境変数を 1 に設定します。
-
-### `DISABLE_FAST_LINK` （オプション）
-
-リンクからのプリセット設定解析を無効にしたい場合は、この環境変数を 1 に設定します。
-
-### `WHITE_WEBDAV_ENDPOINTS` (オプション)
-
-アクセス許可を与える WebDAV サービスのアドレスを追加したい場合、このオプションを使用します。フォーマット要件：
-
-- 各アドレスは完全なエンドポイントでなければなりません。
-  > `https://xxxx/xxx`
-- 複数のアドレスは `,` で接続します。
-
-### `CUSTOM_MODELS` （オプション）
-
-> 例：`+qwen-7b-chat,+glm-6b,-gpt-3.5-turbo,gpt-4-1106-preview=gpt-4-turbo` は `qwen-7b-chat` と `glm-6b` をモデルリストに追加し、`gpt-3.5-turbo` を削除し、`gpt-4-1106-preview` のモデル名を `gpt-4-turbo` として表示します。
-> すべてのモデルを無効にし、特定のモデルを有効にしたい場合は、`-all,+gpt-3.5-turbo` を使用します。これは `gpt-3.5-turbo` のみを有効にすることを意味します。
-
-モデルリストを管理します。`+` でモデルを追加し、`-` でモデルを非表示にし、`モデル名=表示名` でモデルの表示名をカスタマイズし、カンマで区切ります。
-
-Azure モードでは、`modelName@Azure=deploymentName` 形式でモデル名とデプロイ名（deploy-name）を設定できます。
-
-> 例：`+gpt-3.5-turbo@Azure=gpt35` この設定でモデルリストに `gpt35(Azure)` のオプションが表示されます。
-
-ByteDance モードでは、`modelName@bytedance=deploymentName` 形式でモデル名とデプロイ名（deploy-name）を設定できます。
-
-> 例: `+Doubao-lite-4k@bytedance=ep-xxxxx-xxx` この設定でモデルリストに `Doubao-lite-4k(ByteDance)` のオプションが表示されます。
-
-### `DEFAULT_MODEL` （オプション）
-
-デフォルトのモデルを変更します。
-
-### `VISION_MODELS` (オプション)
-
-> デフォルト：空
-> 例：`gpt-4-vision,claude-3-opus,my-custom-model` は、これらのモデルにビジョン機能を追加します。これはデフォルトのパターンマッチング（"vision"、"claude-3"、"gemini-1.5"などのキーワードを含むモデルを検出）に加えて適用されます。
-
-デフォルトのパターンマッチングに加えて、追加のモデルにビジョン機能を付与します。複数のモデルはカンマで区切ります。
-
-### `DEFAULT_INPUT_TEMPLATE` （オプション）
-
-『設定』の『ユーザー入力前処理』の初期設定に使用するテンプレートをカスタマイズします。
-
-### `AI302_API_KEY` （オプション）
-
-302.AI API キー.
-
-### `AI302_URL` （オプション）
-
-302.AI API の URL.
+スターまたはウォッチでリリース通知を受け取れます。
 
 ## 開発
 
-下のボタンをクリックして二次開発を開始してください：
+NodeJS ≥ 18, Docker ≥ 20
 
-[![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/#https://github.com/Yidadaa/ChatGPT-Next-Web)
+[![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/#https://github.com/Na2CuCl4/NextChat)
 
-コードを書く前に、プロジェクトのルートディレクトリに `.env.local` ファイルを新規作成し、環境変数を記入します：
+プロジェクトルートに`.env`ファイルを作成：
 
-```
+```shell
 OPENAI_API_KEY=<your api key here>
+
+# OpenAIに直接アクセスできない場合はプロキシを使用
+BASE_URL=https://chatgpt1.nextweb.fun/api/proxy
 ```
 
 ### ローカル開発
 
-1. Node.js 18 と Yarn をインストールします。具体的な方法は ChatGPT にお尋ねください。
-2. `yarn install && yarn dev` を実行します。⚠️ 注意：このコマンドはローカル開発用であり、デプロイには使用しないでください。
-3. ローカルでデプロイしたい場合は、`yarn install && yarn build && yarn start` コマンドを使用してください。プロセスを守るために pm2 を使用することもできます。詳細は ChatGPT にお尋ねください。
-
-## デプロイ
-
-### コンテナデプロイ（推奨）
-
-> Docker バージョンは 20 以上が必要です。それ以下だとイメージが見つからないというエラーが出ます。
-
-> ⚠️ 注意：Docker バージョンは最新バージョンより 1～2 日遅れることが多いため、デプロイ後に「更新があります」の通知が出続けることがありますが、正常です。
-
 ```shell
-docker pull yidadaa/chatgpt-next-web
-
-docker run -d -p 3000:3000 \
-   -e OPENAI_API_KEY=sk-xxxx \
-   -e CODE=ページアクセスパスワード \
-   yidadaa/chatgpt-next-web
+# 1. Node.js 18とYarnをインストール
+# 2. .envに環境変数を設定
+# 3. 実行
+yarn install
+yarn dev
 ```
 
-プロキシを指定することもできます：
+## 環境変数
 
-```shell
-docker run -d -p 3000:3000 \
-   -e OPENAI_API_KEY=sk-xxxx \
-   -e CODE=ページアクセスパスワード \
-   --net=host \
-   -e PROXY_URL=http://127.0.0.1:7890 \
-   yidadaa/chatgpt-next-web
-```
+### コア
 
-ローカルプロキシがアカウントとパスワードを必要とする場合は、以下を使用できます：
+#### `OPENAI_API_KEY`（必須）
 
-```shell
--e PROXY_URL="http://127.0.0.1:7890 user password"
-```
+OpenAI APIキー。複数キーをカンマ区切りで設定可能（ロードバランシング）。
 
-他の環境変数を指定する必要がある場合は、上記のコマンドに `-e 環境変数=環境変数値` を追加して指定してください。
+#### `CODE`（オプション）
 
-### ローカルデプロイ
+アクセスパスワード。カンマ区切りで複数設定可能。
 
-コンソールで以下のコマンドを実行します：
+#### `BASE_URL`（オプション）
 
-```shell
-bash <(curl -s https://raw.githubusercontent.com/Yidadaa/ChatGPT-Next-Web/main/scripts/setup.sh)
-```
+> デフォルト: `https://api.openai.com`
+> 例: `http://your-openai-proxy.com`
 
-⚠️ 注意：インストール中に問題が発生した場合は、Docker を使用してデプロイしてください。
+OpenAI APIリクエストのベースURLを上書きします。
+
+#### `OPENAI_ORG_ID`（オプション）
+
+OpenAI組織IDを指定します。
+
+#### `PROXY_URL`（オプション）
+
+HTTPプロキシ（Dockerのみ）。
+
+> 例: `http://localhost:7890`
+> 認証あり: `http://127.0.0.1:7890 user password`
+
+---
+
+### プロバイダー設定
+
+多くのプロバイダーは`{PROVIDER}_API_KEY`（必須）と`{PROVIDER}_URL`（オプション、デフォルトエンドポイントを上書き）のパターンです。
+
+#### Azure OpenAI
+
+| 変数 | 必須 | 説明 |
+| --- | --- | --- |
+| `AZURE_API_KEY` | はい | Azure APIキー |
+| `AZURE_URL` | はい | AzureエンドポイントURL、例: `https://{resource-url}/openai` |
+| `AZURE_API_VERSION` | いいえ | Azure APIバージョン。[Azureドキュメント](https://learn.microsoft.com/en-us/azure/ai-services/openai/reference#chat-completions)参照 |
+
+#### Google Gemini
+
+| 変数 | 必須 | 説明 |
+| --- | --- | --- |
+| `GOOGLE_API_KEY` | はい | Google Gemini APIキー |
+| `GOOGLE_URL` | いいえ | Google API URLを上書き |
+
+#### Anthropic Claude
+
+| 変数 | 必須 | 説明 |
+| --- | --- | --- |
+| `ANTHROPIC_API_KEY` | はい | Anthropic APIキー |
+| `ANTHROPIC_URL` | いいえ | Anthropic API URLを上書き |
+| `ANTHROPIC_API_VERSION` | いいえ | Anthropic APIバージョンを上書き |
+
+#### Baidu
+
+| 変数 | 必須 | 説明 |
+| --- | --- | --- |
+| `BAIDU_API_KEY` | はい | Baidu APIキー |
+| `BAIDU_SECRET_KEY` | はい | Baiduシークレットキー |
+| `BAIDU_URL` | いいえ | Baidu API URLを上書き |
+
+#### ByteDance
+
+| 変数 | 必須 | 説明 |
+| --- | --- | --- |
+| `BYTEDANCE_API_KEY` | はい | ByteDance APIキー |
+| `BYTEDANCE_URL` | いいえ | ByteDance API URLを上書き |
+
+#### Alibaba
+
+| 変数 | 必須 | 説明 |
+| --- | --- | --- |
+| `ALIBABA_API_KEY` | はい | Alibaba Cloud APIキー |
+| `ALIBABA_URL` | いいえ | Alibaba API URLを上書き |
+
+#### Tencent
+
+| 変数 | 必須 | 説明 |
+| --- | --- | --- |
+| `TENCENT_API_KEY` | はい | Tencent Hunyuan APIキー |
+| `TENCENT_SECRET_ID` | はい | Tencent Secret ID |
+| `TENCENT_SECRET_KEY` | はい | Tencent Secret Key |
+| `TENCENT_URL` | いいえ | Tencent API URLを上書き |
+
+#### Moonshot
+
+| 変数 | 必須 | 説明 |
+| --- | --- | --- |
+| `MOONSHOT_API_KEY` | はい | Moonshot APIキー |
+| `MOONSHOT_URL` | いいえ | Moonshot API URLを上書き |
+
+#### iFlytek
+
+| 変数 | 必須 | 説明 |
+| --- | --- | --- |
+| `IFLYTEK_API_KEY` | はい | iFlytek APIキー |
+| `IFLYTEK_API_SECRET` | はい | iFlytek APIシークレット |
+| `IFLYTEK_URL` | いいえ | iFlytek API URLを上書き |
+
+#### ChatGLM
+
+| 変数 | 必須 | 説明 |
+| --- | --- | --- |
+| `CHATGLM_API_KEY` | はい | ChatGLM APIキー |
+| `CHATGLM_URL` | いいえ | ChatGLM API URLを上書き |
+
+#### DeepSeek
+
+| 変数 | 必須 | 説明 |
+| --- | --- | --- |
+| `DEEPSEEK_API_KEY` | はい | DeepSeek APIキー |
+| `DEEPSEEK_URL` | いいえ | DeepSeek API URLを上書き |
+
+#### xAI
+
+| 変数 | 必須 | 説明 |
+| --- | --- | --- |
+| `XAI_API_KEY` | はい | xAI (Grok) APIキー |
+| `XAI_URL` | いいえ | xAI API URLを上書き |
+
+#### SiliconFlow
+
+| 変数 | 必須 | 説明 |
+| --- | --- | --- |
+| `SILICONFLOW_API_KEY` | はい | SiliconFlow APIキー |
+| `SILICONFLOW_URL` | いいえ | SiliconFlow API URLを上書き |
+
+#### 302.AI
+
+| 変数 | 必須 | 説明 |
+| --- | --- | --- |
+| `AI302_API_KEY` | はい | 302.AI APIキー |
+| `AI302_URL` | いいえ | 302.AI API URLを上書き |
+
+#### Stability AI
+
+| 変数 | 必須 | 説明 |
+| --- | --- | --- |
+| `STABILITY_API_KEY` | はい | Stability AI APIキー |
+| `STABILITY_URL` | いいえ | Stability API URLを上書き |
+
+---
+
+### 機能フラグ
+
+#### `HIDE_USER_API_KEY`（オプション）
+
+> デフォルト: 空
+
+`1`に設定すると、ユーザーが自分のAPIキーを入力できなくなります。
+
+#### `DISABLE_GPT4`（オプション）
+
+> デフォルト: 空
+
+`1`に設定すると、GPT-4モデルを非表示にします。
+
+#### `ENABLE_BALANCE_QUERY`（オプション）
+
+> デフォルト: 空
+
+`1`に設定すると、残高照会を許可します。
+
+#### `DISABLE_FAST_LINK`（オプション）
+
+> デフォルト: 空
+
+`1`に設定すると、URLからの設定解析を無効にします。
+
+#### `ENABLE_MCP`（オプション）
+
+> デフォルト: 空
+
+`true`に設定すると、MCP（Model Context Protocol）機能を有効にします。
+
+---
+
+### モデル設定
+
+#### `CUSTOM_MODELS`（オプション）
+
+> デフォルト: 空
+> 例: `+llama,+claude-2,-gpt-3.5-turbo,gpt-4-1106-preview=gpt-4-turbo`
+
+モデルリストの制御：
+- `+モデル名` — モデルを追加
+- `-モデル名` — モデルを非表示
+- `モデル名=表示名` — 表示名をカスタマイズ
+- `-all` — デフォルトモデルをすべて無効化
+- `+all` — デフォルトモデルをすべて有効化
+
+Azureの場合：`modelName@Azure=deploymentName`
+> 例: `+gpt-3.5-turbo@Azure=gpt35` → `gpt35(Azure)`と表示
+
+ByteDanceの場合：`modelName@bytedance=deploymentName`
+> 例: `+Doubao-lite-4k@bytedance=ep-xxxxx-xxx`
+
+#### `DEFAULT_MODEL`（オプション）
+
+デフォルトモデルを変更します。
+
+#### `VISION_MODELS`（オプション）
+
+> デフォルト: 空（モデル名パターンで自動検出）
+> 例: `gpt-4-vision,claude-3-opus,my-custom-model`
+
+デフォルトのパターンマッチングに加えて、視覚機能を持つモデルを追加指定します。カンマ区切り。
+
+#### `DEFAULT_INPUT_TEMPLATE`（オプション）
+
+「設定」の「ユーザー入力前処理」のデフォルトテンプレートをカスタマイズします。
+
+---
+
+### サービスエンドポイント
+
+#### `FILE_READING_SERVER`（オプション）
+
+> 例: `http://nextchat-readfile:8000`
+
+ファイル読み取りサイドカーサービスのURL（アップロードされたドキュメントの解析に使用）。
+
+#### `MINERU_SERVER`（オプション）
+
+> 例: `http://mineru-api:8000`
+
+MinerU APIサービスのURL（PDF/画像変換に使用）。
+
+---
+
+### 同期とストレージ
+
+#### `WHITE_WEBDAV_ENDPOINTS`（オプション）
+
+許可するWebDAVサービスアドレスを追加します。形式：
+- 各アドレスは完全なエンドポイントであること（例: `https://xxxx/yyy`）
+- 複数アドレスは`,`で区切る
+
+#### Cloudflare KV同期（オプション）
+
+| 変数 | 説明 |
+| --- | --- |
+| `CLOUDFLARE_ACCOUNT_ID` | CloudflareアカウントID |
+| `CLOUDFLARE_KV_NAMESPACE_ID` | KV名前空間ID |
+| `CLOUDFLARE_KV_API_KEY` | KV APIキー |
+| `CLOUDFLARE_KV_TTL` | KVエントリTTL（秒） |
+
+---
+
+### アナリティクス（オプション）
+
+| 変数 | 説明 |
+| --- | --- |
+| `GTM_ID` | Google Tag ManagerコンテナID |
+| `GA_ID` | Google Analytics測定ID |
+
+## 同期とバックアップ
+
+[简体中文](./docs/synchronise-chat-logs-cn.md) | [English](./docs/synchronise-chat-logs-en.md) | [Italiano](./docs/synchronise-chat-logs-es.md) | [日本語](./docs/synchronise-chat-logs-ja.md) | [한국어](./docs/synchronise-chat-logs-ko.md)
+
+## ドキュメント
+
+- [よくある質問](./docs/faq-ja.md)
+- [新しい翻訳の追加方法](./docs/translation.md)
+- [Vercelの使い方](./docs/vercel-ja.md)
+- [ユーザーマニュアル（中国語、作成中）](./docs/user-manual-cn.md)
+
+## 翻訳
+
+新しい翻訳を追加するには[このガイド](./docs/translation.md)をお読みください。
 
 ## 謝辞
 
-### 寄付者
+### コントリビューター
 
-> 英語版をご覧ください。
+<a href="https://github.com/Na2CuCl4/NextChat/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=Na2CuCl4/NextChat" />
+</a>
 
-### 貢献者
-
-[プロジェクトの貢献者リストはこちら](https://github.com/Yidadaa/ChatGPT-Next-Web/graphs/contributors)
-
-### 関連プロジェクト
-
-- [one-api](https://github.com/songquanpeng/one-api): 一つのプラットフォームで大規模モデルのクォータ管理を提供し、市場に出回っているすべての主要な大規模言語モデルをサポートします。
-
-## オープンソースライセンス
+## ライセンス
 
 [MIT](https://opensource.org/license/mit/)
