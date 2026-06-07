@@ -812,9 +812,7 @@ export function FileConversion() {
                     <th>{Locale.FileConversion.FileList.Name}</th>
                     <th>{Locale.FileConversion.FileList.Size}</th>
                     <th>{Locale.FileConversion.FileList.StatusLabel}</th>
-                    <th className={styles["file-actions-header"]}>
-                      {Locale.FileConversion.FileList.ActionsLabel}
-                    </th>
+                    <th>{Locale.FileConversion.FileList.ActionsLabel}</th>
                   </tr>
                 </thead>
                 <tbody>
