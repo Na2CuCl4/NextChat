@@ -957,7 +957,7 @@ const en: PartialLocaleType = {
     FileList: {
       Upload: "Upload File",
       ClearAll: "Clear All",
-      Convert: "Convert",
+      Convert: "Start",
       Stop: "Stop",
       Name: "Name",
       Size: "Size",

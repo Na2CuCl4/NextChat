@@ -945,7 +945,7 @@ const cn = {
     FileList: {
       Upload: "上传文件",
       ClearAll: "全部清除",
-      Convert: "转换",
+      Convert: "开始转换",
       Stop: "停止转换",
       Name: "名称",
       Size: "大小",

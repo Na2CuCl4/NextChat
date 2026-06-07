@@ -403,6 +403,8 @@ export function FileConversion() {
   const fileRefs = useRef<Map<string, File>>(new Map());
   const abortRef = useRef<AbortController | null>(null);
   const logEndRef = useRef<HTMLDivElement>(null);
+  const fileListRef = useRef<FileItem[]>(fileList);
+  fileListRef.current = fileList; // always in sync
 
   const handleUpload = useCallback(() => {
     fileInputRef.current?.click();
@@ -499,6 +501,11 @@ export function FileConversion() {
   );
 
   const handleClearAll = useCallback(() => {
+    if (abortRef.current) {
+      abortRef.current.abort();
+      abortRef.current = null;
+      setConverting(false);
+    }
     fileRefs.current.clear();
     setFileList([]);
   }, []);
@@ -523,20 +530,20 @@ export function FileConversion() {
       return;
     }
 
-    // Process pending and error files, skip already-successful files
-    const toConvert = fileList.filter(
-      (f) => f.status === "pending" || f.status === "error",
-    );
-    if (toConvert.length === 0) return;
-
+    // Dynamic loop: re-reads fileListRef each iteration so hot
+    // uploads and deletes during conversion are respected.
     const controller = new AbortController();
     abortRef.current = controller;
     setConverting(true);
 
     try {
-      for (const item of toConvert) {
-        if (controller.signal.aborted) break;
+      while (!controller.signal.aborted) {
+        const next = fileListRef.current.find(
+          (f) => f.status === "pending" || f.status === "error",
+        );
+        if (!next) break;
 
+        const item = next;
         const file = fileRefs.current.get(item.id);
         if (!file) {
           addLog(`${item.name} ${Locale.FileConversion.FileList.Status.error}`);
@@ -775,14 +782,13 @@ export function FileConversion() {
                   onClick={converting ? handleStop : handleConvert}
                 />
               </div>
-              {hasConverted && (
-                <IconButton
-                  icon={<DownloadIcon />}
-                  text={Locale.FileConversion.FileList.DownloadAll}
-                  bordered
-                  onClick={handleDownloadAll}
-                />
-              )}
+              <IconButton
+                icon={<DownloadIcon />}
+                text={Locale.FileConversion.FileList.DownloadAll}
+                bordered
+                disabled={!hasConverted}
+                onClick={handleDownloadAll}
+              />
             </div>
 
             <div className={styles["log-panel"]}>
