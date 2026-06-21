@@ -40,7 +40,7 @@
 
 ## 更新日志
 
-- **v2.19.1**：修复"全部清除"按钮未重置转换日志、修复转换失败时无限重试循环、下载全部改为 zip 打包提取
+- **v2.19.1**：修复"全部清除"按钮未重置转换日志、修复转换失败时无限重试循环、下载全部改为 zip 打包提取，更新 MinerU 引擎至最新 API（解析后端名称、OCR 语言、解析精度设置）
 - **v2.19.0**：文件转换页面（MarkItDown & MinerU 引擎），Docker Compose profiles（readfile, mineru），docker-build.sh 构建脚本
 - **v2.18.0**：OpenAI Responses 格式 `/v1/responses`，GPT-5 系列模型参数 `reasoning_effort` / `response_format` / `verbosity`，图生图，上传数量扩至 15 张
 - **v2.17.0**：自定义对话摘要模型，GPT-Image 文生图，修复切换页面多次同步问题

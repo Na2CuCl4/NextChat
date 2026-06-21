@@ -40,7 +40,7 @@
 
 ## 更新情報
 
-- **v2.19.1**：「すべてクリア」ボタンで変換ログがリセットされない問題を修正、変換失敗時の無限リトライループを修正、一括ダウンロードをzipパッケージ抽出に変更
+- **v2.19.1**：「すべてクリア」ボタンで変換ログがリセットされない問題を修正、変換失敗時の無限リトライループを修正、一括ダウンロードをzipパッケージ抽出に変更、MinerUエンジンを最新APIに対応（バックエンド名、OCR言語、解析精度設定）
 - **v2.19.0**：ファイル変換ページ（MarkItDown & MinerUエンジン）、Docker Compose profiles（readfile, mineru）、docker-build.shスクリプト
 - **v2.18.0**：OpenAI Responses形式`/v1/responses`、GPT-5シリーズ`reasoning_effort` / `response_format` / `verbosity`、image-to-image生成、アップロード上限15枚に拡大
 - **v2.17.0**：カスタム要約モデル、GPT-Imageファミリーtext-to-image生成、タブ切替時の複数同期問題を修正
