@@ -514,6 +514,9 @@ export function FileConversion() {
     }
     fileRefs.current.clear();
     setFileList([]);
+    setLogLines([
+      `====== ${Locale.FileConversion.FileList.LogPlaceholder} ======\n`,
+    ]);
   }, []);
 
   const handleDeleteFile = useCallback((id: string) => {
@@ -542,11 +545,17 @@ export function FileConversion() {
     abortRef.current = controller;
     setConverting(true);
 
+    // Reset previously failed files to pending so they are retried this run
+    // Must update both the ref (for immediate loop visibility) and state (for UI)
+    const resetList = fileListRef.current.map((f) =>
+      f.status === "error" ? { ...f, status: "pending" as FileStatus } : f,
+    );
+    fileListRef.current = resetList;
+    setFileList(resetList);
+
     try {
       while (!controller.signal.aborted) {
-        const next = fileListRef.current.find(
-          (f) => f.status === "pending" || f.status === "error",
-        );
+        const next = fileListRef.current.find((f) => f.status === "pending");
         if (!next) break;
 
         const item = next;
