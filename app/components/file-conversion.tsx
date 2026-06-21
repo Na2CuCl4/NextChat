@@ -26,22 +26,17 @@ import { useNavigate } from "react-router-dom";
 import { uploadFile } from "../utils/chat";
 
 type FileConversionEngine = "markitdown" | "mineru";
-type MinerUBackend = "pipeline" | "vlm-auto-engine" | "hybrid-auto-engine";
+type MinerUBackend = "pipeline" | "vlm-engine" | "hybrid-engine";
 type ParseMethod = "auto" | "txt" | "ocr";
 type OcrLanguage =
   | "ch"
-  | "ch_lite"
   | "ch_server"
-  | "en"
   | "korean"
-  | "japan"
-  | "chinese_cht"
   | "ta"
   | "te"
   | "ka"
   | "th"
   | "el"
-  | "latin"
   | "arabic"
   | "east_slavic"
   | "cyrillic"
@@ -66,10 +61,8 @@ const FILE_CONVERSION_ENGINES: Record<FileConversionEngine, string> = {
 
 const MINERU_BACKEND: Record<MinerUBackend, string> = {
   pipeline: Locale.FileConversion.MinerU.ParseBackend.PipelineDesc,
-  "vlm-auto-engine":
-    Locale.FileConversion.MinerU.ParseBackend.VlmAutoEngineDesc,
-  "hybrid-auto-engine":
-    Locale.FileConversion.MinerU.ParseBackend.HybridAutoEngineDesc,
+  "vlm-engine": Locale.FileConversion.MinerU.ParseBackend.VlmEngineDesc,
+  "hybrid-engine": Locale.FileConversion.MinerU.ParseBackend.HybridEngineDesc,
 };
 
 const PARSE_METHOD: { value: ParseMethod; desc: string }[] = [
@@ -80,24 +73,16 @@ const PARSE_METHOD: { value: ParseMethod; desc: string }[] = [
 
 const OCR_LANGUAGES: { value: OcrLanguage; desc: string }[] = [
   { value: "ch", desc: Locale.FileConversion.MinerU.OcrLanguage.Ch },
-  { value: "ch_lite", desc: Locale.FileConversion.MinerU.OcrLanguage.ChLite },
   {
     value: "ch_server",
     desc: Locale.FileConversion.MinerU.OcrLanguage.ChServer,
   },
-  { value: "en", desc: Locale.FileConversion.MinerU.OcrLanguage.En },
   { value: "korean", desc: Locale.FileConversion.MinerU.OcrLanguage.Korean },
-  { value: "japan", desc: Locale.FileConversion.MinerU.OcrLanguage.Japan },
-  {
-    value: "chinese_cht",
-    desc: Locale.FileConversion.MinerU.OcrLanguage.ChineseCht,
-  },
   { value: "ta", desc: Locale.FileConversion.MinerU.OcrLanguage.Ta },
   { value: "te", desc: Locale.FileConversion.MinerU.OcrLanguage.Te },
   { value: "ka", desc: Locale.FileConversion.MinerU.OcrLanguage.Ka },
   { value: "th", desc: Locale.FileConversion.MinerU.OcrLanguage.Th },
   { value: "el", desc: Locale.FileConversion.MinerU.OcrLanguage.El },
-  { value: "latin", desc: Locale.FileConversion.MinerU.OcrLanguage.Latin },
   { value: "arabic", desc: Locale.FileConversion.MinerU.OcrLanguage.Arabic },
   {
     value: "east_slavic",
@@ -110,6 +95,17 @@ const OCR_LANGUAGES: { value: OcrLanguage; desc: string }[] = [
   {
     value: "devanagari",
     desc: Locale.FileConversion.MinerU.OcrLanguage.Devanagari,
+  },
+];
+
+const EFFORT_OPTIONS: { value: "medium" | "high"; desc: string }[] = [
+  {
+    value: "medium",
+    desc: Locale.FileConversion.MinerU.Effort.MediumDesc,
+  },
+  {
+    value: "high",
+    desc: Locale.FileConversion.MinerU.Effort.HighDesc,
   },
 ];
 
@@ -267,14 +263,36 @@ function MinerUSettings() {
           <option value="pipeline">
             {Locale.FileConversion.MinerU.ParseBackend.Pipeline}
           </option>
-          <option value="vlm-auto-engine">
-            {Locale.FileConversion.MinerU.ParseBackend.VlmAutoEngine}
+          <option value="vlm-engine">
+            {Locale.FileConversion.MinerU.ParseBackend.VlmEngine}
           </option>
-          <option value="hybrid-auto-engine">
-            {Locale.FileConversion.MinerU.ParseBackend.HybridAutoEngine}
+          <option value="hybrid-engine">
+            {Locale.FileConversion.MinerU.ParseBackend.HybridEngine}
           </option>
         </Select>
       </ListItem>
+
+      {fc.minerUBackend === "hybrid-engine" && (
+        <ListItem
+          title={Locale.FileConversion.MinerU.Effort.Title}
+          subTitle={EFFORT_OPTIONS.find((o) => o.value === fc.effort)?.desc}
+        >
+          <Select
+            aria-label={Locale.FileConversion.MinerU.Effort.Title}
+            value={fc.effort}
+            onChange={(e) => {
+              const val = e.target.value as "medium" | "high";
+              config.update((c) => (c.fileConversionConfig.effort = val));
+            }}
+          >
+            {EFFORT_OPTIONS.map((opt) => (
+              <option key={opt.value} value={opt.value}>
+                {opt.value}
+              </option>
+            ))}
+          </Select>
+        </ListItem>
+      )}
 
       <ListItem title={Locale.FileConversion.MinerU.MaxPages.Title}>
         <InputRange
@@ -723,7 +741,9 @@ export function FileConversion() {
         `${pad(now.getHours())}-${pad(now.getMinutes())}-${pad(
           now.getSeconds(),
         )}`;
-      const filename = `${timestamp} (${total} files).zip`;
+      const filename = `${timestamp} (${total} ${
+        total === 1 ? "file" : "files"
+      }).zip`;
 
       const zipBlob = await outZip.generateAsync({ type: "blob" });
       const url = URL.createObjectURL(zipBlob);

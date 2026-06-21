@@ -585,11 +585,11 @@ const sk: PartialLocaleType = {
         Pipeline: "pipeline",
         PipelineDesc:
           "Tradičný viac-modelový pipeline, podporuje viac jazykov, bez halucinácie.",
-        VlmAutoEngine: "vlm-auto-engine",
-        VlmAutoEngineDesc:
+        VlmEngine: "vlm-engine",
+        VlmEngineDesc:
           "Multimodálne VLM vysoko presné parsovanie, podporuje iba čínštinu a angličtinu.",
-        HybridAutoEngine: "hybrid-auto-engine",
-        HybridAutoEngineDesc:
+        HybridEngine: "hybrid-engine",
+        HybridEngineDesc:
           "Vysoko presné hybridné parsovanie, podporuje viac jazykov.",
       },
       MaxPages: {
@@ -615,23 +615,27 @@ const sk: PartialLocaleType = {
       },
       OcrLanguage: {
         Title: "Jazyk OCR",
-        Ch: "Čínština, angličtina, tradičná čínština",
-        ChLite: "Čínština, angličtina, tradičná čínština, japončina",
-        ChServer: "Čínština, angličtina, tradičná čínština, japončina",
-        En: "Angličtina",
+        Ch: "Čínština, angličtina, japončina, tradičná čínština, latinka",
+        ChServer: "Čínština, angličtina, japončina, tradičná čínština, latinka",
         Korean: "Kórejčina, angličtina",
-        Japan: "Japončina, čínština, angličtina, tradičná čínština",
-        ChineseCht: "Tradičná čínština, čínština, angličtina, japončina",
         Ta: "Tamilčina, angličtina",
         Te: "Telugčina, angličtina",
         Ka: "Kannadčina",
         Th: "Thajčina, angličtina",
         El: "Gréčtina, angličtina",
-        Latin: "Francúzština, nemčina atď. (jazyky s latinkou)",
         Arabic: "Arabčina, perzština, urdčina atď.",
         EastSlavic: "Ruština, bieloruština, ukrajinčina, angličtina",
         Cyrillic: "Ruština, cyrilické jazyky",
         Devanagari: "Hindčina, maráthčina, nepálčina atď.",
+      },
+      Effort: {
+        Title: "Presnosť parsovania",
+        Medium: "medium",
+        MediumDesc:
+          "Rýchlejšie parsovanie, vyvažuje presnosť a efektivitu. Analýza obrázkov/grafov je zakázaná.",
+        High: "high",
+        HighDesc:
+          "Parsovanie s vyššou presnosťou a podporou analýzy obrázkov/grafov, môže trvať dlhšie.",
       },
     },
     FileList: {

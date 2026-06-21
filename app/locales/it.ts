@@ -649,11 +649,11 @@ const it: PartialLocaleType = {
         Pipeline: "pipeline",
         PipelineDesc:
           "Pipeline multi-modello tradizionale, supporta più lingue, nessuna allucinazione.",
-        VlmAutoEngine: "vlm-auto-engine",
-        VlmAutoEngineDesc:
+        VlmEngine: "vlm-engine",
+        VlmEngineDesc:
           "Analisi di alta precisione VLM multimodale, supporta solo cinese e inglese.",
-        HybridAutoEngine: "hybrid-auto-engine",
-        HybridAutoEngineDesc:
+        HybridEngine: "hybrid-engine",
+        HybridEngineDesc:
           "Analisi ibrida ad alta precisione, supporta più lingue.",
       },
       MaxPages: {
@@ -679,23 +679,27 @@ const it: PartialLocaleType = {
       },
       OcrLanguage: {
         Title: "Lingua OCR",
-        Ch: "Cinese, inglese, cinese tradizionale",
-        ChLite: "Cinese, inglese, cinese tradizionale, giapponese",
-        ChServer: "Cinese, inglese, cinese tradizionale, giapponese",
-        En: "Inglese",
+        Ch: "Cinese, inglese, giapponese, cinese tradizionale, latino",
+        ChServer: "Cinese, inglese, giapponese, cinese tradizionale, latino",
         Korean: "Coreano, inglese",
-        Japan: "Giapponese, cinese, inglese, cinese tradizionale",
-        ChineseCht: "Cinese tradizionale, cinese, inglese, giapponese",
         Ta: "Tamil, inglese",
         Te: "Telugu, inglese",
         Ka: "Kannada",
         Th: "Thai, inglese",
         El: "Greco, inglese",
-        Latin: "Francese, tedesco, ecc. (lingue a scrittura latina)",
         Arabic: "Arabo, persiano, urdu, ecc.",
         EastSlavic: "Russo, bielorusso, ucraino, inglese",
         Cyrillic: "Russo, lingue cirilliche",
         Devanagari: "Hindi, marathi, nepalese, ecc.",
+      },
+      Effort: {
+        Title: "Precisione di parsing",
+        Medium: "medium",
+        MediumDesc:
+          "Analisi più veloce, bilanciando precisione ed efficienza. L'analisi di immagini/grafici è disattivata.",
+        High: "high",
+        HighDesc:
+          "Analisi ad alta precisione con supporto per l'analisi di immagini/grafici, potrebbe richiedere più tempo.",
       },
     },
     FileList: {

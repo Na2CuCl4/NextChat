@@ -905,11 +905,11 @@ const en: PartialLocaleType = {
         Pipeline: "pipeline",
         PipelineDesc:
           "Traditional multi-model pipeline, supports multiple languages, no hallucination.",
-        VlmAutoEngine: "vlm-auto-engine",
-        VlmAutoEngineDesc:
+        VlmEngine: "vlm-engine",
+        VlmEngineDesc:
           "Multi-modal VLM high-precision parsing, only supports Chinese and English.",
-        HybridAutoEngine: "hybrid-auto-engine",
-        HybridAutoEngineDesc:
+        HybridEngine: "hybrid-engine",
+        HybridEngineDesc:
           "High-precision hybrid parsing, supports multiple languages.",
       },
       MaxPages: {
@@ -935,23 +935,27 @@ const en: PartialLocaleType = {
       },
       OcrLanguage: {
         Title: "OCR Language",
-        Ch: "Chinese, English, Chinese Traditional",
-        ChLite: "Chinese, English, Chinese Traditional, Japanese",
-        ChServer: "Chinese, English, Chinese Traditional, Japanese",
-        En: "English",
+        Ch: "Chinese, English, Japanese, Chinese Traditional, Latin",
+        ChServer: "Chinese, English, Japanese, Chinese Traditional, Latin",
         Korean: "Korean, English",
-        Japan: "Japanese, Chinese, English, Chinese Traditional",
-        ChineseCht: "Chinese Traditional, Chinese, English, Japanese",
         Ta: "Tamil, English",
         Te: "Telugu, English",
         Ka: "Kannada",
         Th: "Thai, English",
         El: "Greek, English",
-        Latin: "French, German, etc. (Latin script languages)",
         Arabic: "Arabic, Persian, Urdu, etc.",
         EastSlavic: "Russian, Belarusian, Ukrainian, English",
         Cyrillic: "Russian, Cyrillic languages",
         Devanagari: "Hindi, Marathi, Nepali, etc.",
+      },
+      Effort: {
+        Title: "Parse Effort",
+        Medium: "medium",
+        MediumDesc:
+          "Faster parsing, balancing accuracy and efficiency. Image/chart analysis is disabled.",
+        High: "high",
+        HighDesc:
+          "Higher-accuracy parsing with image/chart analysis support, which may take longer.",
       },
     },
     FileList: {

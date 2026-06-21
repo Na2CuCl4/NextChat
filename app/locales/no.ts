@@ -641,12 +641,11 @@ const no: PartialLocaleType = {
         Pipeline: "pipeline",
         PipelineDesc:
           "Tradisjonell flermodell-pipeline, støtter flere språk, ingen hallusinasjon.",
-        VlmAutoEngine: "vlm-auto-engine",
-        VlmAutoEngineDesc:
+        VlmEngine: "vlm-engine",
+        VlmEngineDesc:
           "Multimodal VLM høypresisjonsparsing, støtter kun kinesisk og engelsk.",
-        HybridAutoEngine: "hybrid-auto-engine",
-        HybridAutoEngineDesc:
-          "Høypresisjons hybrid parsing, støtter flere språk.",
+        HybridEngine: "hybrid-engine",
+        HybridEngineDesc: "Høypresisjons hybrid parsing, støtter flere språk.",
       },
       MaxPages: {
         Title: "Maks konverteringssider",
@@ -671,23 +670,27 @@ const no: PartialLocaleType = {
       },
       OcrLanguage: {
         Title: "OCR-språk",
-        Ch: "Kinesisk, engelsk, tradisjonell kinesisk",
-        ChLite: "Kinesisk, engelsk, tradisjonell kinesisk, japansk",
-        ChServer: "Kinesisk, engelsk, tradisjonell kinesisk, japansk",
-        En: "Engelsk",
+        Ch: "Kinesisk, engelsk, japansk, tradisjonell kinesisk, latin",
+        ChServer: "Kinesisk, engelsk, japansk, tradisjonell kinesisk, latin",
         Korean: "Koreansk, engelsk",
-        Japan: "Japansk, kinesisk, engelsk, tradisjonell kinesisk",
-        ChineseCht: "Tradisjonell kinesisk, kinesisk, engelsk, japansk",
         Ta: "Tamil, engelsk",
         Te: "Telugu, engelsk",
         Ka: "Kannada",
         Th: "Thai, engelsk",
         El: "Gresk, engelsk",
-        Latin: "Fransk, tysk osv. (språk med latinsk skrift)",
         Arabic: "Arabisk, persisk, urdu osv.",
         EastSlavic: "Russisk, hviterussisk, ukrainsk, engelsk",
         Cyrillic: "Russisk, kyrilliske språk",
         Devanagari: "Hindi, marathi, nepalesisk osv.",
+      },
+      Effort: {
+        Title: "Parse-presisjon",
+        Medium: "medium",
+        MediumDesc:
+          "Raskere parsing, balanserer nøyaktighet og effektivitet. Bilde-/diagramanalyse er deaktivert.",
+        High: "high",
+        HighDesc:
+          "Parsing med høyere nøyaktighet med støtte for bilde-/diagramanalyse, kan ta lengre tid.",
       },
     },
     FileList: {

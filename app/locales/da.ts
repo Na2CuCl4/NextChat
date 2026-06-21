@@ -884,11 +884,11 @@ const da: PartialLocaleType = {
         Pipeline: "pipeline",
         PipelineDesc:
           "Traditionel multi-model pipeline, understøtter flere sprog, ingen hallucination.",
-        VlmAutoEngine: "vlm-auto-engine",
-        VlmAutoEngineDesc:
+        VlmEngine: "vlm-engine",
+        VlmEngineDesc:
           "Multimodal VLM højpræcisionsparsing, understøtter kun kinesisk og engelsk.",
-        HybridAutoEngine: "hybrid-auto-engine",
-        HybridAutoEngineDesc:
+        HybridEngine: "hybrid-engine",
+        HybridEngineDesc:
           "Højpræcisions hybrid parsing, understøtter flere sprog.",
       },
       MaxPages: {
@@ -914,23 +914,27 @@ const da: PartialLocaleType = {
       },
       OcrLanguage: {
         Title: "OCR-sprog",
-        Ch: "Kinesisk, engelsk, traditionelt kinesisk",
-        ChLite: "Kinesisk, engelsk, traditionelt kinesisk, japansk",
-        ChServer: "Kinesisk, engelsk, traditionelt kinesisk, japansk",
-        En: "Engelsk",
+        Ch: "Kinesisk, engelsk, japansk, traditionelt kinesisk, latin",
+        ChServer: "Kinesisk, engelsk, japansk, traditionelt kinesisk, latin",
         Korean: "Koreansk, engelsk",
-        Japan: "Japansk, kinesisk, engelsk, traditionelt kinesisk",
-        ChineseCht: "Traditionelt kinesisk, kinesisk, engelsk, japansk",
         Ta: "Tamil, engelsk",
         Te: "Telugu, engelsk",
         Ka: "Kannada",
         Th: "Thai, engelsk",
         El: "Græsk, engelsk",
-        Latin: "Fransk, tysk osv. (sprog med latinsk skrift)",
         Arabic: "Arabisk, persisk, urdu osv.",
         EastSlavic: "Russisk, hviderussisk, ukrainsk, engelsk",
         Cyrillic: "Russisk, kyrilliske sprog",
         Devanagari: "Hindi, marathi, nepalesisk osv.",
+      },
+      Effort: {
+        Title: "Parse-præcision",
+        Medium: "medium",
+        MediumDesc:
+          "Hurtigere parsing, der balancerer præcision og effektivitet. Billede-/diagramanalyse er deaktiveret.",
+        High: "high",
+        HighDesc:
+          "Parsing med højere præcision og understøttelse af billede-/diagramanalyse, kan tage længere tid.",
       },
     },
     FileList: {

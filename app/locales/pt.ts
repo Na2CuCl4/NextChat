@@ -571,11 +571,11 @@ const pt: PartialLocaleType = {
         Pipeline: "pipeline",
         PipelineDesc:
           "Pipeline multi-modelo tradicional, suporta vários idiomas, sem alucinação.",
-        VlmAutoEngine: "vlm-auto-engine",
-        VlmAutoEngineDesc:
+        VlmEngine: "vlm-engine",
+        VlmEngineDesc:
           "Análise de alta precisão VLM multimodal, suporta apenas chinês e inglês.",
-        HybridAutoEngine: "hybrid-auto-engine",
-        HybridAutoEngineDesc:
+        HybridEngine: "hybrid-engine",
+        HybridEngineDesc:
           "Análise híbrida de alta precisão, suporta vários idiomas.",
       },
       MaxPages: {
@@ -601,23 +601,27 @@ const pt: PartialLocaleType = {
       },
       OcrLanguage: {
         Title: "Idioma OCR",
-        Ch: "Chinês, inglês, chinês tradicional",
-        ChLite: "Chinês, inglês, chinês tradicional, japonês",
-        ChServer: "Chinês, inglês, chinês tradicional, japonês",
-        En: "Inglês",
+        Ch: "Chinês, inglês, japonês, chinês tradicional, latim",
+        ChServer: "Chinês, inglês, japonês, chinês tradicional, latim",
         Korean: "Coreano, inglês",
-        Japan: "Japonês, chinês, inglês, chinês tradicional",
-        ChineseCht: "Chinês tradicional, chinês, inglês, japonês",
         Ta: "Tâmil, inglês",
         Te: "Telugo, inglês",
         Ka: "Canarês",
         Th: "Tailandês, inglês",
         El: "Grego, inglês",
-        Latin: "Francês, alemão, etc. (idiomas de escrita latina)",
         Arabic: "Árabe, persa, urdu, etc.",
         EastSlavic: "Russo, bielorrusso, ucraniano, inglês",
         Cyrillic: "Russo, idiomas cirílicos",
         Devanagari: "Hindi, marata, nepalês, etc.",
+      },
+      Effort: {
+        Title: "Precisão de análise",
+        Medium: "medium",
+        MediumDesc:
+          "Análise mais rápida, equilibrando precisão e eficiência. A análise de imagens/gráficos está desativada.",
+        High: "high",
+        HighDesc:
+          "Análise de alta precisão com suporte para análise de imagens/gráficos, pode demorar mais.",
       },
     },
     FileList: {

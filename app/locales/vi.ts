@@ -633,11 +633,11 @@ const vi: PartialLocaleType = {
         Pipeline: "pipeline",
         PipelineDesc:
           "Pipeline đa mô hình truyền thống, hỗ trợ nhiều ngôn ngữ, không ảo giác.",
-        VlmAutoEngine: "vlm-auto-engine",
-        VlmAutoEngineDesc:
+        VlmEngine: "vlm-engine",
+        VlmEngineDesc:
           "Phân tích độ chính xác cao VLM đa phương thức, chỉ hỗ trợ tiếng Trung và tiếng Anh.",
-        HybridAutoEngine: "hybrid-auto-engine",
-        HybridAutoEngineDesc:
+        HybridEngine: "hybrid-engine",
+        HybridEngineDesc:
           "Phân tích lai độ chính xác cao, hỗ trợ nhiều ngôn ngữ.",
       },
       MaxPages: {
@@ -663,23 +663,28 @@ const vi: PartialLocaleType = {
       },
       OcrLanguage: {
         Title: "Ngôn ngữ OCR",
-        Ch: "Tiếng Trung, tiếng Anh, tiếng Trung phồn thể",
-        ChLite: "Tiếng Trung, tiếng Anh, tiếng Trung phồn thể, tiếng Nhật",
-        ChServer: "Tiếng Trung, tiếng Anh, tiếng Trung phồn thể, tiếng Nhật",
-        En: "Tiếng Anh",
+        Ch: "Tiếng Trung, tiếng Anh, tiếng Nhật, tiếng Trung phồn thể, tiếng Latinh",
+        ChServer:
+          "Tiếng Trung, tiếng Anh, tiếng Nhật, tiếng Trung phồn thể, tiếng Latinh",
         Korean: "Tiếng Hàn, tiếng Anh",
-        Japan: "Tiếng Nhật, tiếng Trung, tiếng Anh, tiếng Trung phồn thể",
-        ChineseCht: "Tiếng Trung phồn thể, tiếng Trung, tiếng Anh, tiếng Nhật",
         Ta: "Tiếng Tamil, tiếng Anh",
         Te: "Tiếng Telugu, tiếng Anh",
         Ka: "Tiếng Kannada",
         Th: "Tiếng Thái, tiếng Anh",
         El: "Tiếng Hy Lạp, tiếng Anh",
-        Latin: "Tiếng Pháp, tiếng Đức, v.v. (ngôn ngữ chữ Latinh)",
         Arabic: "Tiếng Ả Rập, tiếng Ba Tư, tiếng Urdu, v.v.",
         EastSlavic: "Tiếng Nga, tiếng Belarus, tiếng Ukraina, tiếng Anh",
         Cyrillic: "Tiếng Nga, các ngôn ngữ Kirin",
         Devanagari: "Tiếng Hindi, tiếng Marathi, tiếng Nepal, v.v.",
+      },
+      Effort: {
+        Title: "Độ chính xác phân tích",
+        Medium: "medium",
+        MediumDesc:
+          "Phân tích nhanh hơn, cân bằng độ chính xác và hiệu quả. Phân tích hình ảnh/biểu đồ bị tắt.",
+        High: "high",
+        HighDesc:
+          "Phân tích độ chính xác cao hơn với hỗ trợ phân tích hình ảnh/biểu đồ, có thể mất nhiều thời gian hơn.",
       },
     },
     FileList: {

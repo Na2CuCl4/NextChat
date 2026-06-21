@@ -638,11 +638,11 @@ const tr: PartialLocaleType = {
         Pipeline: "pipeline",
         PipelineDesc:
           "Geleneksel çoklu model işlem hattı, birden çok dili destekler, halüsinasyon yok.",
-        VlmAutoEngine: "vlm-auto-engine",
-        VlmAutoEngineDesc:
+        VlmEngine: "vlm-engine",
+        VlmEngineDesc:
           "Çok modlu VLM yüksek hassasiyetli ayrıştırma, yalnızca Çince ve İngilizceyi destekler.",
-        HybridAutoEngine: "hybrid-auto-engine",
-        HybridAutoEngineDesc:
+        HybridEngine: "hybrid-engine",
+        HybridEngineDesc:
           "Yüksek hassasiyetli hibrit ayrıştırma, birden çok dili destekler.",
       },
       MaxPages: {
@@ -668,23 +668,27 @@ const tr: PartialLocaleType = {
       },
       OcrLanguage: {
         Title: "OCR Dili",
-        Ch: "Çince, İngilizce, Geleneksel Çince",
-        ChLite: "Çince, İngilizce, Geleneksel Çince, Japonca",
-        ChServer: "Çince, İngilizce, Geleneksel Çince, Japonca",
-        En: "İngilizce",
+        Ch: "Çince, İngilizce, Japonca, Geleneksel Çince, Latince",
+        ChServer: "Çince, İngilizce, Japonca, Geleneksel Çince, Latince",
         Korean: "Korece, İngilizce",
-        Japan: "Japonca, Çince, İngilizce, Geleneksel Çince",
-        ChineseCht: "Geleneksel Çince, Çince, İngilizce, Japonca",
         Ta: "Tamilce, İngilizce",
         Te: "Teluguca, İngilizce",
         Ka: "Kannada",
         Th: "Tayca, İngilizce",
         El: "Yunanca, İngilizce",
-        Latin: "Fransızca, Almanca vb. (Latin alfabesi dilleri)",
         Arabic: "Arapça, Farsça, Urduca vb.",
         EastSlavic: "Rusça, Belarusça, Ukraynaca, İngilizce",
         Cyrillic: "Rusça, Kiril dilleri",
         Devanagari: "Hintçe, Marathi, Nepalce vb.",
+      },
+      Effort: {
+        Title: "Ayrıştırma Hassasiyeti",
+        Medium: "medium",
+        MediumDesc:
+          "Daha hızlı ayrıştırma, doğruluk ve verimlilik dengesi. Görüntü/grafik analizi devre dışı.",
+        High: "high",
+        HighDesc:
+          "Görüntü/grafik analizi desteğiyle yüksek doğrulukta ayrıştırma, daha uzun sürebilir.",
       },
     },
     FileList: {

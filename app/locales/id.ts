@@ -637,11 +637,11 @@ const id: PartialLocaleType = {
         Pipeline: "pipeline",
         PipelineDesc:
           "Pipeline multi-model tradisional, mendukung banyak bahasa, tanpa halusinasi.",
-        VlmAutoEngine: "vlm-auto-engine",
-        VlmAutoEngineDesc:
+        VlmEngine: "vlm-engine",
+        VlmEngineDesc:
           "Parsing presisi tinggi VLM multimodal, hanya mendukung bahasa Tionghoa dan Inggris.",
-        HybridAutoEngine: "hybrid-auto-engine",
-        HybridAutoEngineDesc:
+        HybridEngine: "hybrid-engine",
+        HybridEngineDesc:
           "Parsing hibrida presisi tinggi, mendukung banyak bahasa.",
       },
       MaxPages: {
@@ -667,23 +667,27 @@ const id: PartialLocaleType = {
       },
       OcrLanguage: {
         Title: "Bahasa OCR",
-        Ch: "Tionghoa, Inggris, Tionghoa Tradisional",
-        ChLite: "Tionghoa, Inggris, Tionghoa Tradisional, Jepang",
-        ChServer: "Tionghoa, Inggris, Tionghoa Tradisional, Jepang",
-        En: "Inggris",
+        Ch: "Tionghoa, Inggris, Jepang, Tionghoa Tradisional, Latin",
+        ChServer: "Tionghoa, Inggris, Jepang, Tionghoa Tradisional, Latin",
         Korean: "Korea, Inggris",
-        Japan: "Jepang, Tionghoa, Inggris, Tionghoa Tradisional",
-        ChineseCht: "Tionghoa Tradisional, Tionghoa, Inggris, Jepang",
         Ta: "Tamil, Inggris",
         Te: "Telugu, Inggris",
         Ka: "Kannada",
         Th: "Thai, Inggris",
         El: "Yunani, Inggris",
-        Latin: "Prancis, Jerman, dll. (bahasa aksara Latin)",
         Arabic: "Arab, Persia, Urdu, dll.",
         EastSlavic: "Rusia, Belarusia, Ukraina, Inggris",
         Cyrillic: "Rusia, bahasa Kiril",
         Devanagari: "Hindi, Marathi, Nepali, dll.",
+      },
+      Effort: {
+        Title: "Presisi Parsing",
+        Medium: "medium",
+        MediumDesc:
+          "Parsing lebih cepat, menyeimbangkan akurasi dan efisiensi. Analisis gambar/grafik dinonaktifkan.",
+        High: "high",
+        HighDesc:
+          "Parsing akurasi lebih tinggi dengan dukungan analisis gambar/grafik, mungkin memerlukan waktu lebih lama.",
       },
     },
     FileList: {

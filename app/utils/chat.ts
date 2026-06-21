@@ -214,6 +214,7 @@ export async function uploadFile(
       String(fc.enableInlineFormulaRecognition),
     );
     body.append("enableImageAnalysis", String(fc.enableImageAnalysis));
+    body.append("effort", fc.effort);
     body.append("maxPages", String(fc.maxPages));
     if (returnZip) {
       body.append("return_images", "true");

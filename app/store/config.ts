@@ -119,10 +119,10 @@ export const DEFAULT_CONFIG = {
   fileConversionConfig: {
     engine: "markitdown" as "markitdown" | "mineru",
     enableDocIntelligence: false,
-    minerUBackend: "hybrid-auto-engine" as
+    minerUBackend: "hybrid-engine" as
       | "pipeline"
-      | "vlm-auto-engine"
-      | "hybrid-auto-engine",
+      | "vlm-engine"
+      | "hybrid-engine",
     maxPages: 1000,
     enableTableRecognition: true,
     enableInlineFormulaRecognition: true,
@@ -130,22 +130,18 @@ export const DEFAULT_CONFIG = {
     parseMethod: "auto" as "auto" | "txt" | "ocr",
     ocrLanguage: "ch" as
       | "ch"
-      | "ch_lite"
       | "ch_server"
-      | "en"
       | "korean"
-      | "japan"
-      | "chinese_cht"
       | "ta"
       | "te"
       | "ka"
       | "th"
       | "el"
-      | "latin"
       | "arabic"
       | "east_slavic"
       | "cyrillic"
       | "devanagari",
+    effort: "medium" as "medium" | "high",
   },
 };
 

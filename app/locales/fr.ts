@@ -648,11 +648,11 @@ const fr: PartialLocaleType = {
         Pipeline: "pipeline",
         PipelineDesc:
           "Pipeline multi-modèle traditionnel, prend en charge plusieurs langues, sans hallucination.",
-        VlmAutoEngine: "vlm-auto-engine",
-        VlmAutoEngineDesc:
+        VlmEngine: "vlm-engine",
+        VlmEngineDesc:
           "Analyse haute précision par VLM multimodal, prend en charge uniquement le chinois et l'anglais.",
-        HybridAutoEngine: "hybrid-auto-engine",
-        HybridAutoEngineDesc:
+        HybridEngine: "hybrid-engine",
+        HybridEngineDesc:
           "Analyse hybride haute précision, prend en charge plusieurs langues.",
       },
       MaxPages: {
@@ -678,23 +678,27 @@ const fr: PartialLocaleType = {
       },
       OcrLanguage: {
         Title: "Langue OCR",
-        Ch: "Chinois, anglais, chinois traditionnel",
-        ChLite: "Chinois, anglais, chinois traditionnel, japonais",
-        ChServer: "Chinois, anglais, chinois traditionnel, japonais",
-        En: "Anglais",
+        Ch: "Chinois, anglais, japonais, chinois traditionnel, latin",
+        ChServer: "Chinois, anglais, japonais, chinois traditionnel, latin",
         Korean: "Coréen, anglais",
-        Japan: "Japonais, chinois, anglais, chinois traditionnel",
-        ChineseCht: "Chinois traditionnel, chinois, anglais, japonais",
         Ta: "Tamoul, anglais",
         Te: "Télougou, anglais",
         Ka: "Kannada",
         Th: "Thaï, anglais",
         El: "Grec, anglais",
-        Latin: "Français, allemand, etc. (langues à écriture latine)",
         Arabic: "Arabe, persan, ourdou, etc.",
         EastSlavic: "Russe, biélorusse, ukrainien, anglais",
         Cyrillic: "Russe, langues cyrilliques",
         Devanagari: "Hindi, marathi, népalais, etc.",
+      },
+      Effort: {
+        Title: "Précision d'analyse",
+        Medium: "medium",
+        MediumDesc:
+          "Analyse plus rapide, équilibrant précision et efficacité. L'analyse d'images/graphiques est désactivée.",
+        High: "high",
+        HighDesc:
+          "Analyse de haute précision avec prise en charge de l'analyse d'images/graphiques, peut prendre plus de temps.",
       },
     },
     FileList: {

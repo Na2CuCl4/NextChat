@@ -652,11 +652,11 @@ const de: PartialLocaleType = {
         Pipeline: "pipeline",
         PipelineDesc:
           "Traditionelle Multi-Modell-Pipeline, unterstützt mehrere Sprachen, keine Halluzination.",
-        VlmAutoEngine: "vlm-auto-engine",
-        VlmAutoEngineDesc:
+        VlmEngine: "vlm-engine",
+        VlmEngineDesc:
           "Multimodales VLM-Hochpräzisionsparsing, unterstützt nur Chinesisch und Englisch.",
-        HybridAutoEngine: "hybrid-auto-engine",
-        HybridAutoEngineDesc:
+        HybridEngine: "hybrid-engine",
+        HybridEngineDesc:
           "Hochpräzises Hybrid-Parsing, unterstützt mehrere Sprachen.",
       },
       MaxPages: {
@@ -682,24 +682,28 @@ const de: PartialLocaleType = {
       },
       OcrLanguage: {
         Title: "OCR-Sprache",
-        Ch: "Chinesisch, Englisch, Traditionelles Chinesisch",
-        ChLite: "Chinesisch, Englisch, Traditionelles Chinesisch, Japanisch",
-        ChServer: "Chinesisch, Englisch, Traditionelles Chinesisch, Japanisch",
-        En: "Englisch",
+        Ch: "Chinesisch, Englisch, Japanisch, Traditionelles Chinesisch, Latein",
+        ChServer:
+          "Chinesisch, Englisch, Japanisch, Traditionelles Chinesisch, Latein",
         Korean: "Koreanisch, Englisch",
-        Japan: "Japanisch, Chinesisch, Englisch, Traditionelles Chinesisch",
-        ChineseCht:
-          "Traditionelles Chinesisch, Chinesisch, Englisch, Japanisch",
         Ta: "Tamil, Englisch",
         Te: "Telugu, Englisch",
         Ka: "Kannada",
         Th: "Thai, Englisch",
         El: "Griechisch, Englisch",
-        Latin: "Französisch, Deutsch usw. (Sprachen mit lateinischer Schrift)",
         Arabic: "Arabisch, Persisch, Urdu usw.",
         EastSlavic: "Russisch, Weißrussisch, Ukrainisch, Englisch",
         Cyrillic: "Russisch, kyrillische Sprachen",
         Devanagari: "Hindi, Marathi, Nepalesisch usw.",
+      },
+      Effort: {
+        Title: "Parse-Genauigkeit",
+        Medium: "medium",
+        MediumDesc:
+          "Schnellere Analyse, balanciert Genauigkeit und Effizienz. Bild-/Diagrammanalyse ist deaktiviert.",
+        High: "high",
+        HighDesc:
+          "Höhere Analyseenauigkeit mit Unterstützung für Bild-/Diagrammanalyse, kann länger dauern.",
       },
     },
     FileList: {

@@ -61,6 +61,9 @@ export async function POST(req: NextRequest) {
       const imageAnalysis = inForm.get("enableImageAnalysis");
       if (imageAnalysis) outForm.append("image_analysis", imageAnalysis);
 
+      const effort = inForm.get("effort");
+      if (effort) outForm.append("effort", effort);
+
       const returnImages = inForm.get("return_images");
       if (returnImages) outForm.append("return_images", returnImages);
 
