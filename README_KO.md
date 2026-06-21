@@ -40,6 +40,7 @@
 
 ## 업데이트 소식
 
+- **v2.19.1**: "전체 삭제" 버튼이 변환 로그를 초기화하지 않는 문제 수정, 변환 실패 시 무한 재시도 루프 수정, 전체 다운로드를 zip 패키지로 변경
 - **v2.19.0**: 파일 변환 페이지 (MarkItDown & MinerU 엔진), Docker Compose profiles (readfile, mineru), docker-build.sh 스크립트
 - **v2.18.0**: OpenAI Responses 형식 `/v1/responses`, GPT-5 시리즈 `reasoning_effort` / `response_format` / `verbosity`, image-to-image 생성, 업로드 15장으로 확대
 - **v2.17.0**: 사용자 정의 대화 요약 모델, GPT-Image 패밀리 text-to-image 생성, 탭 전환 다중 동기화 문제 수정

@@ -40,6 +40,7 @@ English / [简体中文](./README_CN.md) / [日本語](./README_JP.md) / [한국
 
 ## What's New
 
+- **v2.19.1**: Fixed Clear All button not resetting conversion log, fixed infinite retry loop on conversion failure, DownloadAll now packages as zip with extraction
 - **v2.19.0**: File Conversion page with MarkItDown & MinerU engines, Docker Compose profiles
 - **v2.18.0**: OpenAI Responses format `/v1/responses`, GPT-5 series models with `reasoning_effort` / `response_format` / `verbosity`, image-to-image generation
 - **v2.17.0**: Custom conversation summary model, GPT-Image family text-to-image generation
