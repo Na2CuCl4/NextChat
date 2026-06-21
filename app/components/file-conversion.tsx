@@ -401,6 +401,8 @@ export function FileConversion() {
   const [fileList, setFileList] = useState<FileItem[]>([]);
   const [dragOver, setDragOver] = useState(false);
   const [converting, setConverting] = useState(false);
+  const [packaging, setPackaging] = useState(false);
+  const [packagingProgress, setPackagingProgress] = useState(0);
   const [logLines, setLogLines] = useState<string[]>([
     `====== ${Locale.FileConversion.FileList.LogPlaceholder} ======\n`,
   ]);
@@ -666,14 +668,73 @@ export function FileConversion() {
     [config.fileConversionConfig.engine],
   );
 
-  const handleDownloadAll = useCallback(() => {
+  const handleDownloadAll = useCallback(async () => {
     const successFiles = fileList.filter(
       (f) => f.status === "success" && f.content,
     );
-    for (const item of successFiles) {
-      handleDownload(item);
+    if (successFiles.length === 0) return;
+
+    setPackaging(true);
+    setPackagingProgress(0);
+
+    try {
+      const JSZip = (await import("jszip")).default;
+      const outZip = new JSZip();
+      const total = successFiles.length;
+
+      for (let i = 0; i < successFiles.length; i++) {
+        const item = successFiles[i];
+
+        if (item.content!.startsWith("blob:")) {
+          // MinerU: fetch zip blob, extract entries directly to root
+          // (MinerU zips already contain a root folder)
+          const blob = await fetch(item.content!).then((r) => r.blob());
+          const inZip = await JSZip.loadAsync(blob);
+          for (const [path, file] of Object.entries(inZip.files)) {
+            if (file.dir) continue;
+            const data = await file.async("uint8array");
+            outZip.file(path, data);
+          }
+        } else {
+          // MarkItDown: add .md file directly to root
+          const mdName = item.name.replace(/\.[^.]+$/, "") + ".md";
+          outZip.file(mdName, item.content!);
+        }
+
+        setPackagingProgress(i + 1);
+      }
+
+      // Generate timestamp filename: YYYY-MM-DD HH-MM-SS (X files).zip
+      const now = new Date();
+      const pad = (n: number) => String(n).padStart(2, "0");
+      const timestamp =
+        `${now.getFullYear()}-${pad(now.getMonth() + 1)}-${pad(
+          now.getDate(),
+        )} ` +
+        `${pad(now.getHours())}-${pad(now.getMinutes())}-${pad(
+          now.getSeconds(),
+        )}`;
+      const filename = `${timestamp} (${total} files).zip`;
+
+      const zipBlob = await outZip.generateAsync({ type: "blob" });
+      const url = URL.createObjectURL(zipBlob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = filename;
+      a.click();
+      URL.revokeObjectURL(url);
+    } catch (err) {
+      console.error("Package download failed:", err);
+      showToast(
+        config.fileConversionConfig.engine === "mineru"
+          ? "打包下载失败"
+          : "Package download failed",
+      );
+    } finally {
+      setPackaging(false);
+      setPackagingProgress(0);
     }
-  }, [fileList, handleDownload]);
+  }, [fileList, config.fileConversionConfig.engine]);
 
   const hasConverted = fileList.some((f) => f.status === "success");
 
@@ -788,9 +849,19 @@ export function FileConversion() {
               </div>
               <IconButton
                 icon={<DownloadIcon />}
-                text={Locale.FileConversion.FileList.DownloadAll}
+                text={
+                  packaging
+                    ? `${
+                        Locale.FileConversion.FileList.Packaging
+                      } ${packagingProgress}/${
+                        fileList.filter(
+                          (f) => f.status === "success" && f.content,
+                        ).length
+                      }`
+                    : Locale.FileConversion.FileList.DownloadAll
+                }
                 bordered
-                disabled={!hasConverted}
+                disabled={!hasConverted || packaging}
                 onClick={handleDownloadAll}
               />
             </div>
