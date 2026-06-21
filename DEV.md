@@ -15,6 +15,31 @@ yarn build
 yarn start
 ```
 
+## 启动本地文件转换服务
+
+- 启动 MarkItDown 服务
+
+```bash
+cd ~/Projects/Website/NextChatReadFile
+conda activate personal-website
+uvicorn main:app --reload --port 8000
+```
+
+使用 Ctrl + C 停止服务。
+
+- 启动 MinerU 服务
+
+```bash
+cd ~/service/mineru/
+sudo docker compose -f docker-compose.yml up -d
+```
+
+使用以下命令停止服务：
+
+```bash
+sudo docker compose -f docker-compose.yml down
+```
+
 ## Docker 编译和发布流程
 
 - 编译
